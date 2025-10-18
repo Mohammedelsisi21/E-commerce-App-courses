@@ -9,7 +9,7 @@ interface IProps {
   ProductCard: IProduct
 }
 const ProductCard = ({ ProductCard }: IProps) => {
-  const {title ,description,price,thumbnail}= ProductCard
+  const {title ,description,price,thumbnail, documentId}= ProductCard
   const { url } = thumbnail
 
   const { colorMode } = useColorMode();
@@ -69,7 +69,7 @@ const ProductCard = ({ ProductCard }: IProps) => {
           { `${price.toLocaleString("en-us")}` }
         </Text>
 
-        <Link to={"/product/1"} style={{ width: "100%" }}>
+        <Link to={`/product/${documentId}`} style={{ width: "100%" }}>
           <Button
           alignContent={"center"}
             bg={colorMode === "light" ? "teal.500" : "teal.400"}
