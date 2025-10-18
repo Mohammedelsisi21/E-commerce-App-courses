@@ -2,6 +2,7 @@ import { Box, Image, Heading, Text, Button, VStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useColorMode } from "./ui/color-mode";
 import type { IProduct } from "../interfaces";
+import { truncateText } from "@/utils";
 
 
 interface IProps {
@@ -25,6 +26,10 @@ const ProductCard = ({ ProductCard }: IProps) => {
       py={3}
       bg={colorMode === "light" ? "white" : "gray.900"}
       transition="0.3s"
+      display={"flex"}
+      flexDirection={"column"}
+      justifyContent={"space-between"}
+      height={"100%"}
       _hover={{
         transform: "scale(1.01)",
         boxShadow: "lg",
@@ -46,14 +51,14 @@ const ProductCard = ({ ProductCard }: IProps) => {
           size="md"
           color={colorMode === "light" ? "teal.600" : "teal.300"}
         >
-          {title}
+          {truncateText({text: title, limmit: 3})}
         </Heading>
 
         <Text
           color={colorMode === "light" ? "gray.600" : "gray.300"}
           fontSize="sm"
         >
-          {description}
+          {truncateText({text: description, limmit: 15})}
         </Text>
 
         <Text
@@ -61,7 +66,7 @@ const ProductCard = ({ ProductCard }: IProps) => {
           color={colorMode === "light" ? "teal.500" : "teal.200"}
           fontSize="lg"
         >
-          { price }
+          { `${price.toLocaleString("en-us")}` }
         </Text>
 
         <Link to={"/product/1"} style={{ width: "100%" }}>

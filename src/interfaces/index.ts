@@ -12,3 +12,10 @@ export interface IProduct {
         title: string
     }
 }
+
+
+// ** function text limet
+export interface ITruncateText {
+    text: string
+    limmit?: number
+}
