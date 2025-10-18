@@ -1,3 +1,4 @@
+import type { AxiosRequestConfig } from "axios"
 
 export interface IProduct {
     id?: number
@@ -18,4 +19,12 @@ export interface IProduct {
 export interface ITruncateText {
     text: string
     limmit?: number
+}
+
+
+export interface IAuthenticatedQuery {
+    queryKey: string[]
+    url: string
+    config?: AxiosRequestConfig
+    action: "get" | "post" | "delete" | "put"
 }
