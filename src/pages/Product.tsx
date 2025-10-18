@@ -5,6 +5,7 @@ import { useColorMode } from "@/components/ui/color-mode"
 import type { IProduct } from "@/interfaces"
 import { useEffect } from "react"
 import { BsArrowLeft } from "react-icons/bs"
+import ProductDetailsSkeleton from "@/components/ProductDetailsSkeleton"
 
 
 
@@ -28,8 +29,8 @@ const Product = () => {
     }, [data])
     const goBack = () => navigate(-1)
     
-    if(isLoading) return "ssss"
-    console.log(data)
+    if(isLoading) return <ProductDetailsSkeleton />
+
     if(!data.data) return null
     const product : IProduct = data?.data
     const {title, description, price, thumbnail:{url}, category}= product
@@ -48,7 +49,6 @@ return (
             <Text ml="2">Back</Text>
         </Flex>
             <Box
-                
                 maxW={"sm"}
                 mx={"auto"}
                 borderWidth="1px"

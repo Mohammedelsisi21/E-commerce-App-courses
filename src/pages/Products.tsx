@@ -9,7 +9,7 @@ const ProductsPage = () => {
     const {data, isLoading} = useAuthenticatedQuery({
         queryKey: ["products"],
         action: "get",
-        url: "/api/products?populate[0]=thumbnail&populate[1]=category",
+        url: "/api/products?populate[0]=thumbnail&populate[1]=category&sort[createdAt]=desc",
     })
     
     if(isLoading) return <Grid margin={30} gap={5} templateColumns={"repeat(auto-fill, minmax(300px, 1fr))"}>
