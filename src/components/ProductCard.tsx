@@ -66,7 +66,7 @@ const ProductCard = ({ ProductCard }: IProps) => {
           color={colorMode === "light" ? "teal.500" : "teal.200"}
           fontSize="lg"
         >
-          { `${price.toLocaleString("en-us")}` }
+          { `$${price.toLocaleString("en-us")}` }
         </Text>
 
         <Link to={`/product/${documentId}`} style={{ width: "100%" }}>
