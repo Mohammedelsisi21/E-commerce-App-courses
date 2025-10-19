@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
     const { colorMode }= useColorMode()
 return (
-    <Box bg={`${colorMode == "dark" ? "teal.500" : "#fff"}`} color={`${colorMode == "light" ? "#000" : "#fff/50"}`} py={10} borderTop={`2px solid ${colorMode == "light" ? "#333" : "#eee"}`} mt={10}>
+    <Box bg={`${colorMode == "dark" ? "teal.800" : "#fff"}`} color={`${colorMode == "light" ? "#000" : "#fff/50"}`} py={10} borderTop={`2px solid ${colorMode == "light" ? "#333" : "#eee"}`} mt={10}>
         <Container>
             <Grid templateColumns={{ base: "1fr", md: "3fr 1fr 1fr 1fr" }} gap={10} maxW="6xl" mx="auto" px={{ base: 5, md: 0 }}>
                 <GridItem>
