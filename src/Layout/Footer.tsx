@@ -46,11 +46,11 @@ return (
                         Categories
                     </Heading>
                     <Flex direction="column" gap={2}>
-                        <Link to={"/"}><Box _hover={{color: "white"}}>Men's Fashion</Box></Link>
-                        <Link to={"/"}><Box _hover={{color: "white"}}>Women's Fashion</Box></Link>
-                        <Link to={"/"}><Box _hover={{color: "white"}}>Baby & Toys</Box></Link>
-                        <Link to={"/"}><Box _hover={{color: "white"}}>Beauty & Health</Box></Link>
-                        <Link to={"/"}><Box _hover={{color: "white"}}>Electronics</Box></Link>
+                        <Link to={"/"}><Text _hover={{color: "white"}}>Men's Fashion</Text></Link>
+                        <Link to={"/"}><Text _hover={{color: "white"}}>Women's Fashion</Text></Link>
+                        <Link to={"/"}><Text _hover={{color: "white"}}>Baby & Toys</Text></Link>
+                        <Link to={"/"}><Text _hover={{color: "white"}}>Beauty & Health</Text></Link>
+                        <Link to={"/"}><Text _hover={{color: "white"}}>Electronics</Text></Link>
                     </Flex>
                 </GridItem>
 
@@ -59,11 +59,11 @@ return (
                         Quick Links
                     </Heading>
                     <Flex direction="column" gap={2} >
-                        <Link to={"/"}><Box _hover={{color: "white"}}>About Us</Box></Link>
-                        <Link to={"/"}><Box _hover={{color: "white"}}>Contact Us</Box></Link>
-                        <Link to={"/"}><Box _hover={{color: "white"}}>Privacy Policy</Box></Link>
-                        <Link to={"/"}><Box _hover={{color: "white"}}>Terms of Services</Box></Link>
-                        <Link to={"/"}><Box _hover={{color: "white"}}>Shipping Policy</Box></Link>
+                        <Link to={"/"}><Text _hover={{color: "white"}}>About Us</Text></Link>
+                        <Link to={"/"}><Text _hover={{color: "white"}}>Contact Us</Text></Link>
+                        <Link to={"/"}><Text _hover={{color: "white"}}>Privacy Policy</Text></Link>
+                        <Link to={"/"}><Text _hover={{color: "white"}}>Terms of Services</Text></Link>
+                        <Link to={"/"}><Text _hover={{color: "white"}}>Shipping Policy</Text></Link>
                     </Flex>
                 </GridItem>
 
@@ -72,11 +72,11 @@ return (
                         Customer Service
                     </Heading>
                     <Flex direction="column" gap={2}>
-                        <Link to={"/"}><Box _hover={{color: "white"}}>Account</Box></Link>
-                        <Link to={"/"}><Box _hover={{color: "white"}}>My Orders</Box></Link>
-                        <Link to={"/"}><Box _hover={{color: "white"}}>Wishlist</Box></Link>
-                        <Link to={"/"}><Box _hover={{color: "white"}}>Returns & Refunds</Box></Link>
-                        <Link to={"/"}><Box _hover={{color: "white"}}>Help Center</Box></Link>
+                        <Link to={"/"}><Text _hover={{color: "white"}}>Account</Text></Link>
+                        <Link to={"/"}><Text _hover={{color: "white"}}>My Orders</Text></Link>
+                        <Link to={"/"}><Text _hover={{color: "white"}}>Wishlist</Text></Link>
+                        <Link to={"/"}><Text _hover={{color: "white"}}>Returns & Refunds</Text></Link>
+                        <Link to={"/"}><Text _hover={{color: "white"}}>Help Center</Text></Link>
                     </Flex>
                 </GridItem>
             </Grid>

@@ -37,7 +37,7 @@ const ProductCard = ({ ProductCard }: IProps) => {
     >
       <Image
         src={`${import.meta.env.VITE_LOCAL_API}${url}`}
-        alt="Product Image"
+        alt={title}
         mx="auto"
         boxSize="200px"
         objectFit="cover"

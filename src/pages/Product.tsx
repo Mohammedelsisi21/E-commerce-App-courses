@@ -28,7 +28,6 @@ const Product = () => {
         }
     }, [data])
     const goBack = () => navigate(-1)
-    
     if(isLoading) return <ProductDetailsSkeleton />
 
     if(!data.data) return null
@@ -70,7 +69,7 @@ return (
             >
             <Image
                 src={`${import.meta.env.VITE_LOCAL_API}${url}`}
-            alt="Product Image"
+            alt={title}
             mx="auto"
             boxSize="200px"
             objectFit="cover"

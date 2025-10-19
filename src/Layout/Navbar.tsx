@@ -10,6 +10,7 @@ const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const [isScrolled, setIsScrolled] = useState(false);
   const { open :isOpen, onOpen, onClose } = useDisclosure();
+  
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
@@ -48,11 +49,10 @@ const Navbar = () => {
           <ChakraLink asChild color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }} display={{ base: "none", md: "block" }}>
             <Link to="/signin">Sign in</Link>
           </ChakraLink>
-          <Link to="/signup">
+
             <Button bg={buttonBg} color={buttonColor} _hover={{ bg: buttonHoverBg }} size="sm" borderRadius="md" transition="all 0.2s">
             <Link to="/signup">Sign up</Link>
             </Button>
-          </Link>
 
           <IconButton aria-label="Toggle color mode" onClick={toggleColorMode} color={linkColor} variant="ghost" fontSize="20px" _hover={{ color: hoverColor, bg: "rgba(255,255,255,0.1)" }}>
             {colorMode === "light" ? <FiMoon /> : <FiSun />}
