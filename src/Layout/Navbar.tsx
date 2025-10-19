@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import {Box,Flex,HStack,Button,IconButton,Spacer,Link as ChakraLink,Container,useDisclosure,VStack, Text,} from "@chakra-ui/react";
+import {Box,Flex,HStack,Button,IconButton,Spacer,Link as ChakraLink,Container,useDisclosure,VStack,} from "@chakra-ui/react";
 import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
 import { Link, NavLink } from "react-router-dom";
 import { useColorMode, useColorModeValue } from "@/components/ui/color-mode";
-import { animateLogo, lettersLogo, navLinks } from "../constant";
+import { navLinks } from "../constant";
+import Logo from "../components/Logo";
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -31,17 +32,7 @@ const Navbar = () => {
       <Container>
         <Flex align="center" justifyContent={"space-between"} alignItems={"center"}>
           <Link to={"/"}>
-            <Box display="flex" alignItems="center" justifyContent="center">
-              <Text textTransform="uppercase" color="white" fontFamily="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" fontSize={{ base: "3xl", md: "1xl" }} style={{
-                    WebkitBoxReflect: "below -25px linear-gradient(transparent, rgba(0, 0, 0, 0.43))",
-              }}>
-                {lettersLogo.map((letter, i) => (
-                  <Box key={i} display="inline-block" position="relative" animation={`${animateLogo} 1s infinite`} animationDelay={`calc(${i + 1} * 0.1s)`}>
-                    {letter}
-                  </Box>
-                ))}
-              </Text>
-            </Box>
+            <Logo />
           </Link>
 
         <HStack px={"50px"} display={{ base: "none", md: "flex" }} alignItems="center">
