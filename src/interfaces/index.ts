@@ -28,3 +28,11 @@ export interface IAuthenticatedQuery {
     config?: AxiosRequestConfig
     action: "get" | "post" | "delete" | "put"
 }
+
+
+// ** Login
+
+export interface ILoginForm {
+    identifier: string
+    password: string
+}

@@ -1,26 +1,40 @@
 import { useColorMode } from "@/components/ui/color-mode"
 import { PasswordInput } from "@/components/ui/password-input"
-import { Divider } from "@chakra-ui/layout"
-import {
-  Box,
-  Button,
-  Flex,
-  Field,
-  Fieldset,
-  Input,
-  Link,
-  Stack,
-  Text,
-  IconButton,
-} from "@chakra-ui/react"
-import { FaGoogle, FaGithub } from "react-icons/fa"
+import type { ILoginForm } from "../interfaces"
+import { Box, Button, Field, Fieldset, Flex, Input, Stack, Text,} from "@chakra-ui/react"
+import { useState, type ChangeEvent, type FormEvent } from "react"
+import { Link } from "react-router-dom"
 
 const Signin = () => {
     const { colorMode } = useColorMode()
     const isDark = colorMode === "dark"
+    const [user, setUser] = useState<ILoginForm>({
+        identifier: "",
+        password: ""
+    })
 
+    const [isIdentifier, setIsIdentifier] = useState<boolean>(true)
+    const [isPassword, setIsPassword] = useState<boolean>(true)
+    
+    // ** Heandlers
+    const onChange = (e : ChangeEvent<HTMLInputElement>)=> {
+        const {name, value}= e.target
+        setUser({...user, [name]: value})
+    }
+
+    const onSubmit = (e : FormEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        console.log(user)
+
+        if(!user.identifier) setIsIdentifier(true)
+        else setIsIdentifier(false)
+    
+        if(!user.password) setIsPassword(true)
+        else setIsPassword(false)
+
+    }
 return (
-    <Box bg={isDark ? "gray.900" : "teal.50"} color={isDark ? "teal.100" : "gray.700"} p={8} borderRadius="lg" maxW="sm" mx="auto" mt={12} boxShadow="2xl">
+    <Box as={"form"} onSubmit={onSubmit} bg={isDark ? "gray.900" : "teal.50"} color={isDark ? "teal.100" : "gray.700"} p={8} borderRadius="lg" maxW="sm" mx="auto" mt={12} boxShadow="2xl">
         <Fieldset.Root size="lg" maxW="md">
             <Stack p={5}>
                 <Fieldset.Legend textAlign="center" color={isDark ? "teal.300" : "teal.700"} fontSize="3xl" fontWeight="700">
@@ -32,53 +46,34 @@ return (
                 </Fieldset.HelperText>
             </Stack>
 
-        <Fieldset.Content mt={6}>
-            <Field.Root>
+        <Fieldset.Content>
+            <Field.Root invalid={isIdentifier}>
                 <Field.Label color={isDark ? "teal.200" : "teal.700"}>
-                    Username
+                    Email Address <Field.RequiredIndicator />
                 </Field.Label>
-                <Input name="username" bg={isDark ? "gray.800" : "white"} borderColor={isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: "teal.400", boxShadow: "0 0 0 1px teal.400" }} color={isDark ? "teal.100" : "gray.700"}/>
+                <Input value={user.identifier} onChange={onChange} name="identifier" bg={isDark ? "gray.800" : "white"} borderColor={isIdentifier ? "#f87171" : isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: `${isIdentifier ? "#f87171" : "teal.400"}`, boxShadow: "0 0 0 1px teal.400" }} color={isIdentifier ? "#f87171" : isDark ? "teal.100" : "gray.700"}/>
+                {isIdentifier && <Field.ErrorText>This field is required</Field.ErrorText>}
             </Field.Root>
 
-            <Field.Root mt={4}>
+            <Field.Root invalid={isPassword}>
                 <Field.Label color={isDark ? "teal.200" : "teal.700"}>
-                    Password
+                    Password <Field.RequiredIndicator />
                 </Field.Label>
-                <PasswordInput  type="password" name="password" bg={isDark ? "gray.800" : "white"} borderColor={isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: "teal.400", boxShadow: "0 0 0 1px teal.400" }} color={isDark ? "teal.100" : "gray.700"}/>
-                <Flex justify="flex-end" mt={2}>
-                    <Link color={isDark ? "teal.400" : "teal.600"} fontSize="sm" _hover={{ color: isDark ? "teal.300" : "teal.800" }}>
-                        Forgot Password?
-                    </Link>
-                </Flex>
+                <PasswordInput value={user.password} onChange={onChange} type="password" name="password" bg={isDark ? "gray.800" : "white"} borderColor={isPassword ? "#f87171" : isDark ? "gray.700" : "teal.300"} _focus={{ borderColor:`${isPassword ? "#f87171" : "teal.400"}`, boxShadow: "0 0 0 1px teal.400" }} color={isPassword ? "#f87171" : isDark ? "teal.100" : "gray.700"}/>
+                {isPassword && <Field.ErrorText>This field is required</Field.ErrorText>}
             </Field.Root>
-            <Button mt={4} bg={isDark ? "teal.500" : "teal.600"} color="white" fontWeight="600" w="full" _hover={{ bg: isDark ? "teal.400" : "teal.700" }} transition="0.3s">
+            <Button type="submit" mt={4} bg={isPassword || isIdentifier ? "red.500" : isDark ? "teal.500" : "teal.600"} color="white" fontWeight="600" w="full" _hover={{ bg: isPassword || isIdentifier ? "red.400" : isDark ? "teal.400" : "teal.700" }} transition="0.3s">
                 Sign in
             </Button>
         </Fieldset.Content>
-
-        <Flex align="center" py={5}>
-            <Divider flex="1" borderColor={isDark ? "gray.700" : "gray.300"} />
-                <Text px={3} color={isDark ? "gray.400" : "gray.600"} fontSize="sm">
-                    Login with social accounts
-                </Text>
-            <Divider flex="1" borderColor={isDark ? "gray.700" : "gray.300"} />
-        </Flex>
-
-        <Flex justify="center" mb={4}>
-            <IconButton aria-label="Log in with Google" bg="transparent" color={isDark ? "teal.200" : "teal.700"} _hover={{ color: "teal.400" }} mx={1}>
-                <FaGoogle />
-            </IconButton>
-            <IconButton aria-label="Log in with GitHub" bg="transparent" color={isDark ? "teal.200" : "teal.700"} _hover={{ color: "teal.400" }} mx={1}>
-                <FaGithub />
-            </IconButton>
-        </Flex>
-
-        <Text textAlign="center" fontSize="sm" color={isDark ? "gray.400" : "gray.600"}>
+        <Flex justifyContent="center" fontSize="sm" color={isDark ? "gray.400" : "gray.600"}>
             Don't have an account?{" "}
-            <Link color={isDark ? "teal.300" : "teal.700"} _hover={{ textDecoration: "underline", color: "teal.400" }}>
-                Sign up
+            <Link to={"/signup"}>
+                <Text color={isDark ? "teal.300" : "teal.700"} _hover={{ textDecoration: "underline", color: "teal.400" }}>
+                    Sign up
+                </Text>
             </Link>
-        </Text>
+        </Flex>
         </Fieldset.Root>
     </Box>)
 }
