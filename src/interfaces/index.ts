@@ -36,3 +36,14 @@ export interface ILoginForm {
     identifier: string
     password: string
 }
+
+export interface IErrorResponse {
+    error: {
+        details?: {
+            errors: {
+            message: string;
+        }[];
+        };
+        message?: string;
+    };
+}

@@ -5,6 +5,7 @@ import type { ILoginForm, IProduct } from '@/interfaces'
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
 
+
 interface IInitialState {
     isLoading: boolean
     data: IProduct[] | null
@@ -23,6 +24,7 @@ export const userLogin = createAsyncThunk("login/userLogin", async(user : ILogin
         return data
     } catch (error) {
         rejectWithValue(error)
+        console.log(error)
     }
 })
 
@@ -38,12 +40,15 @@ const loginSlice = createSlice({
             state.isLoading = false;
             state.data = action.payload;
             state.error = null;
+            
+
         });
 
         builder.addCase(userLogin.rejected, (state, action: PayloadAction<unknown>) => {
             state.isLoading = false;
             state.data = [];
             state.error = action.payload;
+
         });
 
     },
