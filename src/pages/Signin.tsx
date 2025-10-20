@@ -2,39 +2,23 @@ import { useColorMode } from "@/components/ui/color-mode"
 import { PasswordInput } from "@/components/ui/password-input"
 import type { ILoginForm } from "../interfaces"
 import { Box, Button, Field, Fieldset, Flex, Input, Stack, Text,} from "@chakra-ui/react"
-import { useState, type ChangeEvent, type FormEvent } from "react"
 import { Link } from "react-router-dom"
-
+import { useForm, type SubmitHandler } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { loginSchema } from "@/validation"
 const Signin = () => {
     const { colorMode } = useColorMode()
     const isDark = colorMode === "dark"
-    const [user, setUser] = useState<ILoginForm>({
-        identifier: "",
-        password: ""
-    })
-
-    const [isIdentifier, setIsIdentifier] = useState<boolean>(true)
-    const [isPassword, setIsPassword] = useState<boolean>(true)
-    
+    const { register, handleSubmit, formState: { errors }} = useForm<ILoginForm>(
+        {
+    resolver: yupResolver(loginSchema),
+  }
+    )
     // ** Heandlers
-    const onChange = (e : ChangeEvent<HTMLInputElement>)=> {
-        const {name, value}= e.target
-        setUser({...user, [name]: value})
-    }
-
-    const onSubmit = (e : FormEvent<HTMLDivElement>) => {
-        e.preventDefault()
-        console.log(user)
-
-        if(!user.identifier) setIsIdentifier(true)
-        else setIsIdentifier(false)
-    
-        if(!user.password) setIsPassword(true)
-        else setIsPassword(false)
-
-    }
+    const onSubmit: SubmitHandler<ILoginForm> = (data) => console.log(data)
+    console.log(errors.identifier?.message)
 return (
-    <Box as={"form"} onSubmit={onSubmit} bg={isDark ? "gray.900" : "teal.50"} color={isDark ? "teal.100" : "gray.700"} p={8} borderRadius="lg" maxW="sm" mx="auto" mt={12} boxShadow="2xl">
+    <Box as={"form"} onSubmit={handleSubmit(onSubmit)} bg={isDark ? "gray.900" : "teal.50"} color={isDark ? "teal.100" : "gray.700"} p={8} borderRadius="lg" maxW="sm" mx="auto" mt={12} boxShadow="2xl">
         <Fieldset.Root size="lg" maxW="md">
             <Stack p={5}>
                 <Fieldset.Legend textAlign="center" color={isDark ? "teal.300" : "teal.700"} fontSize="3xl" fontWeight="700">
@@ -47,22 +31,22 @@ return (
             </Stack>
 
         <Fieldset.Content>
-            <Field.Root invalid={isIdentifier}>
-                <Field.Label color={isDark ? "teal.200" : "teal.700"}>
+            <Field.Root>
+                <Field.Label color={errors.identifier?.message ? "#f87171" : isDark ? "teal.200" : "teal.700"}>
                     Email Address <Field.RequiredIndicator />
                 </Field.Label>
-                <Input value={user.identifier} onChange={onChange} name="identifier" bg={isDark ? "gray.800" : "white"} borderColor={isIdentifier ? "#f87171" : isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: `${isIdentifier ? "#f87171" : "teal.400"}`, boxShadow: "0 0 0 1px teal.400" }} color={isIdentifier ? "#f87171" : isDark ? "teal.100" : "gray.700"}/>
-                {isIdentifier && <Field.ErrorText>This field is required</Field.ErrorText>}
+                <Input {...register("identifier", { required: true })} name="identifier" bg={isDark ? "gray.800" : "white"} borderColor={errors.identifier?.message ? "#f87171" : isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: `${errors.identifier?.message ? "#f87171" : "teal.400"}`, boxShadow: "0 0 0 1px teal.400" }} color={errors.identifier?.message ? "#f87171" : isDark ? "teal.100" : "gray.700"}/>
+                {errors.identifier?.message && <p style={{color: "#f87171", fontSize: 12}}>{errors.identifier.message}</p>}
             </Field.Root>
 
-            <Field.Root invalid={isPassword}>
-                <Field.Label color={isDark ? "teal.200" : "teal.700"}>
+            <Field.Root>
+                <Field.Label color={errors.identifier?.message ? "#f87171" : isDark ? "teal.200" : "teal.700"}>
                     Password <Field.RequiredIndicator />
                 </Field.Label>
-                <PasswordInput value={user.password} onChange={onChange} type="password" name="password" bg={isDark ? "gray.800" : "white"} borderColor={isPassword ? "#f87171" : isDark ? "gray.700" : "teal.300"} _focus={{ borderColor:`${isPassword ? "#f87171" : "teal.400"}`, boxShadow: "0 0 0 1px teal.400" }} color={isPassword ? "#f87171" : isDark ? "teal.100" : "gray.700"}/>
-                {isPassword && <Field.ErrorText>This field is required</Field.ErrorText>}
+                <PasswordInput {...register("password", { required: true })} type="password" name="password" bg={isDark ? "gray.800" : "white"} borderColor={errors.password ? "#f87171" : isDark ? "gray.700" : "teal.300"} _focus={{ borderColor:`${errors.password?.message ? "#f87171" : "teal.400"}`, boxShadow: "0 0 0 1px teal.400" }} color={errors.password?.message ? "#f87171" : isDark ? "teal.100" : "gray.700"}/>
+                {errors.password?.message && <p style={{color: "#f87171", fontSize: 12}}>{errors.password?.message}</p>}
             </Field.Root>
-            <Button type="submit" mt={4} bg={isPassword || isIdentifier ? "red.500" : isDark ? "teal.500" : "teal.600"} color="white" fontWeight="600" w="full" _hover={{ bg: isPassword || isIdentifier ? "red.400" : isDark ? "teal.400" : "teal.700" }} transition="0.3s">
+            <Button type="submit" mt={4} bg={errors.identifier?.message || errors.password?.message ? "red.500" : isDark ? "teal.500" : "teal.600"} color="white" fontWeight="600" w="full" _hover={{ bg: errors.identifier?.message || errors.password?.message ? "red.400" : isDark ? "teal.400" : "teal.700" }} transition="0.3s">
                 Sign in
             </Button>
         </Fieldset.Content>
