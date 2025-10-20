@@ -5,19 +5,24 @@ import { Box, Button, Field, Fieldset, Flex, Input, Stack, Text,} from "@chakra-
 import { Link } from "react-router-dom"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { loginSchema } from "@/validation"
+import { loginSchema } from "../validation"
+import { useDispatch } from "react-redux"
+import { userLogin } from "../app/features/login/loginSlice"
+import type { AppDispatch } from "../app/store"
+// import { userLogin } from "@/app/features/login/loginSlice"
 const Signin = () => {
     const { colorMode } = useColorMode()
     const isDark = colorMode === "dark"
+    const dispatch = useDispatch<AppDispatch>()
     const { register, handleSubmit, formState: { errors }} = useForm<ILoginForm>(
         {
     resolver: yupResolver(loginSchema),
-  }
+    }
     )
     // ** Heandlers
-    const onSubmit: SubmitHandler<ILoginForm> = (data) => console.log(data)
-    console.log(errors.identifier?.message)
-return (
+    const onSubmit: SubmitHandler<ILoginForm> = (data) => dispatch(userLogin(data))
+
+    return (
     <Box as={"form"} onSubmit={handleSubmit(onSubmit)} bg={isDark ? "gray.900" : "teal.50"} color={isDark ? "teal.100" : "gray.700"} p={8} borderRadius="lg" maxW="sm" mx="auto" mt={12} boxShadow="2xl">
         <Fieldset.Root size="lg" maxW="md">
             <Stack p={5}>
