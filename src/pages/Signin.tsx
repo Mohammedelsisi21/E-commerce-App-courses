@@ -7,13 +7,13 @@ import { useForm, type SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { loginSchema } from "../validation"
 import { userLogin } from "../app/features/login/loginSlice"
-import { useAppDispatch, useAppSelector, type RootState } from "../app/store"
+import { useAppDispatch, useAppSelector } from "../app/store"
 import { useEffect } from "react"
 
 const Signin = () => {
     const { colorMode } = useColorMode()
     const isDark = colorMode === "dark"
-    const {isLoading, error, data} = useAppSelector((store: RootState) =>store.login )
+    const {isLoading, error, data} = useAppSelector((store) =>store.login )
     const dispatch = useAppDispatch()
     const { register, handleSubmit, formState: { errors }} = useForm<ILoginForm>(
         {
