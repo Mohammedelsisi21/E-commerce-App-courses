@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import {Box,Flex,HStack,Button,IconButton,Spacer,Link as ChakraLink,Container,useDisclosure,VStack,} from "@chakra-ui/react";
+import {Box,Flex,HStack,Button,IconButton,Spacer,Link as ChakraLink,Container,useDisclosure,VStack, Text,} from "@chakra-ui/react";
 import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
 import { Link, NavLink } from "react-router-dom";
 import { useColorMode, useColorModeValue } from "@/components/ui/color-mode";
 import { navLinks } from "../constant";
 import Logo from "../components/Logo";
-
+import CookiesServices from "../Services"
 const Navbar = () => {
+const token = CookiesServices.get("jwt")
   const { colorMode, toggleColorMode } = useColorMode();
   const [isScrolled, setIsScrolled] = useState(false);
   const { open :isOpen, onOpen, onClose } = useDisclosure();
@@ -28,6 +29,11 @@ const Navbar = () => {
   const buttonColor = useColorModeValue("teal.600", "teal.200");
   const buttonHoverBg = useColorModeValue("gray.100", "gray.600");
 
+  const hendleLogout= () => {
+    CookiesServices.remove("jwt")
+    location.replace("/signin")
+  }
+  
   return (
     <Box bg={bgColor} position="fixed" top="0" left="0" right="0" zIndex="999" boxShadow="md" px={{ base: 4, md: 10 }} py={3} transition="all 0.3s ease">
       <Container>
@@ -46,14 +52,21 @@ const Navbar = () => {
         <Spacer />
 
         <HStack p={"15px"} alignItems="center">
-          <ChakraLink asChild color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }} display={{ base: "none", md: "block" }}>
-            <Link to="/signin">Sign in</Link>
-          </ChakraLink>
-
-            <Button bg={buttonBg} color={buttonColor} _hover={{ bg: buttonHoverBg }} size="sm" borderRadius="md" transition="all 0.2s">
-            <Link to="/signup">Sign up</Link>
+          {token ? <>
+            <Button bg={buttonBg} onClick={hendleLogout} color={buttonColor} _hover={{ bg: buttonHoverBg }} size="sm" borderRadius="md" transition="all 0.2s">
+              <Text>LogOut</Text>
             </Button>
 
+          </> : <>
+            <ChakraLink asChild color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }} display={{ base: "none", md: "block" }}>
+              <Link to="/signin">Sign in</Link>
+            </ChakraLink>
+
+            <Button bg={buttonBg} color={buttonColor} _hover={{ bg: buttonHoverBg }} size="sm" borderRadius="md" transition="all 0.2s">
+              <Link to="/signup">Sign up</Link>
+            </Button>
+
+          </>}
           <IconButton aria-label="Toggle color mode" onClick={toggleColorMode} color={linkColor} variant="ghost" fontSize="20px" _hover={{ color: hoverColor, bg: "rgba(255,255,255,0.1)" }}>
             {colorMode === "light" ? <FiMoon /> : <FiSun />}
           </IconButton>

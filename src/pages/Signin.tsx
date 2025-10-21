@@ -2,7 +2,7 @@ import { useColorMode } from "@/components/ui/color-mode"
 import { PasswordInput } from "@/components/ui/password-input"
 import type { ILoginForm } from "../interfaces"
 import { Box, Button, Field, Fieldset, Flex, Input, Stack, Text,} from "@chakra-ui/react"
-import { Link, Navigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { loginSchema } from "../validation"
@@ -20,19 +20,18 @@ const Signin = () => {
         {
     resolver: yupResolver(loginSchema),
   }
-    )
+)
     useEffect(() => {
         if(data) {
             setTimeout(()=> {
-                <Navigate to={"/"} />
+                location.replace("/")
             },1500)
         }
-    },[data])
-    
+    })
     const onSubmit: SubmitHandler<ILoginForm> = (data) => {
     dispatch(userLogin(data))
     }
-    
+
 return (
     <Box as={"form"} onSubmit={handleSubmit(onSubmit)} bg={isDark ? "gray.900" : "teal.50"} color={isDark ? "teal.100" : "gray.700"} p={8} borderRadius="lg" maxW="sm" mx="auto" mt={12} boxShadow="2xl">
         <Fieldset.Root size="lg" maxW="md">
