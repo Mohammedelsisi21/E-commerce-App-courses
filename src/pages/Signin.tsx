@@ -6,16 +6,15 @@ import { Link } from "react-router-dom"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { loginSchema } from "../validation"
-import { useDispatch } from "react-redux"
 import { userLogin } from "../app/features/login/loginSlice"
-import { useAppSelector, type AppDispatch, type RootState } from "../app/store"
+import { useAppDispatch, useAppSelector, type RootState } from "../app/store"
 import { useEffect } from "react"
 
 const Signin = () => {
     const { colorMode } = useColorMode()
     const isDark = colorMode === "dark"
     const {isLoading, error, data} = useAppSelector((store: RootState) =>store.login )
-    const dispatch = useDispatch<AppDispatch>()
+    const dispatch = useAppDispatch()
     const { register, handleSubmit, formState: { errors }} = useForm<ILoginForm>(
         {
     resolver: yupResolver(loginSchema),
@@ -25,7 +24,7 @@ const Signin = () => {
         if(data) {
             setTimeout(()=> {
                 location.replace("/")
-            },1500)
+            },700)
         }
     })
     const onSubmit: SubmitHandler<ILoginForm> = (data) => {

@@ -1,11 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit'
 import loginSlice from './features/login/loginSlice'
+import registerSlice from './features/register/registerSlice'
+
 
 
 export const store = configureStore({
   reducer: {
-    login: loginSlice
+    login: loginSlice,
+    register: registerSlice
   },
 })
 

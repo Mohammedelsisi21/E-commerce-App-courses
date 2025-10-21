@@ -9,7 +9,6 @@ import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 import ProtectedRout from "@/auth/ProtectedRout";
 import CookiesServices from "@/Services"
-// const isAllowed = true
 
 const token = CookiesServices.get("jwt")
 const router = createBrowserRouter(

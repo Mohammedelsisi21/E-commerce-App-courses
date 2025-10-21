@@ -5,6 +5,7 @@ import type { IErrorResponse, ILoginForm, IUserData } from '@/interfaces'
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 import cookiesServices from "../../../Services"
+import type { AxiosError } from 'axios'
 
 
 
@@ -19,14 +20,39 @@ const initialState: IInitialState = {
     data: null,
     error: null
 }
-export const userLogin = createAsyncThunk("login/userLogin", async(user : ILoginForm, trunkLogin) => {
+export const userLogin = createAsyncThunk<IUserData, ILoginForm, {rejectValue: IErrorResponse}>("login/userLogin", async(user, trunkLogin) => {
     const { rejectWithValue } = trunkLogin
     try {
         const { data } = await axiosInstance.post('/api/auth/local', user)
         return data
-    } catch (error: any) {
-        
-        return rejectWithValue(error.response?.data as IErrorResponse)
+    } catch (err) {
+        const error = err as AxiosError<{ error?: { message?: string } }>
+    if (error.response) {
+        const message =
+            error.response.data?.error?.message ||
+            "Login failed. Please check your credentials.";
+        return rejectWithValue({
+            error: {
+                details: { errors: [{ message }] },
+            message,
+            },
+        });
+    }
+    if(error.request) {
+        return rejectWithValue({
+            error: {
+                details: {errors: [{message: "No response from server. Please try again later."}]},
+                message: "NetWork Error"
+            }
+        })
+    }
+    return rejectWithValue({
+        error: {
+            details: { errors: [{ message: "Something went wrong. Please try again." }] },
+            message: "Unexpected error",
+        },
+    });
+
     }
 })
 
@@ -45,21 +71,18 @@ const loginSlice = createSlice({
             state.error = null;
             toast.success("Login successful", {
                 position: "top-center",
-                autoClose: 1500,
+                autoClose: 700,
                 theme: "dark"
             })
             const date = new Date();
             date.setDate(date.getDate() + 3);
             cookiesServices.set('jwt', action.payload.jwt, { path: '/', expires: date });
         })
-        .addCase(userLogin.rejected, (state, action: PayloadAction<IErrorResponse | any>) => {
+        .addCase(userLogin.rejected, (state, action: PayloadAction<IErrorResponse | undefined>) => {
             state.isLoading = false;
             state.data = null;
-            state.error = action.payload;
-            const errorMessage =
-                action.payload?.error?.details?.errors?.[0]?.message ||
-                action.payload?.error?.message || "Login failed. Please check your credentials."
-            toast.error(errorMessage , {
+            state.error = action.payload || null;
+            toast.error(action.payload?.error?.details?.errors[0]?.message , {
                 position: "top-center",
                 autoClose: 1500,
                 theme: "dark"

@@ -10,6 +10,7 @@ import { registerSchema } from "../validation"
 // import { userLogin } from "../app/features/login/loginSlice"
 // import { useAppSelector, type AppDispatch, type RootState } from "../app/store"
 // import { useEffect } from "react"
+
 const Signup = () => {
   const {colorMode} = useColorMode()
   const isDark = colorMode === "dark"
