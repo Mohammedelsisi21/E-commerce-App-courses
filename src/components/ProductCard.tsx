@@ -71,14 +71,15 @@ const ProductCard = ({ ProductCard }: IProps) => {
 
         <Link to={`/product/${documentId}`} style={{ width: "100%" }}>
           <Button
+          colorScheme={"teal"}
           alignContent={"center"}
-            bg={colorMode === "light" ? "teal.500" : "teal.400"}
+            bg={colorMode === "light" ? "teal.700" : "teal.500"}
             color="white"
             size="md"
             w="full"
             borderRadius="md"
             _hover={{
-              bg: colorMode === "light" ? "teal.600" : "teal.300",
+              bg: colorMode === "light" ? "teal.800" : "teal.400",
             }}
           >
             View Details

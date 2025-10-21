@@ -9,6 +9,7 @@ import { registerSchema } from "../validation"
 import { useAppDispatch, useAppSelector } from "@/app/store"
 import { userRegister } from "@/app/features/register/registerSlice"
 import { useEffect } from "react"
+import CircleUi from "@/components/CircleUi"
 
 const Signup = () => {
   const {colorMode} = useColorMode()
@@ -29,9 +30,10 @@ const Signup = () => {
     dispatch(userRegister(data))
   }
   
-  return (
-    <Flex h={"100vh"} alignItems={"center"} justifyContent={"center"}>
-    <Box as={"form"} onSubmit={handleSubmit(onSubmit)} bg={isDark ? "gray.900" : "teal.50"} color={isDark ? "teal.100" : "gray.700"} p={8} borderRadius="lg" maxW="sm" mx="auto" mt={12} boxShadow="2xl">
+  return (<Box position="relative" h="100vh" overflow="hidden" bg={isDark ? "gray.900" : "teal.50"}>
+    <CircleUi />
+    <Flex h={"100vh"} alignItems={"center"} justifyContent={"center"} zIndex={1} position="relative" >
+    <Box as={"form"} onSubmit={handleSubmit(onSubmit)} color={isDark ? "teal.100" : "gray.700"} p={8} borderRadius="lg" maxW="sm" mx="auto" mt={12} boxShadow="2xl">
         <Fieldset.Root size="lg" maxW="md">
             <Stack p={5}>
                 <Fieldset.Legend textAlign="center" color={isDark ? "teal.300" : "teal.700"} fontSize="3xl" fontWeight="700">
@@ -82,7 +84,7 @@ const Signup = () => {
         </Fieldset.Root>
     </Box>
 </Flex>
-  )
+  </Box>)
 }
 
 export default Signup

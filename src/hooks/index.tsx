@@ -10,7 +10,8 @@ const useAuthenticatedQuery = ({queryKey, url, config, action} : IAuthenticatedQ
         queryFn: async() => {
             const {data} = await axiosInstance[action](url, config)
             return data
-        }
+        },
+        staleTime: 1000 * 60 * 5
     })
 }
 

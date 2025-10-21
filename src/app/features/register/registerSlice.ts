@@ -24,7 +24,7 @@ export const userRegister = createAsyncThunk< IUserData ,IRegisterForm, { reject
         const {data} = await axiosInstance.post("api/auth/local/register",user)
         return data
     } catch (err) {
-        const error = err as AxiosError<{ message: string , error: {message: string}}>
+        const error = err as AxiosError<{ error: {message: string}}>
         if(error.response) {
             const message = error.response.data.error.message || "Register failed. Please check your credentials"
             return rejectWithValue({error: {details: {errors: [{message: message}]},

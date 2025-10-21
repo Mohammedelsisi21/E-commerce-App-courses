@@ -7,7 +7,13 @@ import App from './App.tsx'
 import { store } from "./app/store.ts"
 import { Provider } from "react-redux"
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+})
 
 createRoot(document.getElementById('root')!).render(
 

@@ -9,6 +9,7 @@ import { loginSchema } from "../validation"
 import { userLogin } from "../app/features/login/loginSlice"
 import { useAppDispatch, useAppSelector } from "../app/store"
 import { useEffect } from "react"
+import CircleUi from "@/components/CircleUi"
 
 const Signin = () => {
     const { colorMode } = useColorMode()
@@ -32,6 +33,8 @@ const Signin = () => {
     }
 
 return (
+    <Box position="relative" h="100vh" overflow="hidden" bg={isDark ? "gray.900" : "teal.50"}>
+    <CircleUi />
 <Flex h={"100vh"} alignItems={"center"} justifyContent={"center"}>
     <Box as={"form"} onSubmit={handleSubmit(onSubmit)} bg={isDark ? "gray.900" : "teal.50"} color={isDark ? "teal.100" : "gray.700"} p={8} borderRadius="lg" maxW="sm" mx="auto" mt={12} boxShadow="2xl">
         <Fieldset.Root size="lg" maxW="md">
@@ -76,6 +79,7 @@ return (
         </Fieldset.Root>
     </Box>
 </Flex>
+    </Box>
 )
 }
 
