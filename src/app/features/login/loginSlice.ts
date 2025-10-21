@@ -1,20 +1,21 @@
 
 
 import axiosInstance from '@/config'
-import type { ILoginForm, IProduct } from '@/interfaces'
+import type { IErrorResponse, ILoginForm, IProduct } from '@/interfaces'
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify'
 
 
 
 interface IInitialState {
     isLoading: boolean
     data: IProduct[] | null
-    error: unknown
+    error: IErrorResponse | null
 }
 
 const initialState: IInitialState = {
     isLoading: false,
-    data: [],
+    data: null,
     error: null
 }
 export const userLogin = createAsyncThunk("login/userLogin", async(user : ILoginForm, trunkLogin) => {
@@ -22,9 +23,9 @@ export const userLogin = createAsyncThunk("login/userLogin", async(user : ILogin
     try {
         const { data } = await axiosInstance.post('/api/auth/local', user)
         return data
-    } catch (error) {
-        rejectWithValue(error)
-        console.log(error)
+    } catch (error: any) {
+        
+        return rejectWithValue(error.response?.data as IErrorResponse)
     }
 })
 
@@ -33,22 +34,33 @@ const loginSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(userLogin.pending, (state) => {
+        builder
+        .addCase(userLogin.pending, (state) => {
             state.isLoading = true
         })
-        builder.addCase(userLogin.fulfilled, (state, action: PayloadAction<IProduct[]>) => {
+        .addCase(userLogin.fulfilled, (state, action: PayloadAction<IProduct[]>) => {
             state.isLoading = false;
             state.data = action.payload;
             state.error = null;
-            
-
-        });
-
-        builder.addCase(userLogin.rejected, (state, action: PayloadAction<unknown>) => {
+            toast.success("Login successful", {
+                position: "top-center",
+                autoClose: 1500,
+                theme: "dark"
+            })
+        })
+        .addCase(userLogin.rejected, (state, action: PayloadAction<IErrorResponse | any>) => {
             state.isLoading = false;
             state.data = [];
             state.error = action.payload;
+            const errorMessage =
+                action.payload?.error?.details?.errors?.[0]?.message ||
+                action.payload?.error?.message || "Login failed. Please check your credentials."
 
+            toast.error(errorMessage , {
+                position: "top-center",
+                autoClose: 1500,
+                theme: "dark"
+            })
         });
 
     },
