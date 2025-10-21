@@ -7,20 +7,30 @@ import ProductsPage from "../pages/Products";
 import Product from "../pages/Product";
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
-
+import ProtectedRout from "@/auth/ProtectedRout";
+import CookiesServices from "@/Services"
 // const isAllowed = true
 
+const token = CookiesServices.get("jwt")
 const router = createBrowserRouter(
     createRoutesFromElements(
         <>
-            <Route path="/" element={<Layout />}>
+            <Route path="/" element={
+                <ProtectedRout isAllowed={token} redirectPath="/signin" children={<Layout />}></ProtectedRout>
+            }>
                 <Route index element={<HomePage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/products" element={<ProductsPage />} />
                 <Route path="/product/:documentId" element={<Product />} />
-                <Route path="/signin" element={<Signin />} />
-                <Route path="/signup" element={<Signup />} />
             </Route>
+
+                <Route path="signin" element={
+                    <ProtectedRout isAllowed={!token} redirectPath="/" children={<Signin/>} />
+                }/>
+                
+                <Route path="signup" element={
+                    <ProtectedRout isAllowed={!token} redirectPath="/" children={<Signup/>} />
+                }/>
         </>
     )
 )

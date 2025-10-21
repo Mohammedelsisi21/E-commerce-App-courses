@@ -37,7 +37,14 @@ export interface ILoginForm {
     identifier: string
     password: string
 }
-
+export interface IUserData {
+    jwt: string
+    user: {
+        id: number
+        username: string
+        email: string
+    }
+}
 export interface IErrorResponse {
     error: {
         details?: {

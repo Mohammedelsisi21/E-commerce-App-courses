@@ -1,19 +1,12 @@
 
 
 import axiosInstance from '@/config'
-import type { IErrorResponse, ILoginForm } from '@/interfaces'
+import type { IErrorResponse, ILoginForm, IUserData } from '@/interfaces'
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 import cookiesServices from "../../../Services"
 
-interface IUserData {
-  jwt: string
-  user: {
-    id: number
-    username: string
-    email: string
-  }
-}
+
 
 interface IInitialState {
     isLoading: boolean
@@ -55,9 +48,9 @@ const loginSlice = createSlice({
                 autoClose: 1500,
                 theme: "dark"
             })
-            const date = new Date()
-            date.setDate(date.getDate() + 1000 * 60 *60 *24 *3)
-            cookiesServices.set('Data', action.payload.jwt, { path: '/', days: `${date}` })
+            const date = new Date();
+            date.setDate(date.getDate() + 3);
+            cookiesServices.set('jwt', action.payload.jwt, { path: '/', expires: date });
         })
         .addCase(userLogin.rejected, (state, action: PayloadAction<IErrorResponse | any>) => {
             state.isLoading = false;

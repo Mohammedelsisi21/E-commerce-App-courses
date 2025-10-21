@@ -6,7 +6,7 @@ class CookiesServices {
         return cookies.get(name);
     }
 
-    set(name: string, value: string, option?: { path?: string; days?: string }) {
+    set(name: string, value: string, option?: { path?: string; expires?: Date }) {
         return cookies.set(name, value, option);
     }
 

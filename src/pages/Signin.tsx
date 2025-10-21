@@ -2,24 +2,33 @@ import { useColorMode } from "@/components/ui/color-mode"
 import { PasswordInput } from "@/components/ui/password-input"
 import type { ILoginForm } from "../interfaces"
 import { Box, Button, Field, Fieldset, Flex, Input, Stack, Text,} from "@chakra-ui/react"
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { loginSchema } from "../validation"
 import { useDispatch } from "react-redux"
 import { userLogin } from "../app/features/login/loginSlice"
 import { useAppSelector, type AppDispatch, type RootState } from "../app/store"
+import { useEffect } from "react"
 
 const Signin = () => {
     const { colorMode } = useColorMode()
     const isDark = colorMode === "dark"
-    const {isLoading, error} = useAppSelector((store: RootState) =>store.login )
+    const {isLoading, error, data} = useAppSelector((store: RootState) =>store.login )
     const dispatch = useDispatch<AppDispatch>()
     const { register, handleSubmit, formState: { errors }} = useForm<ILoginForm>(
         {
     resolver: yupResolver(loginSchema),
   }
     )
+    useEffect(() => {
+        if(data) {
+            setTimeout(()=> {
+                <Navigate to={"/"} />
+            },1500)
+        }
+    },[data])
+    
     const onSubmit: SubmitHandler<ILoginForm> = (data) => {
     dispatch(userLogin(data))
     }
