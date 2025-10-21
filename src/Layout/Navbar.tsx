@@ -84,13 +84,15 @@ const token = CookiesServices.get("jwt")
               <NavLink to={link.path}>{link.name}</NavLink>
             </ChakraLink>
             ))}
-            
-            <ChakraLink asChild color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }}>
+          {
+            token ? null : <>
+                        <ChakraLink asChild color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }}>
               <NavLink to="/signin">Sign in</NavLink>
             </ChakraLink>
             <ChakraLink asChild color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }}>
               <NavLink to="/signup">Sign up</NavLink>
-            </ChakraLink>
+            </ChakraLink></>
+          }
           </VStack>
         )}
       </Container>

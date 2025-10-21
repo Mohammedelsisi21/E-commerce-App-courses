@@ -37,6 +37,12 @@ export interface ILoginForm {
     identifier: string
     password: string
 }
+export interface IRegisterForm {
+    username: string
+    email: string
+    password: string
+}
+
 export interface IUserData {
     jwt: string
     user: {

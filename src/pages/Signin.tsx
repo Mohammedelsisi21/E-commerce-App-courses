@@ -33,6 +33,7 @@ const Signin = () => {
     }
 
 return (
+<Flex h={"100vh"} alignItems={"center"} justifyContent={"center"}>
     <Box as={"form"} onSubmit={handleSubmit(onSubmit)} bg={isDark ? "gray.900" : "teal.50"} color={isDark ? "teal.100" : "gray.700"} p={8} borderRadius="lg" maxW="sm" mx="auto" mt={12} boxShadow="2xl">
         <Fieldset.Root size="lg" maxW="md">
             <Stack p={5}>
@@ -66,7 +67,7 @@ return (
             </Button>
         </Fieldset.Content>
         <Flex justifyContent="center" fontSize="sm" color={isDark ? "gray.400" : "gray.600"}>
-            Don't have an account?{" "}
+            Don't have an account? {" "}
             <Link to={"/signup"}>
                 <Text color={isDark ? "teal.300" : "teal.700"} _hover={{ textDecoration: "underline", color: "teal.400" }}>
                     Sign up
@@ -74,7 +75,9 @@ return (
             </Link>
         </Flex>
         </Fieldset.Root>
-    </Box>)
+    </Box>
+</Flex>
+)
 }
 
 export default Signin
