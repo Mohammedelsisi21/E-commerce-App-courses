@@ -1,6 +1,7 @@
 import type { AxiosRequestConfig } from "axios"
 
 export interface IProduct {
+    jwt?: string
     id?: number
     title: string
     description: string

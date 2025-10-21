@@ -1,15 +1,23 @@
 
 
 import axiosInstance from '@/config'
-import type { IErrorResponse, ILoginForm, IProduct } from '@/interfaces'
+import type { IErrorResponse, ILoginForm } from '@/interfaces'
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
+import cookiesServices from "../../../Services"
 
-
+interface IUserData {
+  jwt: string
+  user: {
+    id: number
+    username: string
+    email: string
+  }
+}
 
 interface IInitialState {
     isLoading: boolean
-    data: IProduct[] | null
+    data: IUserData | null
     error: IErrorResponse | null
 }
 
@@ -38,7 +46,7 @@ const loginSlice = createSlice({
         .addCase(userLogin.pending, (state) => {
             state.isLoading = true
         })
-        .addCase(userLogin.fulfilled, (state, action: PayloadAction<IProduct[]>) => {
+        .addCase(userLogin.fulfilled, (state, action: PayloadAction<IUserData>) => {
             state.isLoading = false;
             state.data = action.payload;
             state.error = null;
@@ -47,15 +55,17 @@ const loginSlice = createSlice({
                 autoClose: 1500,
                 theme: "dark"
             })
+            const date = new Date()
+            date.setDate(date.getDate() + 1000 * 60 *60 *24 *3)
+            cookiesServices.set('Data', action.payload.jwt, { path: '/', days: `${date}` })
         })
         .addCase(userLogin.rejected, (state, action: PayloadAction<IErrorResponse | any>) => {
             state.isLoading = false;
-            state.data = [];
+            state.data = null;
             state.error = action.payload;
             const errorMessage =
                 action.payload?.error?.details?.errors?.[0]?.message ||
                 action.payload?.error?.message || "Login failed. Please check your credentials."
-
             toast.error(errorMessage , {
                 position: "top-center",
                 autoClose: 1500,
