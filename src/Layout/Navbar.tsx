@@ -7,13 +7,15 @@ import { navLinks } from "../constant";
 import Logo from "../components/Logo";
 import CookiesServices from "../Services"
 import { BsCart } from "react-icons/bs";
+import { useAppSelector } from "@/app/store";
 
 const Navbar = () => {
 const token = CookiesServices.get("jwt")
   const { colorMode, toggleColorMode } = useColorMode();
   const [isScrolled, setIsScrolled] = useState(false);
   const { open :isOpen, onOpen, onClose } = useDisclosure();
-  
+  const { cartItems } = useAppSelector((store) => store.cart)
+
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
@@ -59,7 +61,7 @@ const token = CookiesServices.get("jwt")
               <BsCart size={22} />
             </Button>
             <Text position="absolute" top="10%" right="10%" bg="red.500" color="white" fontSize="xs" borderRadius="full" h="5" w={5} display="flex" alignItems="center" justifyContent="center" transform="translate(50%, -50%)">
-            3
+            {cartItems.length}
             </Text>
           </Box>
           {token ? <>
