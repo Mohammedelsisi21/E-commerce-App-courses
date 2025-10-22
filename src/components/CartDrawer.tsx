@@ -3,6 +3,7 @@
 import { onChangeOpen } from "@/app/features/global/globalSlice"
 import { useAppDispatch, useAppSelector } from "@/app/store"
 import { Button, CloseButton, Drawer, Portal } from "@chakra-ui/react"
+import CartDrawerProduct from "./CartDrawerProduct"
 
 const CartDrawer = () => {
   const dispatch = useAppDispatch()
@@ -12,7 +13,7 @@ const CartDrawer = () => {
     dispatch(onChangeOpen())
   }
   return (
-    <Drawer.Root open={isOpenCartDrawer} onOpenChange={onChange}>
+    <Drawer.Root open={isOpenCartDrawer} onOpenChange={onChange} size={"sm"}>
       <Drawer.Trigger asChild>
       </Drawer.Trigger>
       <Portal>
@@ -20,17 +21,14 @@ const CartDrawer = () => {
         <Drawer.Positioner>
           <Drawer.Content>
             <Drawer.Header>
-              <Drawer.Title>Drawer Title</Drawer.Title>
+              <Drawer.Title>Your Shoping Cart</Drawer.Title>
             </Drawer.Header>
             <Drawer.Body>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
+              <CartDrawerProduct />
             </Drawer.Body>
             <Drawer.Footer>
-              <Button variant="outline">Cancel</Button>
-              <Button>Save</Button>
+              <Button variant="outline" onClick={onChange}>Cancel</Button>
+              <Button variant="outline" color={"red"}>Clear All</Button>
             </Drawer.Footer>
             <Drawer.CloseTrigger asChild>
               <CloseButton size="sm" />
