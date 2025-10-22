@@ -4,6 +4,7 @@ import { onChangeOpen } from "@/app/features/global/globalSlice"
 import { useAppDispatch, useAppSelector } from "@/app/store"
 import { Button, CloseButton, Drawer, Portal } from "@chakra-ui/react"
 import CartDrawerProduct from "./CartDrawerProduct"
+import { removeCartAll } from "@/app/features/cart/cartSlice"
 
 const CartDrawer = () => {
   const dispatch = useAppDispatch()
@@ -11,6 +12,12 @@ const CartDrawer = () => {
 
   const onChange = () => {
     dispatch(onChangeOpen())
+  }
+  const onRemoveAll = () => {
+    dispatch(removeCartAll())
+    setTimeout(()=> {
+      dispatch(onChangeOpen())
+    },400)
   }
   return (
     <Drawer.Root open={isOpenCartDrawer} onOpenChange={onChange} size={"sm"}>
@@ -28,7 +35,7 @@ const CartDrawer = () => {
             </Drawer.Body>
             <Drawer.Footer>
               <Button variant="outline" onClick={onChange}>Cancel</Button>
-              <Button variant="outline" color={"red"}>Clear All</Button>
+              <Button variant="outline" color={"red"} onClick={onRemoveAll}>Clear All</Button>
             </Drawer.Footer>
             <Drawer.CloseTrigger asChild>
               <CloseButton size="sm" />

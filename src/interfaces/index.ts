@@ -15,6 +15,21 @@ export interface IProduct {
         title: string
     }
 }
+export interface ICartItem {
+    qty: number
+    jwt?: string
+    id?: number
+    title: string
+    description: string
+    price: number
+    thumbnail: {
+        url: string
+    }
+    category: {
+        title: string
+    }
+}
+
 
 
 // ** function text limet

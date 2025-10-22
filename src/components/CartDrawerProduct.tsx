@@ -1,12 +1,12 @@
-import { useAppSelector } from "@/app/store"
+import { decreaseQty, increaseQty, removeFromCart } from "@/app/features/cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/app/store"
 import { Box ,Flex, HStack, IconButton, Image, Text, VStack } from "@chakra-ui/react"
 import { FiTrash2, FiPlus, FiMinus } from "react-icons/fi";
 
 const CartDrawerProduct = () => {
     const {cartItems} = useAppSelector((store) => store.cart)
-    console.log(cartItems)
-    const totalPrice: number = cartItems.reduce((acc , itme) => acc + itme.price * (itme.qty ?? 1), 0)
-
+    const dispatch = useAppDispatch()
+    const totalPrice: number = cartItems.reduce((acc , item) => acc + item.price * item.qty, 0)
     return (<>
             {cartItems.length > 0 ? <>
                 {cartItems.map((item) => (
@@ -17,16 +17,16 @@ const CartDrawerProduct = () => {
                             <Text fontWeight="medium">{item.title}</Text>
                             <Text color="teal.500">${item.price}</Text>
                             <HStack>
-                                <IconButton size="xs" aria-label="Decrease quantity">
+                                <IconButton onClick={() => dispatch(decreaseQty(item.id ?? 1))} size="xs" aria-label="Decrease quantity">
                                     <FiMinus />
                                 </IconButton>
                                 <Text>{item.qty}</Text>
-                                <IconButton size="xs" aria-label="Increase quantity">
+                                <IconButton onClick={() => dispatch(increaseQty(item.id ?? 1))} size="xs" aria-label="Increase quantity">
                                     <FiPlus />
                                 </IconButton>
                             </HStack>
                             </VStack>
-                            <IconButton aria-label="Remove item"
+                            <IconButton aria-label="Remove item" onClick={() => dispatch(removeFromCart(item.id ?? 1))}
                             variant={"ghost"}
                             colorScheme={"red"}
                             color={"red"}>
