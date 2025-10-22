@@ -7,13 +7,20 @@ import { navLinks } from "../constant";
 import Logo from "../components/Logo";
 import CookiesServices from "../Services"
 import { BsCart } from "react-icons/bs";
-import { useAppSelector } from "@/app/store";
+import { useAppDispatch, useAppSelector } from "@/app/store";
+import { onChangeOpen } from "@/app/features/global/globalSlice";
 
 const Navbar = () => {
 const token = CookiesServices.get("jwt")
   const { colorMode, toggleColorMode } = useColorMode();
   const [isScrolled, setIsScrolled] = useState(false);
   const { open :isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useAppDispatch()
+
+    const onChangeCart = () => {
+      dispatch(onChangeOpen())
+    }
+    
   const { cartItems } = useAppSelector((store) => store.cart)
 
   useEffect(() => {
@@ -56,7 +63,7 @@ const token = CookiesServices.get("jwt")
         <Spacer />
 
         <HStack p={"15px"} alignItems="center">
-          <Box position="relative">
+          <Box position="relative" onClick={onChangeCart}>
             <Button position="relative" bg={buttonBg} color={buttonColor} _hover={{ bg: buttonHoverBg }} size="sm" borderRadius="md" transition="all 0.2s">
               <BsCart size={22} />
             </Button>
@@ -88,7 +95,7 @@ const token = CookiesServices.get("jwt")
           </IconButton>
           </HStack>
         </Flex>
-          
+
         {isOpen && (
           <VStack mt={4} p={4} align="start" display={{ base: "flex", md: "none" }}>
             {navLinks.map((link, idx) => (
