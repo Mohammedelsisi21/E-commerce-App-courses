@@ -6,6 +6,8 @@ import { useColorMode, useColorModeValue } from "@/components/ui/color-mode";
 import { navLinks } from "../constant";
 import Logo from "../components/Logo";
 import CookiesServices from "../Services"
+import { BsCart } from "react-icons/bs";
+
 const Navbar = () => {
 const token = CookiesServices.get("jwt")
   const { colorMode, toggleColorMode } = useColorMode();
@@ -52,6 +54,14 @@ const token = CookiesServices.get("jwt")
         <Spacer />
 
         <HStack p={"15px"} alignItems="center">
+          <Box position="relative">
+            <Button position="relative" bg={buttonBg} color={buttonColor} _hover={{ bg: buttonHoverBg }} size="sm" borderRadius="md" transition="all 0.2s">
+              <BsCart size={22} />
+            </Button>
+            <Text position="absolute" top="10%" right="10%" bg="red.500" color="white" fontSize="xs" borderRadius="full" h="5" w={5} display="flex" alignItems="center" justifyContent="center" transform="translate(50%, -50%)">
+            3
+            </Text>
+          </Box>
           {token ? <>
             <Button bg={buttonBg} onClick={hendleLogout} color={buttonColor} _hover={{ bg: buttonHoverBg }} size="sm" borderRadius="md" transition="all 0.2s">
               <Text>LogOut</Text>
@@ -76,7 +86,7 @@ const token = CookiesServices.get("jwt")
           </IconButton>
           </HStack>
         </Flex>
-
+          
         {isOpen && (
           <VStack mt={4} p={4} align="start" display={{ base: "flex", md: "none" }}>
             {navLinks.map((link, idx) => (
