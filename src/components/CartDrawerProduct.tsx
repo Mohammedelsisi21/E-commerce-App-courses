@@ -5,7 +5,7 @@ import { FiTrash2, FiPlus, FiMinus } from "react-icons/fi";
 const CartDrawerProduct = () => {
     const {cartItems} = useAppSelector((store) => store.cart)
     console.log(cartItems)
-    const totalPrice: number = cartItems.reduce((acc , itme) => acc + itme.price, 0)
+    const totalPrice: number = cartItems.reduce((acc , itme) => acc + itme.price * (itme.qty ?? 1), 0)
 
     return (<>
             {cartItems.length > 0 ? <>
@@ -20,7 +20,7 @@ const CartDrawerProduct = () => {
                                 <IconButton size="xs" aria-label="Decrease quantity">
                                     <FiMinus />
                                 </IconButton>
-                                <Text>1</Text>
+                                <Text>{item.qty}</Text>
                                 <IconButton size="xs" aria-label="Increase quantity">
                                     <FiPlus />
                                 </IconButton>
