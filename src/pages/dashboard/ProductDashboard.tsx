@@ -1,7 +1,10 @@
+import DashboardTable from "@/components/DashboardTable"
 
 const Products = () => {
-  return (
-    <div>ProductDashboard</div>
+  
+  return (<>
+      <DashboardTable />
+    </>
   )
 }
 
