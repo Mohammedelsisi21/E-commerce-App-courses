@@ -4,6 +4,7 @@ import { AiFillDelete, AiFillEdit, AiFillEye  } from "react-icons/ai";
 import { useGetProductListQuery } from "@/app/services/APiSlice";
 import TableSkeleton from "./TableSkeleton";
 import type { IProduct } from "@/interfaces";
+import AlertDialog from "@/Shared/AlertDialog";
 
 const DashboardTable = () => {
     const {isLoading, data} = useGetProductListQuery(1)
@@ -37,22 +38,27 @@ return (
                 <Table.Cell>${product.price.toFixed(2)}</Table.Cell>
                 <Table.Cell>
                 <ButtonGroup p={2}>
-                <IconButton aria-label="View" variant={"outline"} size="sm" color="white" bg={"blue.400"} _hover={{ transform: "scale(1.08)", bg: "blue.500" }}>
-                    <AiFillEye  />
-                </IconButton>
-                <IconButton aria-label="Remove" variant={"outline"} size="sm" color="white" bg={"red.400"} _hover={{ transform: "scale(1.08)", bg: "red.500"}}>
-                    <AiFillDelete />
-                </IconButton>
-                <IconButton aria-label="Update" variant={"outline"} size="sm" color="white" bg={"tan"} _hover={{ transform: "scale(1.08)", bg: "tan"}}>
-                    <AiFillEdit />
-                </IconButton>
+                {/* <AlertDialog btn={ */}
+                    <IconButton aria-label="View" variant={"outline"} size="sm" color="white" bg={"blue.400"} _hover={{ transform: "scale(1.08)", bg: "blue.500" }}>
+                        <AiFillEye  />
+                    </IconButton>
+                {/* }/> */}
+                <AlertDialog btn={
+                    <IconButton aria-label="Remove" variant={"outline"} size="sm" color="white" bg={"red.400"} _hover={{ transform: "scale(1.08)", bg: "red.500"}}>
+                        <AiFillDelete />
+                    </IconButton>
+                } variant="outline" color="red" title="Are you Sure" description="Do You really want to destory this Product? This product cannot be undone." okText="remove"/>
+                <AlertDialog btn={
+                    <IconButton aria-label="Update" variant={"outline"} size="sm" color="white" bg={"tan"} _hover={{ transform: "scale(1.08)", bg: "tan"}}>
+                        <AiFillEdit />
+                    </IconButton>
+                }variant={"plain"} color="black" bg="tan" title="Are you Sure" description="Do you really want to update this product? The changes will be applied immediately." okText="updata"/>
                 </ButtonGroup>
             </Table.Cell>
             </Table.Row>
         ))}
         </Table.Body>
     </Table.Root>
-
       {/* <Pagination.Root count={products.length * 5} pageSize={5} page={1} mx={"auto"}>
         <ButtonGroup variant="ghost" size="sm" wrap="wrap">
             <Pagination.PrevTrigger asChild>
