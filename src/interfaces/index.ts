@@ -13,6 +13,7 @@ export interface IProduct {
     category: {
         title: string
     }
+    stock?: number
 }
 export interface ICartItem {
     qty: number

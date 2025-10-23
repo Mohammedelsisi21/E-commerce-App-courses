@@ -44,7 +44,8 @@ const TableSkeleton = () => {
                 <Table.Cell>
                     <Flex>
                         <Skeleton bg={"blue.500"} mr={2} height="30px" w="25px" />
-                        <Skeleton bg={"red.500"} height="30px" w="25px" />
+                        <Skeleton bg={"red.500"} mr={2} height="30px" w="25px" />
+                        <Skeleton bg={"tan"} height="30px" w="25px" />
                     </Flex>
                 </Table.Cell>
             </Table.Row>

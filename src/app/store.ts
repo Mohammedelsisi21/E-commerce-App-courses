@@ -4,8 +4,11 @@ import loginSlice from './features/login/loginSlice'
 import registerSlice from './features/register/registerSlice'
 import cartSlice from './features/cart/cartSlice'
 import globalSlice from './features/global/globalSlice'
+import { apiSlice } from './services/APiSlice'
+
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import { setupListeners } from '@reduxjs/toolkit/query';
 const persistCartConfig = {
   key: 'root',
   storage,
@@ -17,7 +20,8 @@ export const store = configureStore({
     cart: persistedCart,
     login: loginSlice,
     register: registerSlice,
-    global: globalSlice
+    global: globalSlice,
+    [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: {
@@ -30,10 +34,13 @@ export const store = configureStore({
           "persist/PURGE",
       ]
     }
-  })
+  }).concat(apiSlice.middleware)
+  
 })
 
 export const persister = persistStore(store)
+
+setupListeners(store.dispatch)
 
 export type RootState = ReturnType<typeof store.getState>
 
@@ -41,4 +48,5 @@ export type AppDispatch = typeof store.dispatch
 
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
 export const useAppSelector = useSelector.withTypes<RootState>()
+
 

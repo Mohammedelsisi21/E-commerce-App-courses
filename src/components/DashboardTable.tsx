@@ -1,45 +1,16 @@
-import { ButtonGroup, Heading, IconButton, Pagination, Stack, Table, Image} from "@chakra-ui/react";
-import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
-import { AiFillDelete, AiFillEdit } from "react-icons/ai";
-// import TableSkeleton from "./TableSkeleton";
+import { ButtonGroup, Heading, IconButton, Stack, Table, Image} from "@chakra-ui/react";
+// import { LuChevronLeft, LuChevronRight } from "react-icons/lu"; Pagination
+import { AiFillDelete, AiFillEdit, AiFillEye  } from "react-icons/ai";
+import { useGetProductListQuery } from "@/app/services/APiSlice";
+import TableSkeleton from "./TableSkeleton";
+import type { IProduct } from "@/interfaces";
 
 const DashboardTable = () => {
-  const products = [
-    {
-      id: 1,
-      title: "Laptop",
-      description: "High-end gaming laptop",
-      documentId: "doc1",
-      price: 999.99,
-      stock: 10,
-      thumbnail: { url: "https://via.placeholder.com/40" },
-      category: { title: "Electronics" },
-    },
-    {
-      id: 2,
-      title: "Coffee Maker",
-      description: "Automatic coffee maker",
-      documentId: "doc2",
-      price: 49.99,
-      stock: 5,
-      thumbnail: { url: "https://via.placeholder.com/40" },
-      category: { title: "Home Appliances" },
-    },
-    {
-      id: 3,
-      title: "Desk Chair",
-      description: "Comfortable office chair",
-      documentId: "doc3",
-      price: 150.0,
-      stock: 7,
-      thumbnail: { url: "https://via.placeholder.com/40" },
-      category: { title: "Furniture" },
-    },
-  ];
+    const {isLoading, data} = useGetProductListQuery(1)
 
-
-  return (
-    <Stack width="70%" gap="5" mx={"auto"}>
+    if(isLoading) return <TableSkeleton />
+return (
+    <Stack width="70%" gap="5" mr={{base: "10px", md: "auto"}} ml={{base: "0", md: "auto"}}>
         <Heading size="xl">Products</Heading>
             <Table.Root size="sm" variant="outline" striped>
             <Table.Header>
@@ -54,23 +25,26 @@ const DashboardTable = () => {
             </Table.Row>
             </Table.Header>
             <Table.Body>
-            {products.map((product) => (
+            {data?.data?.map((product: IProduct, idx: number) => (
                 <Table.Row key={product.id}>
                 <Table.Cell>
-                    <Image src={product.thumbnail.url} alt={product.title} boxSize="40px" objectFit="cover" borderRadius="md"/>
+                    <Image src={`${import.meta.env.VITE_LOCAL_API}${product.thumbnail.url}`} alt={product.title} boxSize="40px" objectFit="cover" borderRadius="md"/>
                 </Table.Cell>
-                <Table.Cell>{product.id}</Table.Cell>
+                <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{product.title}</Table.Cell>
                 <Table.Cell>{product.category.title}</Table.Cell>
                 <Table.Cell>{product.stock}</Table.Cell>
                 <Table.Cell>${product.price.toFixed(2)}</Table.Cell>
                 <Table.Cell>
                 <ButtonGroup p={2}>
-                <IconButton aria-label="Update" variant={"outline"} size="sm" color="blue" _hover={{ transform: "scale(1.2)" }}>
-                    <AiFillEdit />
+                <IconButton aria-label="View" variant={"outline"} size="sm" color="white" bg={"blue.400"} _hover={{ transform: "scale(1.08)", bg: "blue.500" }}>
+                    <AiFillEye  />
                 </IconButton>
-                <IconButton aria-label="Remove" variant={"outline"} size="sm" color="red" _hover={{ transform: "scale(1.2)" }}>
+                <IconButton aria-label="Remove" variant={"outline"} size="sm" color="white" bg={"red.400"} _hover={{ transform: "scale(1.08)", bg: "red.500"}}>
                     <AiFillDelete />
+                </IconButton>
+                <IconButton aria-label="Update" variant={"outline"} size="sm" color="white" bg={"tan"} _hover={{ transform: "scale(1.08)", bg: "tan"}}>
+                    <AiFillEdit />
                 </IconButton>
                 </ButtonGroup>
             </Table.Cell>
@@ -79,7 +53,7 @@ const DashboardTable = () => {
         </Table.Body>
     </Table.Root>
 
-      <Pagination.Root count={products.length * 5} pageSize={5} page={1} mx={"auto"}>
+      {/* <Pagination.Root count={products.length * 5} pageSize={5} page={1} mx={"auto"}>
         <ButtonGroup variant="ghost" size="sm" wrap="wrap">
             <Pagination.PrevTrigger asChild>
                 <IconButton>
@@ -99,7 +73,7 @@ const DashboardTable = () => {
                 </IconButton>
             </Pagination.NextTrigger>
             </ButtonGroup>
-        </Pagination.Root>
+        </Pagination.Root> */}
     </Stack>
 );
 };
