@@ -1,18 +1,23 @@
-import { Box, Image, Heading, Text, Button, VStack } from "@chakra-ui/react";
+import { Box, Image, Heading, Text, Button, VStack, Flex } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useColorMode } from "./ui/color-mode";
-import type { IProduct } from "../interfaces";
+import type { ICartItem } from "../interfaces";
 import { truncateText } from "@/utils";
-
+import { addCartItmesAction } from "@/app/features/cart/cartSlice"
+import { useAppDispatch } from "@/app/store";
 
 interface IProps {
-  ProductCard: IProduct
+  ProductCard: ICartItem
 }
 const ProductCard = ({ ProductCard }: IProps) => {
   const {title ,description,price,thumbnail, documentId}= ProductCard
   const { url } = thumbnail
 
   const { colorMode } = useColorMode();
+      const dispatch = useAppDispatch()
+    const addCart = () => {
+        dispatch(addCartItmesAction(ProductCard))
+    }
 
   return (
     <Box
@@ -68,23 +73,39 @@ const ProductCard = ({ ProductCard }: IProps) => {
         >
           { `$${price.toLocaleString("en-us")}` }
         </Text>
-
-        <Link to={`/product/${documentId}`} style={{ width: "100%" }}>
-          <Button
-          colorScheme={"teal"}
-          alignContent={"center"}
-            bg={colorMode === "light" ? "teal.700" : "teal.500"}
-            color="white"
-            size="md"
-            w="full"
-            borderRadius="md"
-            _hover={{
-              bg: colorMode === "light" ? "teal.800" : "teal.400",
-            }}
-          >
-            View Details
-          </Button>
-        </Link>
+        <Flex justifyContent={"space-evenly"} w={"full"}>
+          <Link to={`/product/${documentId}`} style={{ width: "45%"}}>
+            <Button
+              colorScheme={"teal"}
+              alignContent={"center"}
+              bg={colorMode === "light" ? "teal.700" : "teal.500"}
+              color="white"
+              size="md"
+              w="full"
+              borderRadius="md"
+              _hover={{
+                bg: colorMode === "light" ? "teal.800" : "teal.400",
+              }}>
+              View Details
+            </Button>
+          </Link>
+          <Link to={``} style={{ width: "45%" }}>
+            <Button
+              colorScheme={"teal"}
+              alignContent={"center"}
+              bg={colorMode === "light" ? "teal.700" : "teal.500"}
+              color="white"
+              size="md"
+              w="full"
+              borderRadius="md"
+              _hover={{
+                bg: colorMode === "light" ? "teal.800" : "teal.400",
+              }}
+            onClick={addCart}>
+                Add to cart
+            </Button>
+          </Link>
+        </Flex>
       </VStack>
     </Box>
   );
