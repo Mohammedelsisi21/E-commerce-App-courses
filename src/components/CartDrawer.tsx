@@ -63,12 +63,11 @@ const CartDrawer = () => {
                             cart?
                           </Text>
                         </Dialog.Body>
-
                         <Dialog.Footer>
                           <Dialog.ActionTrigger asChild>
                             <Button variant="outline">Cancel</Button>
                           </Dialog.ActionTrigger>
-                          <Button  color={"red"} colorScheme="red" onClick={onRemoveAll}>
+                          <Button  color={"white"} bg={"red.700"} _hover={{bg: "red.500"}} transition={"500"}  onClick={onRemoveAll}>
                             Yes, Clear All
                           </Button>
                         </Dialog.Footer>

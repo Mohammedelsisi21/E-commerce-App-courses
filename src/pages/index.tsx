@@ -1,7 +1,10 @@
+import SliderPage from "@/components/SliderPage"
 
 const HomePage = () => {
   return (
-    <div>Hello Home</div>
+    <>
+    <SliderPage />
+    </>
   )
 }
 
