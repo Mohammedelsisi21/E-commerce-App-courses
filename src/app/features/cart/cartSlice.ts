@@ -16,6 +16,11 @@ const cartSlice = createSlice({
     reducers: {
         addCartItmesAction: (state, action : PayloadAction<ICartItem>) => {
             state.cartItems = addCartDrawerQuantity(state.cartItems, action.payload)
+            toast.success(`Added 1 more successful.`, {
+            position: "top-center",
+            autoClose: 500,
+            theme: "colored",
+            });
         },
         removeFromCart: (state, action : PayloadAction<number>) => {
             state.cartItems = state.cartItems.filter((item) => item.id !== action.payload)

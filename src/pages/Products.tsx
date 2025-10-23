@@ -1,4 +1,4 @@
-import { Container, Grid } from "@chakra-ui/react"
+import { Grid } from "@chakra-ui/react"
 import ProductCard from "../components/ProductCard"
 import type { ICartItem } from "../interfaces"
 import ProductCardSkeleton from "@/components/ProductCardSkeleton"
@@ -15,11 +15,11 @@ const ProductsPage = () => {
     {Array.from({length: 10}, (_, idx)=> (<ProductCardSkeleton key={idx}/>))}
     </Grid>
 
-    return (<Container>
+    return (<>
         <Grid margin={30} gap={5} templateColumns={"repeat(auto-fill, minmax(300px, 1fr))"}>
             {data?.data?.map((product : ICartItem) => <ProductCard key={product.id} ProductCard={product}/>)}
         </Grid>
-    </Container>
+    </>
 )
 }
 
