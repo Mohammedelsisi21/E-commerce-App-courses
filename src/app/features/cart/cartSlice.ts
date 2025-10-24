@@ -17,7 +17,7 @@ const cartSlice = createSlice({
         addCartItmesAction: (state, action : PayloadAction<ICartItem>) => {
             state.cartItems = addCartDrawerQuantity(state.cartItems, action.payload)
             toast.success(`Added 1 more successful.`, {
-            position: "top-center",
+            position: "bottom-right",
             autoClose: 500,
             theme: "colored",
             });
@@ -25,7 +25,7 @@ const cartSlice = createSlice({
         removeFromCart: (state, action : PayloadAction<number>) => {
             state.cartItems = state.cartItems.filter((item) => item.id !== action.payload)
             toast.success(`Removed from cart.`, {
-            position: "top-center",
+            position: "bottom-right",
             autoClose: 500,
             theme: "colored",
             });
@@ -34,7 +34,7 @@ const cartSlice = createSlice({
             const item = state.cartItems.find(item => item.id === action.payload)
             if(item) item.qty += 1
             toast.success(`Added 1 more ${item?.title.split(" ").slice(0, 2).join(" ")}`, {
-            position: "top-center",
+            position: "bottom-right",
             autoClose: 500,
             theme: "colored",
             });
@@ -43,7 +43,7 @@ const cartSlice = createSlice({
             const item = state.cartItems.find(item => item.id === action.payload)
             if(item && item.qty > 1) item.qty -=1
             toast.success(`${item?.title.split(" ").slice(0, 2).join(" ")} - 1`, {
-            position: "top-center",
+            position: "bottom-right",
             autoClose: 500,
             theme: "colored",
             });

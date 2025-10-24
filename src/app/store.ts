@@ -4,7 +4,7 @@ import loginSlice from './features/login/loginSlice'
 import registerSlice from './features/register/registerSlice'
 import cartSlice from './features/cart/cartSlice'
 import globalSlice from './features/global/globalSlice'
-import { apiSlice } from './services/APiSlice'
+import { productApiSlice } from './services/productApiSlice'
 
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
@@ -21,7 +21,7 @@ export const store = configureStore({
     login: loginSlice,
     register: registerSlice,
     global: globalSlice,
-    [apiSlice.reducerPath]: apiSlice.reducer,
+    [productApiSlice.reducerPath]: productApiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: {
@@ -34,7 +34,7 @@ export const store = configureStore({
           "persist/PURGE",
       ]
     }
-  }).concat(apiSlice.middleware)
+  }).concat(productApiSlice.middleware)
   
 })
 

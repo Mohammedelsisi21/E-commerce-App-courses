@@ -10,10 +10,12 @@ interface IProps {
     variant: "surface" | "subtle" | "solid" | "plain" | "outline" | "ghost"
     color: string
     bg?: string
+    isLoading?: boolean
+    onHandleOkText?: () => void
 }
-const AlertDialog = ({btn, title, description, okText= "Yes", onCancel= "Cancel", variant, color,bg}: IProps) => {
+const AlertDialog = ({isLoading,btn, title, description, okText= "Yes", onCancel= "Cancel", variant, color,bg, onHandleOkText}: IProps) => {
     return (
-        <Dialog.Root>
+        <Dialog.Root placement={"center"}>
             <Dialog.Trigger asChild>
                 {btn}
             </Dialog.Trigger>
@@ -32,8 +34,10 @@ const AlertDialog = ({btn, title, description, okText= "Yes", onCancel= "Cancel"
                 <Dialog.Footer>
                 <Dialog.ActionTrigger asChild>
                     <Button variant="outline">{onCancel}</Button>
-                    </Dialog.ActionTrigger>
-                    <Button border={`${color} .5px solid`} textTransform={"capitalize"} fontSize={"md"} variant={variant} color={color} bg={bg}>{okText}</Button>
+                </Dialog.ActionTrigger>
+                <Dialog.ActionTrigger asChild>
+                    <Button loading={isLoading} onClick={onHandleOkText} border={`${color} .5px solid`} textTransform={"capitalize"} fontSize={"md"} variant={variant} color={color} bg={bg}>{okText}</Button>
+                </Dialog.ActionTrigger>
                 </Dialog.Footer>
                 <Dialog.CloseTrigger asChild>
                 <CloseButton size="sm" />
