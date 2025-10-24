@@ -1,16 +1,18 @@
-import { ButtonGroup, Heading, IconButton, Stack, Table, Image} from "@chakra-ui/react";
-// import { LuChevronLeft, LuChevronRight } from "react-icons/lu"; Pagination
+import { ButtonGroup, Heading, IconButton, Stack, Pagination,Table, Image} from "@chakra-ui/react";
+import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { AiFillDelete, AiFillEdit, AiFillEye  } from "react-icons/ai";
 import { useGetProductListQuery, useRemoveProductListMutation } from "@/app/services/productApiSlice";
 import TableSkeleton from "./TableSkeleton";
 import type { IProduct } from "@/interfaces";
 import AlertDialog from "@/Shared/AlertDialog";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const DashboardTable = () => {
-    const {isLoading, data} = useGetProductListQuery(1)
+    const [page, setPage] = useState<number>(1);
+    const {isLoading, data} = useGetProductListQuery(page)
     const [destroyProduct, {isLoading: isLoadingDelete, isSuccess}] = useRemoveProductListMutation()
+    console.log(data)
     useEffect(() => {
         if(isSuccess) {
             toast.success(`Removed is Product.`, {
@@ -71,27 +73,29 @@ return (
         ))}
         </Table.Body>
     </Table.Root>
-      {/* <Pagination.Root count={products.length * 5} pageSize={5} page={1} mx={"auto"}>
-        <ButtonGroup variant="ghost" size="sm" wrap="wrap">
+    <Pagination.Root mx="auto" count={data?.meta?.pagination.total} pageSize={data?.meta?.pagination.pageSize} page={page} onPageChange={(details) => setPage(details.page)}>
+        <ButtonGroup variant="ghost" size="sm">
             <Pagination.PrevTrigger asChild>
                 <IconButton>
-                <LuChevronLeft />
+                    <LuChevronLeft />
                 </IconButton>
             </Pagination.PrevTrigger>
 
-            <Pagination.Items render={(page) => (
-                <IconButton key={page.value} variant={{ base: "ghost", _selected: "outline" }}>
-                    {page.value}
-                </IconButton>
-            )}/>
+    <Pagination.Items render={(p) => (
+        <Pagination.Item key={p.value} {...p}>
+            <IconButton variant={p.value === page ? "solid" : "ghost"}>
+                {p.value}
+            </IconButton>
+    </Pagination.Item>
+    )}/>
 
-            <Pagination.NextTrigger asChild>
-                <IconButton>
+        <Pagination.NextTrigger asChild>
+            <IconButton>
                 <LuChevronRight />
-                </IconButton>
-            </Pagination.NextTrigger>
-            </ButtonGroup>
-        </Pagination.Root> */}
+            </IconButton>
+        </Pagination.NextTrigger>
+        </ButtonGroup>
+    </Pagination.Root>
     </Stack>
 );
 };
