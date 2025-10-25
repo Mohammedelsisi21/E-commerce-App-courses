@@ -20,7 +20,7 @@ const AlertDialog = ({isLoading,btn, title, description, okText= "Yes", onCancel
                 {btn}
             </Dialog.Trigger>
             <Portal>
-                <Dialog.Backdrop />
+                <Dialog.Backdrop bg={"black/80"}/>
                 <Dialog.Positioner>
                     <Dialog.Content>
                     <Dialog.Header>

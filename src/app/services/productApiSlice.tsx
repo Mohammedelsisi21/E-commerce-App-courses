@@ -26,7 +26,7 @@ export const productApiSlice = createApi({
                     Authorization: `Bearer ${CookiesServices.get("jwt")}`
                 },
             }),
-            invalidatesTags: [{ type: 'Products', id: 'List' }],
+            invalidatesTags: [{ type: 'Products', id: 'LIST' }],
         })
     }),
 })
