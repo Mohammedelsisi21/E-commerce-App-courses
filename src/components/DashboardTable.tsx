@@ -1,12 +1,12 @@
 import { ButtonGroup, Heading, IconButton, Stack, Pagination,Table, Image} from "@chakra-ui/react";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
-import { AiFillEye  } from "react-icons/ai";
 import { useGetProductListQuery } from "@/app/services/productApiSlice";
 import TableSkeleton from "./TableSkeleton";
 import type { IProduct } from "@/interfaces";
 import { useState } from "react";
 import UpdateProduct from "./curdProduct/UpdateProduct";
 import DeleteProduct from "./curdProduct/deleteProduct";
+import ViewDitails from "./curdProduct/ViewDitails";
 
 
 const DashboardTable = () => {
@@ -41,11 +41,7 @@ return (
                 <Table.Cell>${product.price.toFixed(2)}</Table.Cell>
                 <Table.Cell>
                 <ButtonGroup p={2}>
-                {/* <AlertDialog btn={ */}
-                <IconButton aria-label="View" variant={"outline"} size="sm" color="white" bg={"blue.400"} _hover={{ transform: "scale(1.08)", bg: "blue.500" }}>
-                    <AiFillEye  />
-                </IconButton>
-                {/* }/> */}
+                    <ViewDitails product={product}/>
                     <DeleteProduct id={product.documentId}/>
                     <UpdateProduct product={product}/>
                 </ButtonGroup>
