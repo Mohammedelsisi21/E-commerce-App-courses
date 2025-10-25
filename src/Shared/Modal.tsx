@@ -1,6 +1,6 @@
 import { useColorMode } from "@/components/ui/color-mode"
 import { Button, CloseButton, Dialog, Portal, VStack,} from "@chakra-ui/react"
-import type { ReactNode } from "react"
+import { useState, type ReactNode } from "react"
 
 interface IProps {
     children: ReactNode
@@ -13,15 +13,22 @@ interface IProps {
 const CustomeModal = ({children, openModal, title, onHandleOkText, color, okText} : IProps) => {
     const { colorMode } = useColorMode()
     const isDark = colorMode === "dark"
-
+    const [open, setOpen] = useState(false)
+    
+    const handleOk = async () => {
+        if (onHandleOkText) {
+        await onHandleOkText()
+        }
+    setOpen(false)
+}
 return (
     <VStack alignItems="start">
-        <Dialog.Root placement="center">
+        <Dialog.Root placement="center" open={open} onOpenChange={(e) => setOpen(e.open)}>
         <Dialog.Trigger asChild>
       {openModal}
         </Dialog.Trigger>
         <Portal>
-            <Dialog.Backdrop bg="blackAlpha.800" />
+            <Dialog.Backdrop bg="blackAlpha.600" backdropFilter={"blur(5px)"}/>
             <Dialog.Positioner>
             <Dialog.Content borderRadius="2xl" p="6" bg={isDark ? "gray.900" : "white"}>
         <Dialog.Header>
@@ -39,16 +46,12 @@ return (
         </Dialog.CloseTrigger>
 
         <Dialog.Footer display="flex" justifyContent="flex-end" gap="3">
-        <Dialog.ActionTrigger asChild>
-            <Button variant="outline" borderColor={isDark ? "gray.600" : "teal.400"}>
-                Cancel
-            </Button>
-        </Dialog.ActionTrigger>
-        <Dialog.ActionTrigger asChild>
-            <Button onClick={onHandleOkText} textTransform="capitalize" fontSize="md" colorScheme="teal" color={color}>
-                {okText}
-            </Button>
-        </Dialog.ActionTrigger>
+        <Button variant="outline" onClick={() => setOpen(false)} borderColor={isDark ? "gray.600" : "teal.400"}>
+            Cancel
+        </Button>
+        <Button onClick={handleOk} textTransform="capitalize" fontSize="md" colorScheme="teal" color={color}>
+            {okText}
+        </Button>
         </Dialog.Footer>
         </Dialog.Content>
     </Dialog.Positioner>

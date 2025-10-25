@@ -47,7 +47,7 @@ return (
                 </IconButton>
                 {/* }/> */}
                     <DeleteProduct id={product.documentId}/>
-                    <UpdateProduct />
+                    <UpdateProduct product={product}/>
                 </ButtonGroup>
             </Table.Cell>
             </Table.Row>

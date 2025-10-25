@@ -1,8 +1,9 @@
 import { Button, CloseButton, Dialog, Portal } from "@chakra-ui/react"
+import { useState } from "react"
 import type { ReactNode } from "react"
 
 interface IProps {
-    btn: ReactNode,
+    btn: ReactNode
     title: string
     description: string
     onCancel?: string
@@ -11,43 +12,47 @@ interface IProps {
     color: string
     bg?: string
     isLoading?: boolean
-    onHandleOkText?: () => void
+    onHandleOkText?: () => Promise<void> | void
 }
-const AlertDialog = ({isLoading,btn, title, description, okText= "Yes", onCancel= "Cancel", variant, color,bg, onHandleOkText}: IProps) => {
+
+const AlertDialog = ({ isLoading, btn, title, description, okText = "Yes", onCancel = "Cancel", variant, color, bg, onHandleOkText,}: IProps) => {
+    const [open, setOpen] = useState(false)
+    const handleOk = async () => {
+        if (onHandleOkText) {
+        await onHandleOkText()
+        }
+    setOpen(false)
+    }
+
     return (
-        <Dialog.Root placement={"center"}>
-            <Dialog.Trigger asChild>
-                {btn}
-            </Dialog.Trigger>
+        <Dialog.Root open={open} onOpenChange={(e) => setOpen(e.open)} placement="center">
+            <Dialog.Trigger asChild>{btn}</Dialog.Trigger>
             <Portal>
-                <Dialog.Backdrop bg={"black/80"}/>
+                <Dialog.Backdrop bg="blackAlpha.600" backdropFilter={"blur(5px)"} />
                 <Dialog.Positioner>
-                    <Dialog.Content>
-                    <Dialog.Header>
-                        <Dialog.Title>{title}</Dialog.Title>
-                    </Dialog.Header>
-                    <Dialog.Body>
-                    <p>
-                        {description}
-                    </p>
-                </Dialog.Body>
-                <Dialog.Footer>
-                <Dialog.ActionTrigger asChild>
-                    <Button variant="outline">{onCancel}</Button>
-                </Dialog.ActionTrigger>
-                <Dialog.ActionTrigger asChild>
-                    <Button loading={isLoading} onClick={onHandleOkText} border={`${color} .5px solid`} textTransform={"capitalize"} fontSize={"md"} variant={variant} color={color} bg={bg}>{okText}</Button>
-                </Dialog.ActionTrigger>
-                </Dialog.Footer>
-                <Dialog.CloseTrigger asChild>
+                <Dialog.Content>
+                <Dialog.Header>
+                    <Dialog.Title>{title}</Dialog.Title>
+                </Dialog.Header>
+            <Dialog.Body>
+                <p>{description}</p>
+            </Dialog.Body>
+            <Dialog.Footer>
+                <Button variant="outline" onClick={() => setOpen(false)}>
+                    {onCancel}
+                </Button>
+                <Button loading={isLoading} onClick={handleOk} border={`${color} .5px solid`} textTransform="capitalize" fontSize="md" variant={variant} color={color} bg={bg}>
+                {okText}
+                </Button>
+            </Dialog.Footer>
+            <Dialog.CloseTrigger asChild>
                 <CloseButton size="sm" />
-                </Dialog.CloseTrigger>
-                </Dialog.Content>
-            </Dialog.Positioner>
-            </Portal>
+            </Dialog.CloseTrigger>
+        </Dialog.Content>
+        </Dialog.Positioner>
+    </Portal>
     </Dialog.Root>
 )
 }
-
 
 export default AlertDialog
