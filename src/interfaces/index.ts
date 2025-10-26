@@ -40,6 +40,7 @@ export interface ITruncateText {
 }
 
 
+// ** Custom Hook
 export interface IAuthenticatedQuery {
     queryKey: string[]
     url: string
@@ -54,12 +55,15 @@ export interface ILoginForm {
     identifier: string
     password: string
 }
+
+// ** Register
 export interface IRegisterForm {
     username: string
     email: string
     password: string
 }
 
+// ** User Data in Login && Register
 export interface IUserData {
     jwt: string
     user: {
@@ -68,6 +72,8 @@ export interface IUserData {
         email: string
     }
 }
+
+// ** Error
 export interface IErrorResponse {
     error: {
         details?: {

@@ -1,7 +1,7 @@
 import type { IProduct } from "@/interfaces"
 import CustomeModal from "@/Shared/Modal"
 import { useColorMode } from "../ui/color-mode"
-import { Box, Flex, Heading, HStack, IconButton, Image, Text, Badge, VStack,} from "@chakra-ui/react"
+import { Box, Flex, Heading, HStack, IconButton, Image, Text, Badge, VStack, Dialog, Button,} from "@chakra-ui/react"
 import { AiFillEye } from "react-icons/ai"
 
 interface IProps {
@@ -20,9 +20,7 @@ const ViewDetails = ({ product }: IProps) => {
                 <AiFillEye />
             </IconButton>
             }
-        title="Product Details"
-        color="blue.400"
-        okText="OK">
+        title="Product Details">
             <VStack align="stretch" p={4} divideColor={isDark ? "gray.700" : "gray.200"}>
                 <Flex justify="center">
                     <Image src={`${import.meta.env.VITE_LOCAL_API}${url}`} alt={title} boxSize="200px" objectFit="cover" borderRadius="xl" shadow="xl" transition="all 0.3s ease" _hover={{ transform: "scale(1.05)" }}/>
@@ -67,9 +65,16 @@ const ViewDetails = ({ product }: IProps) => {
                         {description || "No description available."}
                     </Text>
                 </Box>
+                <Dialog.Footer display="flex" justifyContent="flex-end" gap="3">
+                    <Dialog.ActionTrigger asChild>
+                        <Button type={"button"} textTransform="capitalize" fontSize="md" colorScheme="teal" color={"blue.400"}>
+                            OK
+                        </Button>
+                    </Dialog.ActionTrigger>
+            </Dialog.Footer>
             </VStack>
         </CustomeModal>
-        )
+    )
 }
 
 export default ViewDetails

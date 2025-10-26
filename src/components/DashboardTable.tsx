@@ -59,7 +59,7 @@ return (
             </Pagination.PrevTrigger>
 
     <Pagination.Items render={(p) => (
-        <Pagination.Item key={p.value} {...p}>
+        <Pagination.Item asChild key={p.value} {...p}>
             <IconButton variant={p.value === page ? "solid" : "ghost"}>
                 {p.value}
             </IconButton>
