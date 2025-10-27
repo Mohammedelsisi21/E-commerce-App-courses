@@ -9,6 +9,7 @@ export interface IProduct {
     price: number
     thumbnail: {
         url?: string | null
+        id?: number | null
     }
     category: {
         title: string

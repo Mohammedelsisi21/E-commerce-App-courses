@@ -62,7 +62,7 @@ const UpdateProduct = ({ product } : IProps) => {
                 price: formData.price,
                 stock: formData.stock,
                 title: formData.title,
-                thumbnail: imageId ? [imageId] : [],
+                thumbnail: imageId ? [imageId] : product.thumbnail ? [product.thumbnail.id] : [],
               },
             };
             updateProductFun({id: product.documentId, body: body})
