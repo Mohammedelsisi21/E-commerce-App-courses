@@ -18,6 +18,9 @@ export const productApiSlice = createApi({
                 {"type": "Products", id: "LIST"}]
                 : [{"type": "Products", id: "LIST"}],
             }),
+        // createProductList: builder.mutation({
+
+        // }),
         updateProductList: builder.mutation({
             query: ({id, body}) => ({
                 url: `api/products/${id}`,
@@ -25,9 +28,8 @@ export const productApiSlice = createApi({
                 headers: {
                     Authorization: `Bearer ${CookiesServices.get("jwt")}`
                 },
-                body,
+                body: {data: body},
             }),
-            invalidatesTags: [{ type: 'Products', id: 'LIST' }],
                 async onQueryStarted({ id, ...patch }, { dispatch, queryFulfilled }) {
                 const patchResult = dispatch(
                     productApiSlice.util.updateQueryData('getProductList', id, (draft) => {
@@ -38,6 +40,9 @@ export const productApiSlice = createApi({
                 } catch {
                     patchResult.undo()
                 }},
+                invalidatesTags: ({ id }) => [
+                { type: 'Products', id },
+                { type: 'Products', id: 'LIST' }],
         }),
         removeProductList: builder.mutation({
             query: (id: string) => ( {

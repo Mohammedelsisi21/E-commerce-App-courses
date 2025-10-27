@@ -1,12 +1,13 @@
-import { ButtonGroup, Heading, IconButton, Stack, Pagination,Table, Image} from "@chakra-ui/react";
+import { ButtonGroup, Heading, IconButton, Stack, Pagination,Table, Image, Flex} from "@chakra-ui/react";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { useGetProductListQuery } from "@/app/services/productApiSlice";
 import TableSkeleton from "./TableSkeleton";
 import type { IProduct } from "@/interfaces";
 import { useState } from "react";
 import UpdateProduct from "./curdProduct/UpdateProduct";
-import DeleteProduct from "./curdProduct/deleteProduct";
+import DeleteProduct from "./curdProduct/DeleteProduct";
 import ViewDitails from "./curdProduct/ViewDitails";
+import CreateProdcut from "./curdProduct/CreateProdcut";
 
 
 const DashboardTable = () => {
@@ -15,7 +16,10 @@ const DashboardTable = () => {
     if(isLoading) return <TableSkeleton />
 return (
     <Stack width="70%" gap="5" mr={{base: "10px", md: "auto"}} ml={{base: "0", md: "auto"}}>
-        <Heading size="xl">Products</Heading>
+        <Flex>
+            <Heading size="xl">Products</Heading>
+            <CreateProdcut />
+        </Flex>
             <Table.Root size="sm" variant="outline" striped>
             <Table.Header>
             <Table.Row>
