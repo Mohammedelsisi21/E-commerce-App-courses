@@ -32,7 +32,7 @@ return (
             {children}
         </Dialog.Body>
         <Dialog.CloseTrigger asChild>
-            <CloseButton size="sm" position="absolute" top="3" right="3" />
+            <CloseButton size="sm" position="absolute" top="3" right="3" onClick={()=> onClose(!open)}/>
         </Dialog.CloseTrigger>
         </Dialog.Content>
     </Dialog.Positioner>

@@ -136,7 +136,7 @@ const CreateProdcut = () => {
                 </Field.Root>
                 <Dialog.Footer display="flex" justifyContent="flex-end" gap="3">
                   <Dialog.ActionTrigger asChild>
-                    <Button type={"button"} variant={"outline"}>
+                    <Button type={"button"} variant={"outline"} onClick={()=> setIsOpen(false)}>
                         Cancel
                     </Button>
                   </Dialog.ActionTrigger>

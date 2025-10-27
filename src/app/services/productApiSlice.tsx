@@ -46,7 +46,7 @@ export const productApiSlice = createApi({
                 headers: {
                     Authorization: `Bearer ${CookiesServices.get("jwt")}`
                 },
-                body: {data: body},
+                body,
             }),
                 async onQueryStarted({ id, ...patch }, { dispatch, queryFulfilled }) {
                 const patchResult = dispatch(

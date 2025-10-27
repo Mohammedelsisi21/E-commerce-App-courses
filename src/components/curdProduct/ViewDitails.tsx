@@ -3,6 +3,7 @@ import CustomeModal from "@/Shared/Modal"
 import { useColorMode } from "../ui/color-mode"
 import { Box, Flex, Heading, HStack, IconButton, Image, Text, Badge, VStack, Dialog, Button,} from "@chakra-ui/react"
 import { AiFillEye } from "react-icons/ai"
+import { useState } from "react"
 
 interface IProps {
     product: IProduct
@@ -12,11 +13,12 @@ const ViewDetails = ({ product }: IProps) => {
     const { colorMode } = useColorMode()
     const isDark = colorMode === "dark"
     const { id, category, description, title, price, stock, thumbnail: { url }} = product
-
+    const [isOpen, setOpen] = useState(false)
+    
     return (
-        <CustomeModal
+        <CustomeModal open={isOpen} onClose={setOpen}
         openModal={
-            <IconButton aria-label="View" variant="outline" size="sm" color="white" bg="blue.500" _hover={{ transform: "scale(1.1)", bg: "blue.600" }}>
+            <IconButton aria-label="View" onClick={() => setOpen(true)} variant="outline" size="sm" color="white" bg="blue.500" _hover={{ transform: "scale(1.1)", bg: "blue.600" }}>
                 <AiFillEye />
             </IconButton>
             }
@@ -67,7 +69,7 @@ const ViewDetails = ({ product }: IProps) => {
                 </Box>
                 <Dialog.Footer display="flex" justifyContent="flex-end" gap="3">
                     <Dialog.ActionTrigger asChild>
-                        <Button variant={"outline"} type={"button"} textTransform="capitalize" fontSize="md" fontWeight="semibold" colorScheme="blue" color={"blue.500"} _hover={{ transform: "scale(1.02)", boxShadow: "md" }} _active={{transform: "scale(0.98)"}}>
+                        <Button onClick={()=> setOpen(false)} variant={"outline"} type={"button"} textTransform="capitalize" fontSize="md" fontWeight="semibold" colorScheme="blue" color={"blue.500"} _hover={{ transform: "scale(1.02)", boxShadow: "md" }} _active={{transform: "scale(0.98)"}}>
                             OK
                         </Button>
                     </Dialog.ActionTrigger>

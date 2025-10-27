@@ -8,6 +8,7 @@ import { useState, type ChangeEvent, type FormEvent } from "react"
 import { useUpdateProductListMutation } from "@/app/services/productApiSlice"
 import { useEffect } from "react"
 import { toast } from "react-toastify"
+import { uploadImage } from "@/utils"
 
 interface IProps {
   product: IProduct
@@ -38,7 +39,6 @@ const UpdateProduct = ({ product } : IProps) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value,
-            ...thumbnail
         });
     };
     const handlerImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -51,14 +51,25 @@ const UpdateProduct = ({ product } : IProps) => {
     const handleSubmit = async (e: FormEvent<HTMLDivElement>) => {
         e.preventDefault();
         try {
-            await updateProductFun({
-                id: product.documentId,
-                body: formData
-            }).unwrap();
-        } catch (error) {
+          let imageId = null
+            if(thumbnail) {
+              const uploadData = await uploadImage(thumbnail);
+              imageId = uploadData[0]?.id;
+            }
+            const body = {
+              data: {
+                description: formData.description,
+                price: formData.price,
+                stock: formData.stock,
+                title: formData.title,
+                thumbnail: imageId ? [imageId] : [],
+              },
+            };
+            updateProductFun({id: product.documentId, body: body})
+          } catch (error) {
             console.error('Failed to update:', error);
-        }
-    };
+          }
+        };
 
   return (
     <CustomeModal open={isOpen} onClose={setIsOpen}
@@ -128,7 +139,7 @@ const UpdateProduct = ({ product } : IProps) => {
 
             <Dialog.Footer display="flex" justifyContent="flex-end" gap="3">
               <Dialog.ActionTrigger asChild>
-                <Button type={"button"} variant={"outline"}>
+                <Button type={"button"} variant={"outline"} onClick={()=> setIsOpen(false)}>
                     Cancel
                 </Button>
               </Dialog.ActionTrigger>
