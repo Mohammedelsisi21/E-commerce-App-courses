@@ -8,7 +8,7 @@ export interface IProduct {
     documentId: string
     price: number
     thumbnail: {
-        url: string
+        url?: string | null
     }
     category: {
         title: string

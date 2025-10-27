@@ -13,6 +13,7 @@ interface IProps {
   product: IProduct
 }
 const UpdateProduct = ({ product } : IProps) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   const [thumbnail, setThumbnail] = useState<File | null>(null)
     const [formData, setFormData] = useState({
@@ -60,9 +61,9 @@ const UpdateProduct = ({ product } : IProps) => {
     };
 
   return (
-    <CustomeModal
+    <CustomeModal open={isOpen} onClose={setIsOpen}
     openModal={
-        <IconButton aria-label="Update" variant={"outline"} size="sm" color="white" bg={"tan"} _hover={{ transform: "scale(1.08)", bg: "tan"}}>
+        <IconButton aria-label="Update" onClick={() => setIsOpen(true)} variant={"outline"} size="sm" color="white" bg={"tan"} _hover={{ transform: "scale(1.08)", bg: "tan"}}>
           <AiFillEdit />
         </IconButton>
     }title="Update Product">

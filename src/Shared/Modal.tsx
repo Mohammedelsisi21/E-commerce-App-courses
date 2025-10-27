@@ -1,19 +1,21 @@
 import { useColorMode } from "@/components/ui/color-mode"
 import { CloseButton, Dialog, Portal, VStack,} from "@chakra-ui/react"
-import { useState, type ReactNode } from "react"
+import {type ReactNode } from "react"
 
 interface IProps {
     children: ReactNode
     title: string
     openModal: ReactNode
+    open: boolean
+    onClose: (open: boolean) => void
 }
-const CustomeModal = ({children, openModal, title} : IProps) => {
+const CustomeModal = ({children, openModal, title, onClose, open} : IProps) => {
     const { colorMode } = useColorMode()
     const isDark = colorMode === "dark"
-    const [open, setOpen] = useState(false)
+    // const [open, setOpen] = useState(false)
 return (
     <VStack alignItems="start">
-        <Dialog.Root placement="center" open={open} onOpenChange={(e) => setOpen(e.open)}>
+        <Dialog.Root placement="center" open={open} onOpenChange={()=>onClose}>
         <Dialog.Trigger asChild>
       {openModal}
         </Dialog.Trigger>

@@ -26,7 +26,7 @@ return (
                 <Table.ColumnHeader>Image</Table.ColumnHeader>
                 <Table.ColumnHeader>ID</Table.ColumnHeader>
                 <Table.ColumnHeader>Title</Table.ColumnHeader>
-                <Table.ColumnHeader>Category</Table.ColumnHeader>
+                {/* <Table.ColumnHeader>Category</Table.ColumnHeader> */}
                 <Table.ColumnHeader>Stock</Table.ColumnHeader>
                 <Table.ColumnHeader>Price</Table.ColumnHeader>
                 <Table.ColumnHeader>Actions</Table.ColumnHeader>
@@ -40,7 +40,7 @@ return (
                 </Table.Cell>
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{product.title}</Table.Cell>
-                <Table.Cell>{product.category.title}</Table.Cell>
+                {/* <Table.Cell>{product.category.title}</Table.Cell> */}
                 <Table.Cell>{product.stock}</Table.Cell>
                 <Table.Cell>${product.price.toFixed(2)}</Table.Cell>
                 <Table.Cell>
