@@ -5,9 +5,14 @@ const TableSkeleton = () => {
 
     return (
         <Stack width="70%" gap="5" mx={{md: "auto", base: "10px"}}>
-            <Heading size="xl">
-            <Skeleton height="30px" w="200px" />
-            </Heading>
+            <Flex justifyContent={"space-between"}>
+                <Heading size="xl">
+                    <Skeleton height="30px" w="200px"/>
+                </Heading>
+
+                <Skeleton bg={"green.500"} height="30px" w="80px" />
+            </Flex>
+
             <Table.Root size="sm" variant="outline" striped>
                 <Table.Header>
                 <Table.Row>

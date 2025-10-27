@@ -27,7 +27,7 @@ const DeleteProduct = ({ id }: IProps) => {
     return (
         <AlertDialog
         btn={
-        <IconButton aria-label="Remove" variant="outline" size="sm" color="white" bg="red.400" _hover={{ transform: "scale(1.08)", bg: "red.500" }}>
+        <IconButton aria-label="Remove" variant="outline" size="sm" color="white" bg="red.500" _hover={{ transform: "scale(1.08)", bg: "red.500" }}>
             <AiFillDelete />
         </IconButton>
         } isLoading={isLoading} onHandleOkText={onRemove} variant="outline" color="red" title="Are you sure?" description="Do you really want to destroy this product? This action cannot be undone." okText="remove"

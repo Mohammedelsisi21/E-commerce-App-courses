@@ -128,10 +128,10 @@ const UpdateProduct = ({ product } : IProps) => {
             <Dialog.Footer display="flex" justifyContent="flex-end" gap="3">
               <Dialog.ActionTrigger asChild>
                 <Button type={"button"} variant={"outline"}>
-                    Cansle
+                    Cancel
                 </Button>
               </Dialog.ActionTrigger>
-              <Button type={"submit"} loading={isLoading} textTransform="capitalize" fontSize="md" colorScheme="teal" color={"blue.400"}>
+              <Button variant={"outline"} type={"submit"} loading={isLoading} textTransform="capitalize" fontSize="md" fontWeight="semibold" colorScheme="blue" color={"blue.500"} _hover={{ transform: "scale(1.02)", boxShadow: "md" }} _active={{transform: "scale(0.98)"}}>
                     Update
                 </Button>
             </Dialog.Footer>

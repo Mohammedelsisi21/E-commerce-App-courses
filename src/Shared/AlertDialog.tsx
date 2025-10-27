@@ -41,7 +41,7 @@ const AlertDialog = ({ isLoading, btn, title, description, okText = "Yes", onCan
                 <Button variant="outline" onClick={() => setOpen(false)}>
                     {onCancel}
                 </Button>
-                <Button loading={isLoading} onClick={handleOk} border={`${color} .5px solid`} textTransform="capitalize" fontSize="md" variant={variant} color={color} bg={bg}>
+                <Button loading={isLoading} onClick={handleOk} textTransform="capitalize" fontSize="md" fontWeight="semibold" variant={variant} bg={bg} color={color} _hover={{ transform: "scale(1.02)", boxShadow: "md" }} _active={{transform: "scale(0.98)"}}>
                 {okText}
                 </Button>
             </Dialog.Footer>

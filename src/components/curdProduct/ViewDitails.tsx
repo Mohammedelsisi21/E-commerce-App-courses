@@ -67,7 +67,7 @@ const ViewDetails = ({ product }: IProps) => {
                 </Box>
                 <Dialog.Footer display="flex" justifyContent="flex-end" gap="3">
                     <Dialog.ActionTrigger asChild>
-                        <Button type={"button"} textTransform="capitalize" fontSize="md" colorScheme="teal" color={"blue.400"}>
+                        <Button variant={"outline"} type={"button"} textTransform="capitalize" fontSize="md" fontWeight="semibold" colorScheme="blue" color={"blue.500"} _hover={{ transform: "scale(1.02)", boxShadow: "md" }} _active={{transform: "scale(0.98)"}}>
                             OK
                         </Button>
                     </Dialog.ActionTrigger>

@@ -16,7 +16,7 @@ const DashboardTable = () => {
     if(isLoading) return <TableSkeleton />
 return (
     <Stack width="70%" gap="5" mr={{base: "10px", md: "auto"}} ml={{base: "0", md: "auto"}}>
-        <Flex>
+        <Flex justifyContent={"space-between"}>
             <Heading size="xl">Products</Heading>
             <CreateProdcut />
         </Flex>
