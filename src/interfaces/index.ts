@@ -41,6 +41,7 @@ export interface ICartItem {
 }
 export interface ICategory {
     id: number
+    documentId: string
     title: string
     thumbnail: {
     url: string

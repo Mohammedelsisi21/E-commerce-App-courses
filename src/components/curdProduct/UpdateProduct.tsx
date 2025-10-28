@@ -141,7 +141,7 @@ const UpdateProduct = ({ product } : IProps) => {
               </Field.Root>
               <Field.Root>
                 <Field.Label color={isDark ? "teal.200" : "teal.700"}>Discount</Field.Label>
-                <NumberInput.Root min={0} value={`${formData.discount}`}
+                <NumberInput.Root min={0} max={100} value={`${formData.discount}`}
                 onValueChange={({valueAsNumber}) => {
                   setFormData({
                     ...formData,

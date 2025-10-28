@@ -20,7 +20,7 @@ export const productApiSlice = createApi({
             }),
         createProductList: builder.mutation({
             query: (body) => ({
-                url: `/api/products`,
+                url: `/api/products?populate=category`,
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${CookiesServices.get("jwt")}`

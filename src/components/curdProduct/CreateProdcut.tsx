@@ -1,6 +1,6 @@
 // import type { IProduct } from "@/interfaces"
 import CustomeModal from "@/Shared/Modal"
-import { Box, Button, Dialog, Field, Fieldset, FileUpload, Flex, IconButton, Input, NumberInput, Text, Textarea } from "@chakra-ui/react"
+import { Box, Button, Dialog, Field, Fieldset, FileUpload, Flex, IconButton, Input, NativeSelect, NumberInput, Text, Textarea } from "@chakra-ui/react"
 import { IoCreateSharp } from "react-icons/io5";
 import { useColorMode } from "../ui/color-mode"
 import { LuHardDriveUpload } from "react-icons/lu"
@@ -8,18 +8,21 @@ import { useEffect, useState, type ChangeEvent, type FormEvent } from "react"
 import { useCreateProductListMutation } from "@/app/services/productApiSlice"
 import { uploadImage } from "@/utils";
 import { toast } from "react-toastify"
+import { useGetCategoryListQuery } from "@/app/services/categoryApiSlice";
+import type { ICategory } from "@/interfaces";
 
 const CreateProdcut = () => {
   const { colorMode } = useColorMode()
   const isDark = colorMode === "dark";
   const [createProduct, {isLoading, isSuccess}] = useCreateProductListMutation()
   const [thumbnail, setThumbnail] = useState<File>()
-  const [product, setProduct] = useState({ title:"", description: "", price: 0, stock: 0, rating: 0, discount: 0});
+  const [product, setProduct] = useState({ title:"", description: "", price: 0, stock: 0, rating: 0, discount: 0, category: 0});
   const [isOpen, setIsOpen] = useState(false);
 
   // ** Get Category
+  const {data} = useGetCategoryListQuery(1)
+  console.log(data)
 
-  
   useEffect(()=> {
     if(isSuccess) {
         toast.success(`Updata product successfully.`, {
@@ -29,8 +32,8 @@ const CreateProdcut = () => {
     })
     setIsOpen(false)
   }},[isSuccess])
-  
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement| HTMLTextAreaElement>) => {
+
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement| HTMLTextAreaElement| HTMLSelectElement>) => {
     const {name, value} = e.target
     setProduct({
       ...product,
@@ -42,7 +45,7 @@ const CreateProdcut = () => {
     const file = e.target.files?.[0]
     setThumbnail(file)
   }
-
+  
   const onSubmit = async (e: FormEvent<HTMLDivElement>) => {
   e.preventDefault();
 
@@ -61,16 +64,17 @@ const CreateProdcut = () => {
         stock: product.stock,
         rating: product.rating,
         discount: product.discount,
+        category: {connect: [product.category]},
         thumbnail: imageId ? [imageId] : [],
       },
     };
+    console.log("🟢 Sending Body:", JSON.stringify(body, null, 2))
     await createProduct(body);
 
   } catch (error) {
     console.error("❌ Error creating product:", error);
   }
 };
-
   return (
         <CustomeModal open={isOpen} onClose={setIsOpen}
         openModal={
@@ -137,7 +141,7 @@ const CreateProdcut = () => {
                       })
                     }}>
                       <NumberInput.Control />
-                      <NumberInput.Input name="price" bg={isDark ? "gray.800" : "white"} borderColor={isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: "teal.400", boxShadow: "0 0 0 1px teal.400" }} color={isDark ? "teal.100" : "gray.700"}/>
+                      <NumberInput.Input name="rating" bg={isDark ? "gray.800" : "white"} borderColor={isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: "teal.400", boxShadow: "0 0 0 1px teal.400" }} color={isDark ? "teal.100" : "gray.700"}/>
                     </NumberInput.Root>
                   </Field.Root>
                   <Field.Root>
@@ -150,10 +154,23 @@ const CreateProdcut = () => {
                       })
                     }}>
                       <NumberInput.Control />
-                      <NumberInput.Input name="stock" bg={isDark ? "gray.800" : "white"} borderColor={isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: "teal.400", boxShadow: "0 0 0 1px teal.400" }} color={isDark ? "teal.100" : "gray.700"}/>
+                      <NumberInput.Input name="discount" bg={isDark ? "gray.800" : "white"} borderColor={isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: "teal.400", boxShadow: "0 0 0 1px teal.400" }} color={isDark ? "teal.100" : "gray.700"}/>
                     </NumberInput.Root>
                   </Field.Root>
                 </Flex>
+                <Field.Root>
+                  <Field.Label color={isDark ? "teal.200" : "teal.700"}>
+                    Category
+                  </Field.Label>
+                  <NativeSelect.Root size="sm" width="240px">
+                    <NativeSelect.Field name="category" onChange={onChangeHandler} placeholder="Select option" bg={isDark ? "gray.800" : "white"} borderColor={isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: "teal.400", boxShadow: "0 0 0 1px teal.400" }} color={isDark ? "teal.100" : "gray.700"}>
+                      {data?.data.map((category: ICategory)=>(
+                        <option value={category.documentId} key={category.id}>{category.title}</option>
+                      ))}
+                    </NativeSelect.Field>
+                    <NativeSelect.Indicator />
+                  </NativeSelect.Root>
+                </Field.Root>
                 <Field.Root>
                   <Flex>
                     <Field.Label mr={"5px"} color={isDark ? "teal.200" : "teal.700"}>Thumbnail</Field.Label>
