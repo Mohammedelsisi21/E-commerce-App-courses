@@ -8,12 +8,13 @@ import { useEffect, useState, type ChangeEvent, type FormEvent } from "react"
 import { useCreateProductListMutation } from "@/app/services/productApiSlice"
 import { uploadImage } from "@/utils";
 import { toast } from "react-toastify"
+
 const CreateProdcut = () => {
   const { colorMode } = useColorMode()
   const isDark = colorMode === "dark";
   const [createProduct, {isLoading, isSuccess}] = useCreateProductListMutation()
   const [thumbnail, setThumbnail] = useState<File>()
-  const [product, setProduct] = useState({ title:"", description: "", price: 0, stock: 0,});
+  const [product, setProduct] = useState({ title:"", description: "", price: 0, stock: 0, rating: 0, discount: 0});
   const [isOpen, setIsOpen] = useState(false);
 
   
@@ -56,6 +57,8 @@ const CreateProdcut = () => {
         description: product.description,
         price: product.price,
         stock: product.stock,
+        rating: product.rating,
+        discount: product.discount,
         thumbnail: imageId ? [imageId] : [],
       },
     };
@@ -89,7 +92,7 @@ const CreateProdcut = () => {
                   <Field.Label color={isDark ? "teal.200" : "teal.700"}>
                     Description
                   </Field.Label>
-                    <Textarea name="description" value={product.description} onChange={onChangeHandler} bg={isDark ? "gray.800" : "white"} borderColor={isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: "teal.400", boxShadow: "0 0 0 1px teal.400" }} color={isDark ? "teal.100" : "gray.700"}/>
+                    <Textarea autoresize name="description" value={product.description} onChange={onChangeHandler} bg={isDark ? "gray.800" : "white"} borderColor={isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: "teal.400", boxShadow: "0 0 0 1px teal.400" }} color={isDark ? "teal.100" : "gray.700"}/>
                 </Field.Root>
                 <Flex gap={4}>
                   <Field.Root>
@@ -113,6 +116,35 @@ const CreateProdcut = () => {
                       setProduct({
                         ...product,
                         stock: Number.isNaN(valueAsNumber) ? 0 : valueAsNumber
+                      })
+                    }}>
+                      <NumberInput.Control />
+                      <NumberInput.Input name="stock" bg={isDark ? "gray.800" : "white"} borderColor={isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: "teal.400", boxShadow: "0 0 0 1px teal.400" }} color={isDark ? "teal.100" : "gray.700"}/>
+                    </NumberInput.Root>
+                  </Field.Root>
+                </Flex>
+                <Flex gap={4}>
+                  <Field.Root>
+                    <Field.Label color={isDark ? "teal.200" : "teal.700"}>Rating</Field.Label>
+                    <NumberInput.Root min={0} max={5}
+                    value={`${product.rating}`}
+                    onValueChange={({valueAsNumber}) => {
+                      setProduct({
+                        ...product,
+                        rating: Number.isNaN(valueAsNumber) ? 0 : valueAsNumber
+                      })
+                    }}>
+                      <NumberInput.Control />
+                      <NumberInput.Input name="price" bg={isDark ? "gray.800" : "white"} borderColor={isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: "teal.400", boxShadow: "0 0 0 1px teal.400" }} color={isDark ? "teal.100" : "gray.700"}/>
+                    </NumberInput.Root>
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color={isDark ? "teal.200" : "teal.700"}>Discount</Field.Label>
+                    <NumberInput.Root min={0} max={100} value={`${product.discount}`}
+                    onValueChange={({valueAsNumber})=> {
+                      setProduct({
+                        ...product,
+                        discount: Number.isNaN(valueAsNumber) ? 0 : valueAsNumber
                       })
                     }}>
                       <NumberInput.Control />

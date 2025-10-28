@@ -21,7 +21,9 @@ const UpdateProduct = ({ product } : IProps) => {
         title: product.title,
         description: product.description,
         price: product.price,
-        stock: product.stock
+        stock: product.stock,
+        rating: product.rating,
+        discount: product.discount
     });
 
   const { colorMode } = useColorMode()
@@ -62,6 +64,8 @@ const UpdateProduct = ({ product } : IProps) => {
                 price: formData.price,
                 stock: formData.stock,
                 title: formData.title,
+                rating: formData.rating,
+                discount: formData.discount,
                 thumbnail: imageId ? [imageId] : product.thumbnail ? [product.thumbnail.id] : [],
               },
             };
@@ -91,7 +95,7 @@ const UpdateProduct = ({ product } : IProps) => {
               <Field.Label color={isDark ? "teal.200" : "teal.700"}>
                 Description
               </Field.Label>
-                <Textarea value={formData.description} onChange={handleChange} name="description" bg={isDark ? "gray.800" : "white"} borderColor={isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: "teal.400", boxShadow: "0 0 0 1px teal.400" }} color={isDark ? "teal.100" : "gray.700"}/>
+                <Textarea autoresize value={formData.description} onChange={handleChange} name="description" bg={isDark ? "gray.800" : "white"} borderColor={isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: "teal.400", boxShadow: "0 0 0 1px teal.400" }} color={isDark ? "teal.100" : "gray.700"}/>
             </Field.Root>
             <Flex gap={4}>
               <Field.Root>
@@ -114,6 +118,34 @@ const UpdateProduct = ({ product } : IProps) => {
                   setFormData({
                     ...formData,
                     stock: Number.isNaN(valueAsNumber) ? 0 : valueAsNumber,
+                    })
+                  }}>
+                  <NumberInput.Control />
+                  <NumberInput.Input name="stock" bg={isDark ? "gray.800" : "white"} borderColor={isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: "teal.400", boxShadow: "0 0 0 1px teal.400" }} color={isDark ? "teal.100" : "gray.700"}/>
+                </NumberInput.Root>
+              </Field.Root>
+            </Flex>
+            <Flex gap={4}>
+              <Field.Root>
+                <Field.Label color={isDark ? "teal.200" : "teal.700"}>Rating</Field.Label>
+                <NumberInput.Root min={0} max={5} value={`${formData.rating}`}
+                onValueChange={({valueAsNumber}) => {
+                  setFormData({
+                    ...formData,
+                    rating: Number.isNaN(valueAsNumber) ? 0: valueAsNumber
+                  })
+                }}>
+                  <NumberInput.Control />
+                  <NumberInput.Input name="price" bg={isDark ? "gray.800" : "white"} borderColor={isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: "teal.400", boxShadow: "0 0 0 1px teal.400" }} color={isDark ? "teal.100" : "gray.700"}/>
+                </NumberInput.Root>
+              </Field.Root>
+              <Field.Root>
+                <Field.Label color={isDark ? "teal.200" : "teal.700"}>Discount</Field.Label>
+                <NumberInput.Root min={0} value={`${formData.discount}`}
+                onValueChange={({valueAsNumber}) => {
+                  setFormData({
+                    ...formData,
+                    discount: Number.isNaN(valueAsNumber) ? 0 : valueAsNumber,
                     })
                   }}>
                   <NumberInput.Control />

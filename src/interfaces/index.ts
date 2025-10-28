@@ -34,6 +34,7 @@ export interface ICartItem {
     }
     rating: number
     discount?: number
+    stock?: number
 }
 
 

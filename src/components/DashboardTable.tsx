@@ -28,6 +28,8 @@ return (
                 <Table.ColumnHeader>Title</Table.ColumnHeader>
                 {/* <Table.ColumnHeader>Category</Table.ColumnHeader> */}
                 <Table.ColumnHeader>Stock</Table.ColumnHeader>
+                <Table.ColumnHeader>Discount</Table.ColumnHeader>
+                <Table.ColumnHeader>Price & discount</Table.ColumnHeader>
                 <Table.ColumnHeader>Price</Table.ColumnHeader>
                 <Table.ColumnHeader>Actions</Table.ColumnHeader>
             </Table.Row>
@@ -42,6 +44,8 @@ return (
                 <Table.Cell>{product.title}</Table.Cell>
                 {/* <Table.Cell>{product.category.title}</Table.Cell> */}
                 <Table.Cell>{product.stock}</Table.Cell>
+                <Table.Cell>{`%${product.discount || 0}`}</Table.Cell>
+                <Table.Cell>{product.discount ? <>{`$${(product.price * (1 - product.discount / 100)).toFixed(2)}`}</> : <>No Discount</>}</Table.Cell>
                 <Table.Cell>${product.price.toFixed(2)}</Table.Cell>
                 <Table.Cell>
                 <ButtonGroup p={2}>

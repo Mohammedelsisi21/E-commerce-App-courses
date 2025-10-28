@@ -1,11 +1,12 @@
-import { Box, Skeleton, SkeletonText, VStack } from "@chakra-ui/react";
+import { Box, Skeleton, SkeletonText, VStack, Flex } from "@chakra-ui/react";
+
 
 const ProductCardSkeleton = () => {
   return (
     <Box
       maxW="sm"
       mx="auto"
-      w={"full"}
+      w="full"
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
@@ -17,18 +18,29 @@ const ProductCardSkeleton = () => {
       flexDirection="column"
       justifyContent="space-between"
       height="100%"
+      position="relative"
     >
-      <Skeleton mx="auto" boxSize="250px" borderRadius="md" />
+      <Skeleton
+        mx="auto"
+        boxSize="200px"
+        borderRadius="md"
+      />
 
       <VStack align="start" mt={6} p={3} w="full">
-        <Skeleton height="20px" width="70%" />
+        <Skeleton height="20px" width="70%"/>
 
-        <SkeletonText noOfLines={3} p="4" width="100%" />
+        <SkeletonText noOfLines={3} p="3" width="100%"/>
 
-        <Skeleton height="18px" width="40%" />
-
-        <Skeleton height="40px" width="100%" borderRadius="md" />
+        <Flex justifyContent="space-between" alignItems="center" w="full" mt={2}>
+          <Skeleton height="18px" width="40%"/>
+          <Skeleton height="30px" width="30px" borderRadius="full"/>
+        </Flex>
       </VStack>
+
+      <Flex flexDirection="column" gap={3} position="absolute" right="10px" top="20px">
+        <Skeleton height="30px" width="30px" borderRadius="full"/>
+        <Skeleton height="30px" width="30px" borderRadius="full"/>
+      </Flex>
     </Box>
   );
 };

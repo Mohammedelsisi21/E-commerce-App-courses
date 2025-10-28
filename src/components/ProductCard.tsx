@@ -5,14 +5,18 @@ import type { ICartItem } from "../interfaces";
 import { truncateText } from "@/utils";
 import { addCartItmesAction } from "@/app/features/cart/cartSlice"
 import { useAppDispatch } from "@/app/store";
+import { IoAddCircleOutline } from "react-icons/io5";
+import { FaEye, FaHeart  } from "react-icons/fa";
+import { useState } from "react";
+
 
 interface IProps {
   ProductCard: ICartItem
 }
 const ProductCard = ({ ProductCard }: IProps) => {
-  const {title ,description,price,thumbnail, documentId, discount, rating}= ProductCard
+  const {title ,description,price,thumbnail, documentId, discount, rating, stock}= ProductCard
   const { url } = thumbnail
-
+  const [liked, setLiked] = useState(false);
   const { colorMode } = useColorMode();
       const dispatch = useAppDispatch()
     const addCart = () => {
@@ -28,7 +32,7 @@ const ProductCard = ({ ProductCard }: IProps) => {
       overflow="hidden"
       boxShadow="md"
       px={4}
-      py={3}
+      pb={3}
       bg={colorMode === "light" ? "white" : "gray.900"}
       transition="0.3s"
       display={"flex"}
@@ -39,7 +43,40 @@ const ProductCard = ({ ProductCard }: IProps) => {
         transform: "scale(1.01)",
         boxShadow: "lg",
       }}
+      position={"relative"}
     >
+      <Flex flexDirection={"column"} gap={3} position={"absolute"} right={"10px"} top={"20px"}>
+      <Button
+        colorScheme={"teal"}
+        alignContent={"center"}
+        bg={colorMode === "light" ? "transparent" : "transparent"}
+        color="white"
+        w="fit-content"
+        p={0}
+        borderRadius="full"
+        onClick={() => setLiked(!liked)}
+        _hover={{
+          bg: colorMode === "light" ? "transparent" : "transparent",
+        }}>
+          <FaHeart style={{color: liked ? "#EF4444" : "#9e9e9eff",transition: "0.3s",fontSize: "30px"}}/>
+        </Button>
+        <Link
+          to={`/product/${documentId}`}>
+            <Button
+              colorScheme={"teal"}
+              alignContent={"center"}
+              bg={colorMode === "light" ? "transparent" : "transparent"}
+              color="white"
+              w="fit-content"
+              p={0}
+              borderRadius="full"
+              _hover={{
+                bg: colorMode === "light" ? "transparent" : "transparent",
+              }}>
+              <Box as={FaEye} boxSize={"25px"} color={"gray.300"}></Box>
+            </Button>
+          </Link>
+      </Flex>
       <Image
         src={`${import.meta.env.VITE_LOCAL_API}${url}`}
         alt={title}
@@ -65,58 +102,46 @@ const ProductCard = ({ ProductCard }: IProps) => {
         >
           {truncateText({text: description, limmit: 15})}
         </Text>
-
-        <Flex justifyContent={"space-between"} w={"100%"}>
-          {discount ? (
+        <Flex mt="1">
+          <RatingGroup.Root colorPalette="teal" readOnly count={5} defaultValue={rating} size="md">
+            <RatingGroup.HiddenInput />
+            <RatingGroup.Control />
+          </RatingGroup.Root>
+          <Text ml={"3px"}>{rating}</Text>
+          <Text ml={"3px"} color={colorMode === "light" ? "teal.600" : "teal.300"}>{`(${stock})`}</Text>
+        </Flex>
+        {discount ? <>
+          <Box bg={"red.500"} color={"white"} borderRadius={"md"} position={"absolute"} top={"10px"} left={"-3px"} py={"3px"} px={"10px"}>
+            %{discount}
+          </Box>
+        </> : null}
+        <Flex justifyContent={"space-between"} w={"full"} alignItems={"center"}>
+                    {discount ? (
             <Text fontWeight="bold" fontSize="lg">
               <span style={{color: colorMode === "light" ? "#319795" : "#81E6D9",marginRight: "8px",}}>
-                    {`$${(price * (1 - discount / 100)).toLocaleString("en-us")}`}
+                    {`$${(price * (1 - discount / 100)).toFixed(2)}`}
               </span>
               <span style={{ textDecoration: "line-through", color: colorMode === "light" ? "gray" : "#A0AEC0", fontSize: "0.9rem",}}>
-                  {`$${price.toLocaleString("en-us")}`}
+                  {`$${price.toFixed(2)}`}
               </span>
             </Text>
           ) : (
           <Text fontWeight="bold" color={colorMode === "light" ? "teal.500" : "teal.200"} fontSize="lg">
-            {`$${price.toLocaleString("en-us")}`}
+            {`$${price.toFixed(2)}`}
           </Text>)}
-          
-        <RatingGroup.Root colorPalette="teal" readOnly count={5} defaultValue={rating} size="xs">
-          <RatingGroup.HiddenInput />
-          <RatingGroup.Control />
-        </RatingGroup.Root>
-
-        </Flex>
-        <Flex justifyContent={"space-evenly"} w={"full"}>
-          <Link to={`/product/${documentId}`} style={{ width: "45%"}}>
+          <Link to={``}>
             <Button
               colorScheme={"teal"}
               alignContent={"center"}
-              bg={colorMode === "light" ? "teal.700" : "teal.500"}
+              bg={colorMode === "light" ? "teal.600" : "teal.700"}
               color="white"
-              size="md"
-              w="full"
-              borderRadius="md"
+              p={0}
+              borderRadius="full"
               _hover={{
-                bg: colorMode === "light" ? "teal.800" : "teal.400",
-              }}>
-              View Details
-            </Button>
-          </Link>
-          <Link to={``} style={{ width: "45%" }}>
-            <Button
-              colorScheme={"teal"}
-              alignContent={"center"}
-              bg={colorMode === "light" ? "teal.700" : "teal.500"}
-              color="white"
-              size="md"
-              w="full"
-              borderRadius="md"
-              _hover={{
-                bg: colorMode === "light" ? "teal.800" : "teal.400",
+                bg: colorMode === "light" ? "teal.700" : "teal.400",
               }}
             onClick={addCart}>
-                Add to cart
+                <Box as={IoAddCircleOutline} boxSize="30px"/>
             </Button>
           </Link>
         </Flex>
