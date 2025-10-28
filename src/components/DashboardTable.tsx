@@ -1,4 +1,4 @@
-import { ButtonGroup, Heading, IconButton, Stack, Pagination,Table, Image, Flex} from "@chakra-ui/react";
+import { ButtonGroup, Heading, IconButton, Stack, Pagination,Table, Image, Flex, Text} from "@chakra-ui/react";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { useGetProductListQuery } from "@/app/services/productApiSlice";
 import TableSkeleton from "./TableSkeleton";
@@ -26,7 +26,7 @@ return (
                 <Table.ColumnHeader>Image</Table.ColumnHeader>
                 <Table.ColumnHeader>ID</Table.ColumnHeader>
                 <Table.ColumnHeader>Title</Table.ColumnHeader>
-                {/* <Table.ColumnHeader>Category</Table.ColumnHeader> */}
+                <Table.ColumnHeader>Category</Table.ColumnHeader>
                 <Table.ColumnHeader>Stock</Table.ColumnHeader>
                 <Table.ColumnHeader>Discount</Table.ColumnHeader>
                 <Table.ColumnHeader>Price & discount</Table.ColumnHeader>
@@ -42,7 +42,9 @@ return (
                 </Table.Cell>
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{product.title}</Table.Cell>
-                {/* <Table.Cell>{product.category.title}</Table.Cell> */}
+                <Table.Cell>
+                    <Text>{product.category.title}</Text>
+                </Table.Cell>
                 <Table.Cell>{product.stock}</Table.Cell>
                 <Table.Cell>{`%${product.discount || 0}`}</Table.Cell>
                 <Table.Cell>{product.discount ? <>{`$${(product.price * (1 - product.discount / 100)).toFixed(2)}`}</> : <>No Discount</>}</Table.Cell>

@@ -11,9 +11,7 @@ export interface IProduct {
         url?: string | null
         id?: number | null
     }
-    category: {
-        title: string
-    }
+    category: ICategory
     stock?: number
     rating: number
     discount?: number
@@ -43,9 +41,7 @@ export interface ICategory {
     id: number
     documentId: string
     title: string
-    thumbnail: {
-    url: string
-}
+    thumbnail: {url: string}[]
 }
 
 
