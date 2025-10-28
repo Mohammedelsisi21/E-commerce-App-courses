@@ -5,10 +5,11 @@ import registerSlice from './features/register/registerSlice'
 import cartSlice from './features/cart/cartSlice'
 import globalSlice from './features/global/globalSlice'
 import { productApiSlice } from './services/productApiSlice'
-
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { setupListeners } from '@reduxjs/toolkit/query';
+import { categoryApiSlice } from './services/categoryApiSlice';
+
 const persistCartConfig = {
   key: 'root',
   storage,
@@ -22,6 +23,7 @@ export const store = configureStore({
     register: registerSlice,
     global: globalSlice,
     [productApiSlice.reducerPath]: productApiSlice.reducer,
+    [categoryApiSlice.reducerPath]: categoryApiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: {
@@ -34,7 +36,7 @@ export const store = configureStore({
           "persist/PURGE",
       ]
     }
-  }).concat(productApiSlice.middleware)
+  }).concat(productApiSlice.middleware).concat(categoryApiSlice.middleware)
   
 })
 

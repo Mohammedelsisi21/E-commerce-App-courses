@@ -31,12 +31,21 @@ export interface ICartItem {
     }
     category: {
         title: string
+        thumbnail?: {
+            url?: string
+        }
     }
     rating: number
     discount?: number
     stock?: number
 }
-
+export interface ICategory {
+    id: number
+    title: string
+    thumbnail: {
+    url: string
+}
+}
 
 
 // ** function text limet

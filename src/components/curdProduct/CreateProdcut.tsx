@@ -17,6 +17,8 @@ const CreateProdcut = () => {
   const [product, setProduct] = useState({ title:"", description: "", price: 0, stock: 0, rating: 0, discount: 0});
   const [isOpen, setIsOpen] = useState(false);
 
+  // ** Get Category
+
   
   useEffect(()=> {
     if(isSuccess) {

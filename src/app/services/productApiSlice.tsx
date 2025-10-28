@@ -4,7 +4,7 @@ import type { IProduct } from '@/interfaces'
 
 export const productApiSlice = createApi({
     tagTypes: ["Products"],
-    reducerPath: 'api',
+    reducerPath: 'apiProduct',
     refetchOnReconnect: true,
     refetchOnMountOrArgChange: true,
     baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_LOCAL_API }),
