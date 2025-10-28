@@ -15,12 +15,8 @@ export const registerSchema = yup.object({
 
 export const createProduct = yup.object({
     title: yup.string().required("Title is required").min(3, "Title must be at least 3 characters").max(100, "Title must not exceed 100 characters"),
-
     description: yup.string().required("Description is required").min(10, "Description must be at least 10 characters").max(1000, "Description must not exceed 1000 characters"),
-
     price: yup.number().typeError("Price must be a number").required("Price is required").min(0, "Price cannot be negative"),
-
     stock: yup.number().typeError("Stock must be a number").required("Stock is required").min(0, "Stock cannot be negative"),
-
     thumbnail: yup.mixed().nullable().test("fileRequired", "Thumbnail is required", function (value) {if (!value) return false;return true;}),
 });

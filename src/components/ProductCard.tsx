@@ -1,4 +1,4 @@
-import { Box, Image, Heading, Text, Button, VStack, Flex } from "@chakra-ui/react";
+import { Box, Image, Heading, Text, Button, VStack, Flex, RatingGroup } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useColorMode } from "./ui/color-mode";
 import type { ICartItem } from "../interfaces";
@@ -10,7 +10,7 @@ interface IProps {
   ProductCard: ICartItem
 }
 const ProductCard = ({ ProductCard }: IProps) => {
-  const {title ,description,price,thumbnail, documentId}= ProductCard
+  const {title ,description,price,thumbnail, documentId, discount, rating}= ProductCard
   const { url } = thumbnail
 
   const { colorMode } = useColorMode();
@@ -66,13 +66,27 @@ const ProductCard = ({ ProductCard }: IProps) => {
           {truncateText({text: description, limmit: 15})}
         </Text>
 
-        <Text
-          fontWeight="bold"
-          color={colorMode === "light" ? "teal.500" : "teal.200"}
-          fontSize="lg"
-        >
-          { `$${price.toLocaleString("en-us")}` }
-        </Text>
+        <Flex justifyContent={"space-between"} w={"100%"}>
+          {discount ? (
+            <Text fontWeight="bold" fontSize="lg">
+              <span style={{color: colorMode === "light" ? "#319795" : "#81E6D9",marginRight: "8px",}}>
+                    {`$${(price * (1 - discount / 100)).toLocaleString("en-us")}`}
+              </span>
+              <span style={{ textDecoration: "line-through", color: colorMode === "light" ? "gray" : "#A0AEC0", fontSize: "0.9rem",}}>
+                  {`$${price.toLocaleString("en-us")}`}
+              </span>
+            </Text>
+          ) : (
+          <Text fontWeight="bold" color={colorMode === "light" ? "teal.500" : "teal.200"} fontSize="lg">
+            {`$${price.toLocaleString("en-us")}`}
+          </Text>)}
+          
+        <RatingGroup.Root colorPalette="teal" readOnly count={5} defaultValue={rating} size="xs">
+          <RatingGroup.HiddenInput />
+          <RatingGroup.Control />
+        </RatingGroup.Root>
+
+        </Flex>
         <Flex justifyContent={"space-evenly"} w={"full"}>
           <Link to={`/product/${documentId}`} style={{ width: "45%"}}>
             <Button

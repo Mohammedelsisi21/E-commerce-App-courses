@@ -15,6 +15,8 @@ export interface IProduct {
         title: string
     }
     stock?: number
+    rating: number
+    discount?: number
 }
 export interface ICartItem {
     qty: number
@@ -30,6 +32,8 @@ export interface ICartItem {
     category: {
         title: string
     }
+    rating: number
+    discount?: number
 }
 
 
