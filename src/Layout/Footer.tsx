@@ -1,5 +1,5 @@
 import { useColorMode } from "@/components/ui/color-mode";
-import Logo from "../components/Logo";
+import Logo from "../components/myUi/Logo";
 import { Box, Flex, Grid, GridItem, Heading, Text, HStack, Icon, Container } from "@chakra-ui/react";
 import { FaFacebookF, FaTwitter, FaInstagram, FaPinterestP } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";

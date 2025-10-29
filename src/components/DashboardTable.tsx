@@ -1,7 +1,7 @@
 import { ButtonGroup, Heading, IconButton, Stack, Pagination,Table, Image, Flex, Text} from "@chakra-ui/react";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { useGetProductListQuery } from "@/app/services/productApiSlice";
-import TableSkeleton from "./TableSkeleton";
+import TableSkeleton from "./skeleton/TableSkeleton";
 import type { IProduct } from "@/interfaces";
 import { useState } from "react";
 import UpdateProduct from "./curdProduct/UpdateProduct";

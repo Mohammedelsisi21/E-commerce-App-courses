@@ -9,7 +9,7 @@ import { registerSchema } from "../validation"
 import { useAppDispatch, useAppSelector } from "@/app/store"
 import { userRegister } from "@/app/features/register/registerSlice"
 import { useEffect } from "react"
-import CircleUi from "@/components/CircleUi"
+import CircleUi from "@/components/myUi/CircleUi"
 
 const Signup = () => {
   const {colorMode} = useColorMode()

@@ -1,7 +1,7 @@
 import { Grid } from "@chakra-ui/react"
 import ProductCard from "../components/ProductCard"
 import type { ICartItem } from "../interfaces"
-import ProductCardSkeleton from "@/components/ProductCardSkeleton"
+import ProductCardSkeleton from "@/components/skeleton/ProductCardSkeleton"
 import useAuthenticatedQuery from "../hooks"
 
 const ProductsPage = () => {

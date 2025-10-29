@@ -1,10 +1,11 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Box, Flex, IconButton, Image, Skeleton, SkeletonText, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, IconButton, Image, Skeleton, SkeletonText, Text } from "@chakra-ui/react";
 import { useGetCategoryListQuery } from "@/app/services/categoryApiSlice";
 import type { ICategory } from "@/interfaces";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+import { useColorMode } from "../ui/color-mode";
 
 interface IArrow {
     onClick?: React.MouseEventHandler<HTMLButtonElement>
@@ -47,6 +48,8 @@ const PrevArrow = ({ onClick }: IArrow) => (
 
 
 const SliderCategory = () => {
+    const { colorMode } = useColorMode()
+    const isDark = colorMode === "dark"
     const { data, isLoading } = useGetCategoryListQuery(1);
     const settings = {
     dots: true,
@@ -84,6 +87,7 @@ const SliderCategory = () => {
 
 return (
     <Box className="slider-container" px={4} py={6}>
+        <Heading color={isDark ? "teal.600" : "gray.700"} fontWeight={"bold"} size={"3xl"} mb={"5px"}>Category</Heading>
         <Slider {...settings}>
         {data?.data?.map((cate: ICategory) => (
             <Box

@@ -9,7 +9,7 @@ import { loginSchema } from "../validation"
 import { userLogin } from "../app/features/login/loginSlice"
 import { useAppDispatch, useAppSelector } from "../app/store"
 import { useEffect } from "react"
-import CircleUi from "@/components/CircleUi"
+import CircleUi from "@/components/myUi/CircleUi"
 
 const Signin = () => {
     const { colorMode } = useColorMode()

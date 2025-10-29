@@ -4,7 +4,7 @@ import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
 import { Link, NavLink } from "react-router-dom";
 import { useColorMode, useColorModeValue } from "@/components/ui/color-mode";
 import { navLinks } from "../constant";
-import Logo from "../components/Logo";
+import Logo from "../components/myUi/Logo";
 import CookiesServices from "../Services"
 import { BsCart } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "@/app/store";

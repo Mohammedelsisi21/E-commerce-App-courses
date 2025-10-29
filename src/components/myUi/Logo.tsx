@@ -1,4 +1,4 @@
-import { animateLogo, lettersLogo } from '../constant'
+import { animateLogo, lettersLogo } from '../../constant'
 import { Box } from '@chakra-ui/react'
 
 interface IProps {

@@ -3,7 +3,7 @@ import { FiHome, FiBox, FiTag, FiSun, FiMoon, FiMenu } from "react-icons/fi";
 import React from "react";
 import { useColorMode, useColorModeValue } from "@/components/ui/color-mode";
 import { Link, Outlet } from "react-router-dom";
-import Logo from "@/components/Logo";
+import Logo from "@/components/myUi/Logo";
 
 const SidebarItem = ({
   icon,

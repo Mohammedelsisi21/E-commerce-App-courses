@@ -3,11 +3,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Box, Grid, GridItem, Image } from "@chakra-ui/react";
-import img1  from "../assets/slider-image-1.webp"
-import img2 from "../assets/slider-image-2.webp"
-import img3 from "../assets/slider-image-3.webp"
-import img4 from "../assets/slider-2.webp"
-import img5 from "../assets/grocery-banner-2.webp"
+import img1  from "../../assets/slider-image-1.webp"
+import img2 from "../../assets/slider-image-2.webp"
+import img3 from "../../assets/slider-image-3.webp"
+import img4 from "../../assets/slider-2.webp"
+import img5 from "../../assets/grocery-banner-2.webp"
 const SliderPage = () => {
   const settings = {
     dots: true,

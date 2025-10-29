@@ -5,7 +5,7 @@ import { useColorMode } from "@/components/ui/color-mode"
 import type { IProduct } from "@/interfaces"
 import { useEffect, useState } from "react"
 import { BsArrowLeft } from "react-icons/bs"
-import ProductDetailsSkeleton from "@/components/ProductDetailsSkeleton"
+import ProductDetailsSkeleton from "@/components/skeleton/ProductDetailsSkeleton"
 import { useAppDispatch } from "@/app/store"
 import { addCartItmesAction } from "@/app/features/cart/cartSlice"
 import { IoAddCircleOutline } from "react-icons/io5";
