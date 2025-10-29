@@ -1,9 +1,9 @@
-import DashboardTable from "@/components/DashboardTable"
+import DashboardProduct from "@/components/DashboardProduct"
 
 const Products = () => {
   
   return (<>
-      <DashboardTable />
+      <DashboardProduct />
     </>
   )
 }

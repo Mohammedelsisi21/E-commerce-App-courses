@@ -1,6 +1,6 @@
-import type { IProduct } from "@/interfaces"
+import type { ICategory, IProduct } from "@/interfaces"
 import CustomeModal from "@/Shared/Modal"
-import { Box, Button, Dialog, Field, Fieldset, FileUpload, Flex, IconButton, Image, Input, NumberInput, Textarea } from "@chakra-ui/react"
+import { Box, Button, Dialog, Field, Fieldset, FileUpload, Flex, IconButton, Image, Input, NativeSelect, NumberInput, Textarea } from "@chakra-ui/react"
 import { AiFillEdit } from "react-icons/ai"
 import { useColorMode } from "../ui/color-mode"
 import { LuHardDriveUpload } from "react-icons/lu"
@@ -9,6 +9,7 @@ import { useUpdateProductListMutation } from "@/app/services/productApiSlice"
 import { useEffect } from "react"
 import { toast } from "react-toastify"
 import { uploadImage } from "@/utils"
+import { useGetCategoryListQuery } from "@/app/services/categoryApiSlice"
 
 interface IProps {
   product: IProduct
@@ -23,12 +24,15 @@ const UpdateProduct = ({ product } : IProps) => {
         price: product.price,
         stock: product.stock,
         rating: product.rating,
-        discount: product.discount
+        discount: product.discount,
+        category: product.category.documentId || "",
     });
 
   const { colorMode } = useColorMode()
   const isDark = colorMode === "dark";
   const [updateProductFun, {isLoading, isSuccess}] = useUpdateProductListMutation();
+  const {data} = useGetCategoryListQuery(1)
+  
   useEffect(()=> {
     if(isSuccess) {
         toast.success(`Updata product successfully.`, {
@@ -37,7 +41,7 @@ const UpdateProduct = ({ product } : IProps) => {
         theme: "colored"
     })}
   },[isSuccess])
-    const handleChange = (e: ChangeEvent<HTMLInputElement| HTMLTextAreaElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement| HTMLTextAreaElement| HTMLSelectElement>) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value,
@@ -66,6 +70,7 @@ const UpdateProduct = ({ product } : IProps) => {
                 title: formData.title,
                 rating: formData.rating,
                 discount: formData.discount,
+                category: { connect: [formData.category] },
                 thumbnail: imageId ? [imageId] : product.thumbnail ? [product.thumbnail.id] : [],
               },
             };
@@ -154,6 +159,23 @@ const UpdateProduct = ({ product } : IProps) => {
               </Field.Root>
             </Flex>
             <Field.Root>
+              <Field.Label color={isDark ? "teal.200" : "teal.700"}>
+                Category
+              </Field.Label>
+              <NativeSelect.Root size="sm" width="240px">
+                <NativeSelect.Field name="category" value={formData.category}
+                onChange={(e) => {
+                  setFormData({ ...formData, category: e.target.value });
+                }}
+                bg={isDark ? "gray.800" : "white"} borderColor={isDark ? "gray.700" : "teal.300"} _focus={{ borderColor: "teal.400", boxShadow: "0 0 0 1px teal.400" }} color={isDark ? "teal.100" : "gray.700"}>
+                  {data?.data.map((category: ICategory)=>(
+                    <option value={category.documentId} key={category.id}>{category.title}</option>
+                  ))}
+                </NativeSelect.Field>
+                <NativeSelect.Indicator />
+              </NativeSelect.Root>
+            </Field.Root>
+            <Field.Root>
               <Flex>
                 <Field.Label mr={"5px"} color={isDark ? "teal.200" : "teal.700"}>Thumbnail</Field.Label>
                 <Image src={`${import.meta.env.VITE_LOCAL_API}${product.thumbnail?.url}`} alt={product.title} w={"50px"} h={"50px"} borderRadius={"sm"}></Image>
@@ -168,7 +190,6 @@ const UpdateProduct = ({ product } : IProps) => {
                 <FileUpload.List />
               </FileUpload.Root>
             </Field.Root>
-
             <Dialog.Footer display="flex" justifyContent="flex-end" gap="3">
               <Dialog.ActionTrigger asChild>
                 <Button type={"button"} variant={"outline"} onClick={()=> setIsOpen(false)}>

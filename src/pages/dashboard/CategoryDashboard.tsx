@@ -1,7 +1,8 @@
+import DashboardCategory from "@/components/DashboardCategory"
 
 const Categories = () => {
   return (
-    <div>Categories</div>
+    <DashboardCategory />
   )
 }
 

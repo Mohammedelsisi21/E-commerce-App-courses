@@ -21,7 +21,6 @@ const CreateProdcut = () => {
 
   // ** Get Category
   const {data} = useGetCategoryListQuery(1)
-  console.log(data)
 
   useEffect(()=> {
     if(isSuccess) {

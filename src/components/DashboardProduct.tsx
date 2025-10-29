@@ -1,7 +1,7 @@
 import { ButtonGroup, Heading, IconButton, Stack, Pagination,Table, Image, Flex, Text} from "@chakra-ui/react";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { useGetProductListQuery } from "@/app/services/productApiSlice";
-import TableSkeleton from "./skeleton/TableSkeleton";
+import TableSkeleton from "./skeleton/TableSkeletonProduct";
 import type { IProduct } from "@/interfaces";
 import { useState } from "react";
 import UpdateProduct from "./curdProduct/UpdateProduct";
@@ -10,7 +10,7 @@ import ViewDitails from "./curdProduct/ViewDitails";
 import CreateProdcut from "./curdProduct/CreateProdcut";
 
 
-const DashboardTable = () => {
+const DashboardProduct = () => {
     const [page, setPage] = useState<number>(1);
     const {isLoading, data} = useGetProductListQuery(page)
     if(isLoading) return <TableSkeleton />
@@ -87,4 +87,4 @@ return (
 );
 };
 
-export default DashboardTable;
+export default DashboardProduct;
