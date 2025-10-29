@@ -1,6 +1,6 @@
 import { ButtonGroup, Heading, Pagination, Stack, Table, Skeleton, Flex,} from "@chakra-ui/react";
 
-const TableSkeletonProduct = () => {
+const TableSkeletonCategory = () => {
     const skeletonRows = Array.from({ length: 5 });
 
     return (
@@ -19,9 +19,7 @@ const TableSkeletonProduct = () => {
                 <Table.ColumnHeader>Image</Table.ColumnHeader>
                 <Table.ColumnHeader>ID</Table.ColumnHeader>
                 <Table.ColumnHeader>Title</Table.ColumnHeader>
-                <Table.ColumnHeader>Category</Table.ColumnHeader>
-                <Table.ColumnHeader>Stock</Table.ColumnHeader>
-                <Table.ColumnHeader>Price</Table.ColumnHeader>
+                <Table.ColumnHeader>Number Of Product</Table.ColumnHeader>
                 <Table.ColumnHeader>Actions</Table.ColumnHeader>
                 </Table.Row>
             </Table.Header>
@@ -39,12 +37,6 @@ const TableSkeletonProduct = () => {
                 </Table.Cell>
                 <Table.Cell>
                     <Skeleton height="20px" w="80px" />
-                </Table.Cell>
-                <Table.Cell>
-                    <Skeleton height="20px" w="30px" />
-                </Table.Cell>
-                <Table.Cell>
-                    <Skeleton height="20px" w="50px" />
                 </Table.Cell>
                 <Table.Cell>
                     <Flex>
@@ -72,4 +64,4 @@ const TableSkeletonProduct = () => {
     </Stack>);
 };
 
-export default TableSkeletonProduct;
+export default TableSkeletonCategory;

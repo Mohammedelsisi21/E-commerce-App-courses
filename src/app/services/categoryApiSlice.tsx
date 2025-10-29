@@ -20,6 +20,4 @@ export const categoryApiSlice = createApi({
             }),
     }),
 })
-
-
 export const { useGetCategoryListQuery } = categoryApiSlice
