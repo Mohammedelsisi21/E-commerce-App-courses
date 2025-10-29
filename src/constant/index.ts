@@ -12,7 +12,6 @@ export const lettersLogo = ["F", "r", "e", "s", "h", "C", "a", "r", "t"];
 
 export const navLinks = [
     { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
     { name: "Products", path: "/products" },
     { name: "Dashboard", path: "/dashboard" },
 ];

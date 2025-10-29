@@ -2,7 +2,6 @@ import { createBrowserRouter, createRoutesFromElements, Route } from "react-rout
 
 import Layout from "@/pages/Layout";
 import HomePage from "@/pages";
-import AboutPage from "@/pages/About";
 import ProductsPage from "@/pages/Products";
 import Product from "@/pages/Product";
 import Signin from "@/pages/Signin";
@@ -13,6 +12,7 @@ import LayoutDashboard from "../pages/dashboard/LayoutDashboard";
 import AdminDashboard from "@/pages/dashboard";
 import ProductDashboard from "@/pages/dashboard/ProductDashboard";
 import CategoryDashboard from "@/pages/dashboard/CategoryDashboard";
+import Category from "@/pages/Category";
 
 const token = CookiesServices.get("jwt")
 const router = createBrowserRouter(
@@ -20,9 +20,9 @@ const router = createBrowserRouter(
         <>
             <Route path="/" element={<Layout />}>
                 <Route index element={<HomePage />} />
-                <Route path="/about" element={<AboutPage />} />
                 <Route path="/products" element={<ProductsPage />} />
                 <Route path="/product/:documentId" element={<Product />} />
+                <Route path="/categories/:documentId" element={<Category />} />
             </Route>
 
             <Route path="/dashboard" element={<LayoutDashboard />}>

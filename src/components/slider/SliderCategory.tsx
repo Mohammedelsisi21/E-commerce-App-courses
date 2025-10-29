@@ -50,7 +50,7 @@ const PrevArrow = ({ onClick }: IArrow) => (
 const SliderCategory = () => {
     const { colorMode } = useColorMode()
     const isDark = colorMode === "dark"
-    const { data, isLoading } = useGetCategoryListQuery(1);
+    const { data, isLoading } = useGetCategoryListQuery({page: 1, pageSize: 30});
     const settings = {
     dots: true,
     infinite: true,

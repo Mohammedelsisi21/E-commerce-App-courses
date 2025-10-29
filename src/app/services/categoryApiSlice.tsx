@@ -10,8 +10,8 @@ export const categoryApiSlice = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_LOCAL_API }),
     endpoints: (builder) => ({
         getCategoryList: builder.query({
-            query: (page: number) =>
-                `api/categories?populate[thumbnail]=true&populate[products][populate][thumbnail]=true&sort[createdAt]=desc&pagination[page]=${page}&pagination[pageSize]=10`,
+            query: ({page, pageSize}) =>
+                `api/categories?populate[thumbnail]=true&populate[products][populate][thumbnail]=true&sort[createdAt]=desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
             providesTags: (result) =>
                 result
                 ? [...result.data.map(({ id }: ICategory) => ({ type: 'Categories' as const, id })),

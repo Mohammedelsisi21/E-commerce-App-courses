@@ -10,6 +10,7 @@ import { useAppDispatch } from "@/app/store"
 import { addCartItmesAction } from "@/app/features/cart/cartSlice"
 import { IoAddCircleOutline } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa"
+import SliderCategory from "@/components/slider/SliderCategory"
 
 const Product = () => {
     const { documentId } = useParams()
@@ -39,7 +40,7 @@ const Product = () => {
     const addCart = () => {
         dispatch(addCartItmesAction(data.data))
     }
-return (
+return (<>
     <Box  mt={10}>
         <Flex
         alignItems={"center"}
@@ -153,7 +154,8 @@ return (
     </VStack>
         </Box>
     </Box>
-)
+    <SliderCategory />
+</>)
 }
 
 export default Product

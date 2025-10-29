@@ -20,7 +20,7 @@ const token = CookiesServices.get("jwt")
     const onChangeCart = () => {
       dispatch(onChangeOpen())
     }
-    
+
   const { cartItems } = useAppSelector((store) => store.cart)
 
   useEffect(() => {

@@ -10,8 +10,8 @@ export const productApiSlice = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_LOCAL_API }),
     endpoints: (builder) => ({
         getProductList: builder.query({
-            query: (page: number) =>
-                `api/products?populate[0]=thumbnail&populate[1]=category&sort[createdAt]=desc&pagination[page]=${page}&pagination[pageSize]=8`,
+            query: ({page, pageSize}) =>
+                `api/products?populate[0]=thumbnail&populate[1]=category&sort[createdAt]=desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
             providesTags: (result) =>
                 result
                 ? [...result.data.map(({ id }: IProduct) => ({ type: 'Products' as const, id })),

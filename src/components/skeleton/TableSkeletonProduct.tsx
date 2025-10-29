@@ -4,7 +4,7 @@ const TableSkeletonProduct = () => {
     const skeletonRows = Array.from({ length: 5 });
 
     return (
-        <Stack width="70%" gap="5" mx={{md: "auto", base: "10px"}}>
+        <Stack width={{base: "60%", md:"90%"}} gap="5" mx={{md: "auto", base: "10px"}}>
             <Flex justifyContent={"space-between"}>
                 <Heading size="xl">
                     <Skeleton height="30px" w="200px"/>

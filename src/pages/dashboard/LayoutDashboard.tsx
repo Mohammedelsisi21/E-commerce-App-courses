@@ -51,7 +51,7 @@ const LayoutDashboard= () => {
   );
 
   return (
-    <Flex h="100vh" bg={bg}>
+    <Flex minH="100vh" bg={bg}>
       <Box w="250px" bg={sidebarBg}  borderRight="1px" borderColor={borderColor} pt={"20px"} boxShadow="md" display={{ base: "none", md: "block" }}>
         <Heading size="md" pb={"30px"} borderBottom={`solid 1px ${colorMode === "dark"? "" : "white"}`} color={titleColor}>
           <Link to={"/dashboard"}>
