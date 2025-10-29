@@ -67,7 +67,6 @@ const CreateProdcut = () => {
         thumbnail: imageId ? [imageId] : [],
       },
     };
-    console.log("🟢 Sending Body:", JSON.stringify(body, null, 2))
     await createProduct(body);
 
   } catch (error) {

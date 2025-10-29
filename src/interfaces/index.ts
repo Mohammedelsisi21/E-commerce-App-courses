@@ -41,9 +41,9 @@ export interface ICategory {
     id: number
     documentId: string
     title: string
-    thumbnail: {url: string}[]
+    thumbnail: {id: number,url: string}[]
+    products: []
 }
-
 
 // ** function text limet
 export interface ITruncateText {

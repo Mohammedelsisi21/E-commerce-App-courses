@@ -4,7 +4,7 @@ import type { ICategory } from "@/interfaces";
 import { useState } from "react";
 import { useGetCategoryListQuery } from "@/app/services/categoryApiSlice";
 import TableSkeletonCategory from "./skeleton/TableSkeletonCategory";
-import CreateCategory from "./curdCategory/createCategory";
+import CreateCategory from "./curdCategory/CreateCategory";
 import UpdateCategory from "./curdCategory/UpdateCategory";
 import DeleteCategory from "./curdCategory/DeleteCategory";
 import ViewCategory from "./curdCategory/ViewCategory";
@@ -13,8 +13,8 @@ import ViewCategory from "./curdCategory/ViewCategory";
 const DashboardCategory = () => {
     const [page, setPage] = useState<number>(1);
     const {isLoading, data} = useGetCategoryListQuery(page)
-    
     if(isLoading) return <TableSkeletonCategory />
+
 return (
     <Stack width="70%" gap="5" mr={{base: "10px", md: "auto"}} ml={{base: "0", md: "auto"}}>
         <Flex justifyContent={"space-between"}>
@@ -40,13 +40,13 @@ return (
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{category.title}</Table.Cell>
                 <Table.Cell>
-                    <Text>{8}</Text>
+                    <Text>{category.products.length}</Text>
                 </Table.Cell>
                 <Table.Cell>
                 <ButtonGroup p={2}>
                     <ViewCategory />
                     <DeleteCategory />
-                    <UpdateCategory />
+                    <UpdateCategory category={category}/>
                 </ButtonGroup>
             </Table.Cell>
             </Table.Row>

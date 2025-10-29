@@ -20,3 +20,13 @@ export const createProduct = yup.object({
     stock: yup.number().typeError("Stock must be a number").required("Stock is required").min(0, "Stock cannot be negative"),
     thumbnail: yup.mixed().nullable().test("fileRequired", "Thumbnail is required", function (value) {if (!value) return false;return true;}),
 });
+
+export const categorySchema = yup.object({
+    title: yup.string().required("Title is required").min(3, "Title must be at least 3 characters").max(100, "Title must not exceed 100 characters"),
+    thumbnail: yup.mixed<FileList>()
+    .required("Thumbnail is required")
+    .test("fileRequired", "Thumbnail is required", (value) => {
+        return value && value.length > 0;
+    }),
+});
+
