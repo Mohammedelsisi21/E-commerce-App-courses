@@ -61,7 +61,17 @@ export const categoryApiSlice = createApi({
             } catch {
                 patchResult.undo()
             }},
-        })
+        }),
+        removeCategoryList: builder.mutation({
+            query: (id) => ({
+                url: `api/categories/${id}`,
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${CookiesServices.get("jwt")}`
+                },
+            }),
+            invalidatesTags: [{ type: 'Categories', id: 'LIST' }],
+        }),
     }),
 })
-export const { useGetCategoryListQuery, useCreateCategoryListMutation, useUpdateCategoryListMutation } = categoryApiSlice
+export const { useGetCategoryListQuery, useCreateCategoryListMutation, useUpdateCategoryListMutation, useRemoveCategoryListMutation } = categoryApiSlice

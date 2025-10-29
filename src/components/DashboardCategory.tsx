@@ -44,8 +44,8 @@ return (
                 </Table.Cell>
                 <Table.Cell>
                 <ButtonGroup p={2}>
-                    <ViewCategory />
-                    <DeleteCategory />
+                    <ViewCategory category={category}/>
+                    <DeleteCategory id={category.documentId}/>
                     <UpdateCategory category={category}/>
                 </ButtonGroup>
             </Table.Cell>
