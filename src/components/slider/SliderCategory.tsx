@@ -6,6 +6,7 @@ import { useGetCategoryListQuery } from "@/app/services/categoryApiSlice";
 import type { ICategory } from "@/interfaces";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { useColorMode } from "../ui/color-mode";
+import { Link } from "react-router-dom";
 
 interface IArrow {
     onClick?: React.MouseEventHandler<HTMLButtonElement>
@@ -89,26 +90,28 @@ return (
     <Box className="slider-container" px={4} py={6}>
         <Heading color={isDark ? "teal.600" : "gray.700"} fontWeight={"bold"} size={"3xl"} mb={"5px"}>Category</Heading>
         <Slider {...settings}>
-        {data?.data?.map((cate: ICategory) => (
-            <Box
-            key={cate.documentId || cate.id}
-            textAlign="center"
-            px={3}
-            pb={2}
-            _hover={{ transform: "scale(1.05)", transition: "0.6s" }}>
-                <Image
-                    src={`${import.meta.env.VITE_LOCAL_API}${cate.thumbnail[0].url}`}
-                    alt={cate.title}
-                    mx="auto"
-                    borderRadius="lg"
-                    boxSize="200px"
-                    objectFit="cover"
-                    mb={2}/>
-                <Text fontWeight="bold" fontSize="lg">
-                    {cate.title}
-                </Text>
-            </Box>
-        ))}
+            {data?.data?.map((cate: ICategory) => (
+                <Link to={`/categories/${cate.documentId}`}>
+                    <Box
+                    key={cate.documentId || cate.id}
+                    textAlign="center"
+                    px={3}
+                    pb={2}
+                    _hover={{ transform: "scale(1.05)", transition: "0.6s" }}>
+                        <Image
+                            src={`${import.meta.env.VITE_LOCAL_API}${cate.thumbnail[0].url}`}
+                            alt={cate.title}
+                            mx="auto"
+                            borderRadius="lg"
+                            boxSize="200px"
+                            objectFit="cover"
+                            mb={2}/>
+                        <Text fontWeight="bold" fontSize="lg">
+                            {cate.title}
+                        </Text>
+                    </Box>
+                </Link>
+            ))}
         </Slider>
     </Box>
 )

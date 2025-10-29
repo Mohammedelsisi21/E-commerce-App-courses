@@ -72,6 +72,14 @@ export const categoryApiSlice = createApi({
             }),
             invalidatesTags: [{ type: 'Categories', id: 'LIST' }],
         }),
+        getOneCategory: builder.query({
+            query: (id: string) => `api/categories/${id}?populate[thumbnail]=true&populate[products][populate][thumbnail]=true`,
+
+            providesTags: (result) =>
+            result
+            ? [{ type: "Categories" as const, id: result.id }]
+            : [{ type: "Categories" as const, id: "LIST" }],
+        })
     }),
 })
-export const { useGetCategoryListQuery, useCreateCategoryListMutation, useUpdateCategoryListMutation, useRemoveCategoryListMutation } = categoryApiSlice
+export const { useGetCategoryListQuery, useCreateCategoryListMutation, useUpdateCategoryListMutation, useRemoveCategoryListMutation, useGetOneCategoryQuery } = categoryApiSlice

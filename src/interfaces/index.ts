@@ -42,7 +42,7 @@ export interface ICategory {
     documentId: string
     title: string
     thumbnail: {id: number,url: string}[]
-    products: []
+    products: IProduct[]
 }
 
 // ** function text limet

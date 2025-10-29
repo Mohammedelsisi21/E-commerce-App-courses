@@ -3,6 +3,7 @@ import ProductCard from "../components/ProductCard"
 import type { ICartItem } from "../interfaces"
 import ProductCardSkeleton from "@/components/skeleton/ProductCardSkeleton"
 import useAuthenticatedQuery from "../hooks"
+import { useEffect } from "react"
 
 const ProductsPage = () => {
 
@@ -11,6 +12,10 @@ const ProductsPage = () => {
         action: "get",
         url: "/api/products?populate[0]=thumbnail&populate[1]=category&sort[createdAt]=desc",
     })
+    useEffect(() => {
+        document.title = `Products`
+    })
+
     if(isLoading) return <Grid margin={30} gap={5} templateColumns={"repeat(auto-fill, minmax(300px, 1fr))"}>
     {Array.from({length: 10}, (_, idx)=> (<ProductCardSkeleton key={idx}/>))}
     </Grid>
