@@ -1,10 +1,11 @@
-import { Box, Flex, Heading, Text, VStack, HStack, Icon, IconButton, Drawer, useDisclosure, Portal, CloseButton,} from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, VStack, HStack, Icon, IconButton, Drawer, useDisclosure, Portal, CloseButton, Link as ChakraLink,} from "@chakra-ui/react";
 import { FiHome, FiBox, FiTag, FiSun, FiMoon, FiMenu } from "react-icons/fi";
 import React from "react";
 import { useColorMode, useColorModeValue } from "@/components/ui/color-mode";
 import { Link, Outlet } from "react-router-dom";
 import Logo from "@/components/myUi/Logo";
-
+import  CookiesServices from "@/Services"
+import { AiOutlineLogout } from "react-icons/ai";
 const SidebarItem = ({
   icon,
   label,
@@ -25,6 +26,12 @@ const SidebarItem = ({
     </HStack>
   );
 };
+
+const token = CookiesServices.get("jwt_Admin")
+const onLogout = () => {
+  CookiesServices.remove("jwt_Admin",  '/dashboard' )
+  location.replace("/dashboard/login")
+}
 
 const LayoutDashboard= () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -96,15 +103,21 @@ const LayoutDashboard= () => {
               Admin Dashboard
             </Heading>
           </Flex>
-          <IconButton
-            aria-label="Toggle theme"
-            onClick={toggleColorMode}
-            variant="ghost"
-            colorScheme="teal"
-            _hover={{ bg: useColorModeValue("teal.100", "teal.800") }}
-          >
-            {colorMode === "light" ? <FiMoon /> : <FiSun />}
-          </IconButton>
+          <Flex>
+            {token && (
+              <ChakraLink onClick={onLogout} color={colorMode === "dark" ? "white" : "black"} fontWeight="medium">
+                <Link to={"/logout"}>
+                  <Flex direction="column" align="center">
+                    <Icon as={AiOutlineLogout} boxSize={6} mb={1} />
+                    <Text fontSize="sm">Log out</Text>
+                  </Flex>
+                </Link>
+              </ChakraLink>
+            )}
+            <IconButton aria-label="Toggle theme" onClick={toggleColorMode} variant="ghost" colorScheme="teal" _hover={{ bg: useColorModeValue("teal.100", "teal.800") }}>
+              {colorMode === "light" ? <FiMoon /> : <FiSun />}
+            </IconButton>
+          </Flex>
         </Flex>
         <Box
           border="1px"

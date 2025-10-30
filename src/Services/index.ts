@@ -10,8 +10,8 @@ class CookiesServices {
         return cookies.set(name, value, option);
     }
 
-    remove(name: string) {
-        return cookies.remove(name, { path: '/' });
+    remove(name: string, path :string ) {
+        return cookies.remove(name, {path: path});
     }
 }
 

@@ -8,11 +8,14 @@ import { useAppDispatch } from "@/app/store";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { FaEye, FaHeart  } from "react-icons/fa";
 import { useState } from "react";
+import CookiesServices from "../Services"
 
 
 interface IProps {
   ProductCard: ICartItem
 }
+
+const token = CookiesServices.get("jwt")
 const ProductCard = ({ ProductCard }: IProps) => {
   const {title ,description,price,thumbnail, documentId, discount, rating, stock}= ProductCard
   const { url } = thumbnail
@@ -20,6 +23,9 @@ const ProductCard = ({ ProductCard }: IProps) => {
   const { colorMode } = useColorMode();
       const dispatch = useAppDispatch()
     const addCart = () => {
+      if(!token) {
+        return location.replace("/signin")
+      }
         dispatch(addCartItmesAction(ProductCard))
     }
 

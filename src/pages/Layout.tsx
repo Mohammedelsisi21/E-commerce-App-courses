@@ -11,7 +11,7 @@ const Layout = () => {
     <Container>
       <Navbar />
       <Flex flexDirection={"column"}>
-        <Stack flexGrow={"1"} pt={"100px"} minH={"100vh"}>
+        <Stack flexGrow={"1"} pt={"120px"} minH={"100vh"}>
           <Outlet />
         </Stack>
       </Flex>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import {Box,Flex,HStack,Button,IconButton,Spacer,Link as ChakraLink,Container,useDisclosure,VStack, Text,} from "@chakra-ui/react";
-import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
+import {Box,Flex,HStack,Button,IconButton,Spacer,Link as ChakraLink,Container,useDisclosure,VStack, Text, Icon,} from "@chakra-ui/react";
+import { FiSun, FiMoon, FiMenu, FiX, FiUserPlus } from "react-icons/fi";
 import { Link, NavLink } from "react-router-dom";
 import { useColorMode, useColorModeValue } from "@/components/ui/color-mode";
 import { navLinks } from "../constant";
@@ -9,6 +9,7 @@ import CookiesServices from "../Services"
 import { BsCart } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { onChangeOpen } from "@/app/features/global/globalSlice";
+import { AiOutlineUser, AiOutlineLogout  } from "react-icons/ai";
 
 const Navbar = () => {
 const token = CookiesServices.get("jwt")
@@ -41,7 +42,7 @@ const token = CookiesServices.get("jwt")
   const buttonHoverBg = useColorModeValue("gray.100", "gray.600");
 
   const hendleLogout= () => {
-    CookiesServices.remove("jwt")
+    CookiesServices.remove("jwt", "/")
     location.replace("/signin")
   }
   
@@ -72,18 +73,35 @@ const token = CookiesServices.get("jwt")
             </Text>
           </Box>
           {token ? <>
-            <Button bg={buttonBg} onClick={hendleLogout} color={buttonColor} _hover={{ bg: buttonHoverBg }} size="sm" borderRadius="md" transition="all 0.2s">
-              <Text>LogOut</Text>
-            </Button>
 
+          <ChakraLink onClick={hendleLogout} color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }} display={{ base: "none", md: "block" }}>
+            <Link to={"/logout"}>
+              <Flex direction="column" align="center">
+                <Icon as={AiOutlineLogout} boxSize={6} mb={1} />
+                <Text fontSize="sm">Log out</Text>
+              </Flex>
+            </Link>
+          </ChakraLink>
           </> : <>
-            <ChakraLink asChild color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }} display={{ base: "none", md: "block" }}>
-              <Link to="/signin">Sign in</Link>
-            </ChakraLink>
+      <ChakraLink ml={"2"} mr={"2"} color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }} display={{ base: "none", md: "block" }}>
+        <Link to={"/signin"}>
+          <Flex direction="column" align="center">
+            <Icon as={AiOutlineUser} boxSize={6} mb={1} />
+            <Text fontSize="sm">Sign in</Text>
+          </Flex>
+        </Link>
+      </ChakraLink>
 
-            <Button bg={buttonBg} color={buttonColor} _hover={{ bg: buttonHoverBg }} size="sm" borderRadius="md" transition="all 0.2s">
-              <Link to="/signup">Sign up</Link>
-            </Button>
+      <ChakraLink color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }} display={{ base: "none", md: "block" }}>
+        <Link to={"/signup"}>
+          <Flex direction="column" align="center">
+            <Icon as={FiUserPlus} boxSize={6} mb={1}/>
+            <Text fontSize="sm" fontWeight="medium">
+              Sign up
+            </Text>
+          </Flex>
+        </Link>
+      </ChakraLink>
 
           </>}
           <IconButton aria-label="Toggle color mode" onClick={toggleColorMode} color={linkColor} variant="ghost" fontSize="20px" _hover={{ color: hoverColor, bg: "rgba(255,255,255,0.1)" }}>
