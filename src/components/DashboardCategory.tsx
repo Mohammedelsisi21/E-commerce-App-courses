@@ -39,7 +39,7 @@ return (
             {data?.data?.map((category: ICategory, idx: number) => (
                 <Table.Row key={category.id}>
                 <Table.Cell>
-                    <Image src={`${import.meta.env.VITE_LOCAL_API}${category.thumbnail[0].url}`} alt={category.title} boxSize="40px" objectFit="cover" borderRadius="md"/>
+                    <Image src={`${category.thumbnail[0].url}`} alt={category.title} boxSize="40px" objectFit="cover" borderRadius="md"/>
                 </Table.Cell>
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{category.title}</Table.Cell>

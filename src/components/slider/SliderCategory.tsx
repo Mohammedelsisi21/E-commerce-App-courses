@@ -99,7 +99,7 @@ return (
                     pb={2}
                     _hover={{ transform: "scale(1.05)", transition: "0.6s" }}>
                         <Image
-                            src={`${import.meta.env.VITE_LOCAL_API}${cate.thumbnail[0].url}`}
+                            src={`${cate.thumbnail[0].url}`}
                             alt={cate.title}
                             mx="auto"
                             borderRadius="lg"

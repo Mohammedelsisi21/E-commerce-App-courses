@@ -23,7 +23,7 @@ export const productApiSlice = createApi({
                 url: `/api/products?populate=category`,
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${CookiesServices.get("jwt")}`
+                    Authorization: `Bearer ${CookiesServices.get("jwt_Admin")}`
                 },
                 body
             }),
@@ -44,7 +44,7 @@ export const productApiSlice = createApi({
                 url: `api/products/${id}`,
                 method: "PUT",
                 headers: {
-                    Authorization: `Bearer ${CookiesServices.get("jwt")}`
+                    Authorization: `Bearer ${CookiesServices.get("jwt_Admin")}`
                 },
                 body,
             }),
@@ -67,7 +67,7 @@ export const productApiSlice = createApi({
                 url: `api/products/${id}`,
                 method: "DELETE",
                 headers: {
-                    Authorization: `Bearer ${CookiesServices.get("jwt")}`
+                    Authorization: `Bearer ${CookiesServices.get("jwt_Admin")}`
                 },
             }),
             invalidatesTags: [{ type: 'Products', id: 'LIST' }],

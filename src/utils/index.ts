@@ -29,7 +29,7 @@ export const uploadImage = async (thumbnailFile: File) => {
     return fd;
     })(),
     headers: {
-        Authorization: `Bearer ${CookiesServices.get("jwt")}`,
+        Authorization: `Bearer ${CookiesServices.get("jwt_Admin")}`,
     },});
     return await uploadRes.json();
 }

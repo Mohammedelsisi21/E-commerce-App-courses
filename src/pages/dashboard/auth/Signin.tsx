@@ -18,7 +18,7 @@ const LoginAdmin = () => {
     const { register, handleSubmit, formState: { errors }} = useForm<ILoginForm>(
         {
     resolver: yupResolver(loginSchema),
-  }
+}
 )
     useEffect(() => {
         if(data) {
@@ -39,7 +39,7 @@ return (
         <Fieldset.Root size="lg" maxW="md">
             <Stack p={5}>
                 <Fieldset.Legend textAlign="center" color={isDark ? "teal.300" : "teal.700"} fontSize="3xl" fontWeight="700">
-                    Login
+                    Login Admin
                 </Fieldset.Legend>
 
                 <Fieldset.HelperText textAlign="center" color={isDark ? "gray.400" : "gray.500"}>

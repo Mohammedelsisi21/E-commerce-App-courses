@@ -42,7 +42,7 @@ return (
             {data?.data?.map((product: IProduct, idx: number) => (
                 <Table.Row key={product.id}>
                 <Table.Cell>
-                    <Image src={`${import.meta.env.VITE_LOCAL_API}${product.thumbnail.url}`} alt={product.title} boxSize="40px" objectFit="cover" borderRadius="md"/>
+                    <Image src={`${product.thumbnail.url}`} alt={product.title} boxSize="40px" objectFit="cover" borderRadius="md"/>
                 </Table.Cell>
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{product.title}</Table.Cell>

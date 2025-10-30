@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {Box,Flex,HStack,Button,IconButton,Spacer,Link as ChakraLink,Container,useDisclosure,VStack, Text, Icon,} from "@chakra-ui/react";
+import {Box,Flex,HStack,Button,IconButton,Spacer,Container,useDisclosure,VStack, Text, Icon,} from "@chakra-ui/react";
 import { FiSun, FiMoon, FiMenu, FiX, FiUserPlus } from "react-icons/fi";
 import { Link, NavLink } from "react-router-dom";
 import { useColorMode, useColorModeValue } from "@/components/ui/color-mode";
@@ -43,7 +43,7 @@ const token = CookiesServices.get("jwt")
 
   const hendleLogout= () => {
     CookiesServices.remove("jwt", "/")
-    location.replace("/signin")
+    location.replace("/")
   }
   
   return (
@@ -56,9 +56,9 @@ const token = CookiesServices.get("jwt")
 
         <HStack px={"50px"} display={{ base: "none", md: "flex" }} alignItems="center">
         {navLinks.map((Link, idx) => {
-          return (<ChakraLink key={idx} asChild color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }}>
+          return (<Box key={idx} asChild color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }}>
             <NavLink to={Link.path}>{Link.name}</NavLink>
-          </ChakraLink>
+          </Box>
               )})}
         </HStack>
         <Spacer />
@@ -74,25 +74,25 @@ const token = CookiesServices.get("jwt")
           </Box>
           {token ? <>
 
-          <ChakraLink onClick={hendleLogout} color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }} display={{ base: "none", md: "block" }}>
+          <Box onClick={hendleLogout} color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }} display={{ base: "none", md: "block" }}>
             <Link to={"/logout"}>
               <Flex direction="column" align="center">
                 <Icon as={AiOutlineLogout} boxSize={6} mb={1} />
                 <Text fontSize="sm">Log out</Text>
               </Flex>
             </Link>
-          </ChakraLink>
+          </Box>
           </> : <>
-      <ChakraLink ml={"2"} mr={"2"} color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }} display={{ base: "none", md: "block" }}>
+      <Box ml={"2"} mr={"2"} color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }} display={{ base: "none", md: "block" }}>
         <Link to={"/signin"}>
           <Flex direction="column" align="center">
             <Icon as={AiOutlineUser} boxSize={6} mb={1} />
             <Text fontSize="sm">Sign in</Text>
           </Flex>
         </Link>
-      </ChakraLink>
+      </Box>
 
-      <ChakraLink color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }} display={{ base: "none", md: "block" }}>
+      <Box color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }} display={{ base: "none", md: "block" }}>
         <Link to={"/signup"}>
           <Flex direction="column" align="center">
             <Icon as={FiUserPlus} boxSize={6} mb={1}/>
@@ -101,7 +101,7 @@ const token = CookiesServices.get("jwt")
             </Text>
           </Flex>
         </Link>
-      </ChakraLink>
+      </Box>
 
           </>}
           <IconButton aria-label="Toggle color mode" onClick={toggleColorMode} color={linkColor} variant="ghost" fontSize="20px" _hover={{ color: hoverColor, bg: "rgba(255,255,255,0.1)" }}>
@@ -117,18 +117,18 @@ const token = CookiesServices.get("jwt")
         {isOpen && (
           <VStack mt={4} p={4} align="start" display={{ base: "flex", md: "none" }}>
             {navLinks.map((link, idx) => (
-            <ChakraLink key={idx} asChild color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }}>
+            <Box key={idx} asChild color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }}>
               <NavLink to={link.path}>{link.name}</NavLink>
-            </ChakraLink>
+            </Box>
             ))}
           {
             token ? null : <>
-                        <ChakraLink asChild color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }}>
+                        <Box asChild color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }}>
               <NavLink to="/signin">Sign in</NavLink>
-            </ChakraLink>
-            <ChakraLink asChild color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }}>
+            </Box>
+            <Box asChild color={linkColor} fontWeight="medium" _hover={{ color: hoverColor, textDecoration: "none" }}>
               <NavLink to="/signup">Sign up</NavLink>
-            </ChakraLink></>
+            </Box></>
           }
           </VStack>
         )}

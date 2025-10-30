@@ -4,8 +4,7 @@ import { ToastContainer } from 'react-toastify';
 const App = () => {
 
 
-  return (<>
-  
+return (<>
     <main>
       <RouterProvider router={router}></RouterProvider>
         <ToastContainer/>

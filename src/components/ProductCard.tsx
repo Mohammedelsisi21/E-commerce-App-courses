@@ -84,7 +84,7 @@ const ProductCard = ({ ProductCard }: IProps) => {
           </Link>
       </Flex>
       <Image
-        src={`${import.meta.env.VITE_LOCAL_API}${url}`}
+        src={`${url}`}
         alt={title}
         mx="auto"
         boxSize="200px"

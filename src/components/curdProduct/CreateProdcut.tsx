@@ -20,8 +20,8 @@ const CreateProdcut = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   // ** Get Category
-  const {data} = useGetCategoryListQuery(1)
-
+  const { data } = useGetCategoryListQuery({page: 1, pageSize: 30});
+  console.log(data)
   useEffect(()=> {
     if(isSuccess) {
         toast.success(`Updata product successfully.`, {

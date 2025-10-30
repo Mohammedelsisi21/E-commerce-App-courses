@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text, VStack, HStack, Icon, IconButton, Drawer, useDisclosure, Portal, CloseButton, Link as ChakraLink,} from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, VStack, HStack, Icon, IconButton, Drawer, useDisclosure, Portal, CloseButton,} from "@chakra-ui/react";
 import { FiHome, FiBox, FiTag, FiSun, FiMoon, FiMenu } from "react-icons/fi";
 import React from "react";
 import { useColorMode, useColorModeValue } from "@/components/ui/color-mode";
@@ -105,14 +105,14 @@ const LayoutDashboard= () => {
           </Flex>
           <Flex>
             {token && (
-              <ChakraLink onClick={onLogout} color={colorMode === "dark" ? "white" : "black"} fontWeight="medium">
+              <Box onClick={onLogout} color={colorMode === "dark" ? "white" : "black"} fontWeight="medium">
                 <Link to={"/logout"}>
                   <Flex direction="column" align="center">
                     <Icon as={AiOutlineLogout} boxSize={6} mb={1} />
                     <Text fontSize="sm">Log out</Text>
                   </Flex>
                 </Link>
-              </ChakraLink>
+              </Box>
             )}
             <IconButton aria-label="Toggle theme" onClick={toggleColorMode} variant="ghost" colorScheme="teal" _hover={{ bg: useColorModeValue("teal.100", "teal.800") }}>
               {colorMode === "light" ? <FiMoon /> : <FiSun />}

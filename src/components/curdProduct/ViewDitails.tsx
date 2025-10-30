@@ -25,7 +25,7 @@ const ViewDetails = ({ product }: IProps) => {
         title="Product Details">
             <VStack align="stretch" p={4} divideColor={isDark ? "gray.700" : "gray.200"}>
                 <Flex justify="center">
-                    <Image src={`${import.meta.env.VITE_LOCAL_API}${url}`} alt={title} boxSize="200px" objectFit="cover" borderRadius="xl" shadow="xl" transition="all 0.3s ease" _hover={{ transform: "scale(1.05)" }}/>
+                    <Image src={`${url}`} alt={title} boxSize="200px" objectFit="cover" borderRadius="xl" shadow="xl" transition="all 0.3s ease" _hover={{ transform: "scale(1.05)" }}/>
                 </Flex>
 
                 <Box>

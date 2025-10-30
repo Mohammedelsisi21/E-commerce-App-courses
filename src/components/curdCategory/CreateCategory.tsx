@@ -17,7 +17,7 @@ type Inputs = yup.InferType<typeof categorySchema>;
 const CreateCategory = () => {
   const { colorMode } = useColorMode()
   const isDark = colorMode === "dark";
-  const [createProduct, {isLoading, isSuccess}] = useCreateCategoryListMutation()
+  const [createCategory, {isLoading, isSuccess}] = useCreateCategoryListMutation()
   const [isOpen, setIsOpen] = useState(false);
 const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
   resolver: yupResolver(categorySchema),
@@ -41,7 +41,7 @@ const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
           thumbnail: uploadData[0].id ? [uploadData[0].id] : [],
         }
       }
-      await createProduct(body);
+      await createCategory(body);
     } catch (error) {
       console.error("❌ Error creating Cagegory:", error);
     }
