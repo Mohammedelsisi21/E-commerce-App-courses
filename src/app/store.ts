@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit'
 import loginSlice from './features/login/loginSlice'
+import userLoginAdmin from './features/login/loginAdminSlice'
 import registerSlice from './features/register/registerSlice'
 import cartSlice from './features/cart/cartSlice'
 import globalSlice from './features/global/globalSlice'
@@ -20,6 +21,7 @@ export const store = configureStore({
   reducer: {
     cart: persistedCart,
     login: loginSlice,
+    loginAdmin: userLoginAdmin,
     register: registerSlice,
     global: globalSlice,
     [productApiSlice.reducerPath]: productApiSlice.reducer,

@@ -1,20 +1,19 @@
 import { useColorMode } from "@/components/ui/color-mode"
 import { PasswordInput } from "@/components/ui/password-input"
-import type { ILoginForm } from "../interfaces"
-import { Box, Button, Field, Fieldset, Flex, Input, Stack, Text,} from "@chakra-ui/react"
-import { Link } from "react-router-dom"
+import type { ILoginForm } from "@/interfaces"
+import { Box, Button, Field, Fieldset, Flex, Input, Stack,} from "@chakra-ui/react"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { loginSchema } from "../validation"
-import { userLogin } from "../app/features/login/loginSlice"
-import { useAppDispatch, useAppSelector } from "../app/store"
+import { loginSchema } from "@/validation"
+import { userLoginAdmin } from "@/app/features/login/loginAdminSlice"
+import { useAppDispatch, useAppSelector } from "@/app/store"
 import { useEffect } from "react"
 import CircleUi from "@/components/myUi/CircleUi"
 
-const Signin = () => {
+const LoginAdmin = () => {
     const { colorMode } = useColorMode()
     const isDark = colorMode === "dark"
-    const {isLoading, error, data} = useAppSelector((store) =>store.login )
+    const {isLoading, error, data} = useAppSelector((store) =>store.loginAdmin )
     const dispatch = useAppDispatch()
     const { register, handleSubmit, formState: { errors }} = useForm<ILoginForm>(
         {
@@ -24,12 +23,12 @@ const Signin = () => {
     useEffect(() => {
         if(data) {
             setTimeout(()=> {
-                location.replace("/")
+                location.replace("/dashboard")
             },700)
         }
     })
     const onSubmit: SubmitHandler<ILoginForm> = (data) => {
-    dispatch(userLogin(data))
+    dispatch(userLoginAdmin(data))
     }
 
 return (
@@ -68,14 +67,6 @@ return (
                 Sign in
             </Button>
         </Fieldset.Content>
-        <Flex justifyContent="center" fontSize="sm" color={isDark ? "gray.400" : "gray.600"}>
-            Don't have an account? {" "}
-            <Link to={"/signup"}>
-                <Text color={isDark ? "teal.300" : "teal.700"} _hover={{ textDecoration: "underline", color: "teal.400" }}>
-                    Sign up
-                </Text>
-            </Link>
-        </Flex>
         </Fieldset.Root>
     </Box>
 </Flex>
@@ -83,4 +74,4 @@ return (
 )
 }
 
-export default Signin
+export default LoginAdmin

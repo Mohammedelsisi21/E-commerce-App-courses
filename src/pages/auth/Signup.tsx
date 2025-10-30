@@ -1,36 +1,36 @@
 import { useColorMode } from "@/components/ui/color-mode"
 import { PasswordInput } from "@/components/ui/password-input"
-import type { IRegisterForm } from "../interfaces"
+import type { IRegisterForm } from "@/interfaces"
 import { Box, Button, Field, Fieldset, Flex, Input, Stack, Text,} from "@chakra-ui/react"
 import { Link } from "react-router-dom"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { registerSchema } from "../validation"
+import { registerSchema } from "@/validation"
 import { useAppDispatch, useAppSelector } from "@/app/store"
 import { userRegister } from "@/app/features/register/registerSlice"
 import { useEffect } from "react"
 import CircleUi from "@/components/myUi/CircleUi"
 
 const Signup = () => {
-  const {colorMode} = useColorMode()
-  const isDark = colorMode === "dark"
-  const {register, handleSubmit, formState: {errors}} = useForm<IRegisterForm>({
-      resolver: yupResolver(registerSchema)
-  })
+    const {colorMode} = useColorMode()
+    const isDark = colorMode === "dark"
+    const {register, handleSubmit, formState: {errors}} = useForm<IRegisterForm>({
+        resolver: yupResolver(registerSchema)
+    })
 
-  const {userData ,error, isLoading}=useAppSelector((store) => store.register)
-  useEffect(() => {
+    const {userData ,error, isLoading}=useAppSelector((store) => store.register)
+    useEffect(() => {
     if(userData) {
-      location.replace("/signin")
+        location.replace("/signin")
     }
-  },[userData])
-  
-  const dispatch = useAppDispatch()
-  const onSubmit : SubmitHandler<IRegisterForm> = (data) => {
+    },[userData])
+
+    const dispatch = useAppDispatch()
+    const onSubmit : SubmitHandler<IRegisterForm> = (data) => {
     dispatch(userRegister(data))
-  }
-  
-  return (<Box position="relative" h="100vh" overflow="hidden" bg={isDark ? "gray.900" : "teal.50"}>
+    }
+
+return (<Box position="relative" h="100vh" overflow="hidden" bg={isDark ? "gray.900" : "teal.50"}>
     <CircleUi />
     <Flex h={"100vh"} alignItems={"center"} justifyContent={"center"} zIndex={1} position="relative" >
     <Box as={"form"} onSubmit={handleSubmit(onSubmit)} color={isDark ? "teal.100" : "gray.700"} p={8} borderRadius="lg" maxW="sm" mx="auto" mt={12} boxShadow="2xl">
