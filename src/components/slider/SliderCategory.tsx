@@ -52,6 +52,7 @@ const SliderCategory = () => {
     const { colorMode } = useColorMode()
     const isDark = colorMode === "dark"
     const { data, isLoading } = useGetCategoryListQuery({page: 1, pageSize: 30});
+    console.log(data)
     const settings = {
     dots: true,
     infinite: true,

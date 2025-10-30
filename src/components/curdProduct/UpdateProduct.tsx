@@ -31,7 +31,7 @@ const UpdateProduct = ({ product } : IProps) => {
   const { colorMode } = useColorMode()
   const isDark = colorMode === "dark";
   const [updateProductFun, {isLoading, isSuccess}] = useUpdateProductListMutation();
-  const {data} = useGetCategoryListQuery(1)
+  const { data } = useGetCategoryListQuery({page: 1, pageSize: 30});
   
   useEffect(()=> {
     if(isSuccess) {
@@ -178,7 +178,7 @@ const UpdateProduct = ({ product } : IProps) => {
             <Field.Root>
               <Flex>
                 <Field.Label mr={"5px"} color={isDark ? "teal.200" : "teal.700"}>Thumbnail</Field.Label>
-                <Image src={`${import.meta.env.VITE_LOCAL_API}${product.thumbnail?.url}`} alt={product.title} w={"50px"} h={"50px"} borderRadius={"sm"}></Image>
+                <Image src={`${product.thumbnail?.url}`} alt={product.title} w={"50px"} h={"50px"} borderRadius={"sm"}></Image>
               </Flex>
               <FileUpload.Root>
                 <FileUpload.HiddenInput onChange={handlerImage}/>

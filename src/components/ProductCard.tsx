@@ -2,7 +2,7 @@ import { Box, Image, Heading, Text, Button, VStack, Flex, RatingGroup } from "@c
 import { Link } from "react-router-dom";
 import { useColorMode } from "./ui/color-mode";
 import type { ICartItem } from "../interfaces";
-import { truncateText } from "@/utils";
+import { truncateText, truncateTitle } from "@/utils";
 import { addCartItmesAction } from "@/app/features/cart/cartSlice"
 import { useAppDispatch } from "@/app/store";
 import { IoAddCircleOutline } from "react-icons/io5";
@@ -93,13 +93,12 @@ const ProductCard = ({ ProductCard }: IProps) => {
         border={".5px solid #cccccc4c"}
         shadow={"md"}
       />
-
       <VStack align="start" mt={6} p={3}>
         <Heading
           size="md"
           color={colorMode === "light" ? "teal.600" : "teal.300"}
         >
-          {truncateText({text: title, limmit: 3})}
+          {truncateTitle({text: title, limmit: 2})}
         </Heading>
 
         <Text
@@ -109,7 +108,7 @@ const ProductCard = ({ ProductCard }: IProps) => {
           {truncateText({text: description, limmit: 15})}
         </Text>
         <Flex mt="1">
-          <RatingGroup.Root colorPalette="teal" readOnly count={5} defaultValue={rating} size="md">
+          <RatingGroup.Root colorPalette="yellow" readOnly count={5} defaultValue={rating} size="md">
             <RatingGroup.HiddenInput />
             <RatingGroup.Control />
           </RatingGroup.Root>
