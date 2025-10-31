@@ -12,7 +12,7 @@ const CartDrawerProduct = () => {
                 {cartItems.map((item) => (
                     <Box key={item.id} p={3} borderBottom="1px solid" borderColor="gray.200">
                         <Flex justifyContent={"space-between"} px={"5"} alignItems={"center"}>
-                            <Image src={`${import.meta.env.VITE_LOCAL_API}${item.thumbnail.url}`} alt={item.title} boxSize="80px" borderRadius="md" />
+                            <Image src={`${item.thumbnail.url}`} alt={item.title} boxSize="80px" borderRadius="md" />
                             <VStack mt={2}>
                             <Text fontWeight="medium">{item.title}</Text>
                             <Text color="teal.500">${item.price}</Text>
