@@ -41,12 +41,14 @@ const cartSlice = createSlice({
         },
         decreaseQty: (state, action: PayloadAction<number>) => {
             const item = state.cartItems.find(item => item.id === action.payload)
-            if(item && item.qty > 1) item.qty -=1
-            toast.success(`${item?.title.split(" ").slice(0, 2).join(" ")} - 1`, {
-            position: "bottom-right",
-            autoClose: 500,
-            theme: "colored",
-            });
+            if(item && item.qty > 1) {
+                item.qty -= 1
+                toast.success(`${item?.title.split(" ").slice(0, 2).join(" ")} - 1`, {
+                position: "bottom-right",
+                autoClose: 500,
+                theme: "colored",
+                });
+            }
         },
         removeCartAll: (state) => {
             state.cartItems = []

@@ -76,7 +76,7 @@ return (
             <NativeSelect.Indicator />
             </NativeSelect.Root>
             <Text color={isDark ? "teal.100" : "gray.700"}>
-                Entries per page
+                Entries per page {data?.meta?.pagination.total}
             </Text>
         </Flex>
         <Pagination.Root count={data?.meta?.pagination.total} pageSize={data?.meta?.pagination.pageSize} page={page} onPageChange={(details) => setPage(details.page)}>

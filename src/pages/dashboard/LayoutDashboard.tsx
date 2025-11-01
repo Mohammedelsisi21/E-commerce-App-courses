@@ -111,7 +111,6 @@ const LayoutDashboard= () => {
                 <Link to={"/logout"}>
                   <Flex direction="column" align="center">
                     <Icon as={AiOutlineLogout} boxSize={6} mb={1} />
-                    <Text fontSize="sm">Log out</Text>
                   </Flex>
                 </Link>
               </Box>

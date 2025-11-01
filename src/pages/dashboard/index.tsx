@@ -71,10 +71,10 @@ const AdminDashboard = () => {
         </Box>
       </Grid>
 
-      <Grid mt={10} gap={6} templateColumns={"3fr 1fr"}>
+      <Grid w={"full"} mt={10} gap={6} templateColumns={{base: "1fr" , md: "3fr 1fr"}}>
         <Box p={6} borderRadius="xl" shadow={shadowColor} bg={bgCard}>
-    <LineCarrt />
-</Box>
+          <LineCarrt />
+        </Box>
 
         <Box p={6} borderRadius="xl" shadow={shadowColor} bg={bgCard}>
           <Heading size="md" mb={4} color={textColor}>Recent Activity</Heading>
