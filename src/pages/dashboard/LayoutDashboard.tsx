@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text, VStack, HStack, Icon, IconButton, Drawer, useDisclosure, Portal, CloseButton,} from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, VStack, HStack, Icon, IconButton, Drawer, useDisclosure, Portal, CloseButton, VisuallyHidden,} from "@chakra-ui/react";
 import { FiHome, FiBox, FiTag, FiSun, FiMoon, FiMenu } from "react-icons/fi";
 import React from "react";
 import { useColorMode, useColorModeValue } from "@/components/ui/color-mode";
@@ -6,6 +6,7 @@ import { Link, Outlet } from "react-router-dom";
 import Logo from "@/components/myUi/Logo";
 import  CookiesServices from "@/Services"
 import { AiOutlineLogout } from "react-icons/ai";
+import { LuBell } from "react-icons/lu";
 const SidebarItem = ({
   icon,
   label,
@@ -46,7 +47,7 @@ const LayoutDashboard= () => {
   const sidebarContent = (
     <VStack align="stretch" p={2} mt={4}>
       <Link to={"/dashboard"}>
-        <SidebarItem icon={FiHome} label="Dashboard" />
+        <SidebarItem icon={FiHome} label="Home" />
       </Link>
       <Link to={"/dashboard/products"}>
         <SidebarItem icon={FiBox} label="Products" />
@@ -103,7 +104,8 @@ const LayoutDashboard= () => {
               Admin Dashboard
             </Heading>
           </Flex>
-          <Flex>
+          <Flex gap={"10px"} alignItems={"center"}>
+              <LuBell size={25}/><VisuallyHidden>Notifications</VisuallyHidden>
             {token && (
               <Box onClick={onLogout} color={colorMode === "dark" ? "white" : "black"} fontWeight="medium">
                 <Link to={"/logout"}>

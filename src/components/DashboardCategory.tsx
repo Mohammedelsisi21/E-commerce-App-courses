@@ -20,12 +20,12 @@ const DashboardCategory = () => {
     if(isLoading) return <TableSkeletonCategory />
 
 return (
-    <Stack width="70%" gap="5" mr={{base: "10px", md: "auto"}} ml={{base: "0", md: "auto"}}>
+    <Stack shadow={"sm"} p={2} width="70%" gap="5" mr={{base: "10px", md: "auto"}} ml={{base: "0", md: "auto"}}>
         <Flex justifyContent={"space-between"}>
             <Heading size="xl">Categories</Heading>
             <CreateCategory />
         </Flex>
-            <Table.Root size="sm" variant="outline" striped>
+            <Table.Root size="sm" striped>
             <Table.Header>
             <Table.Row>
                 <Table.ColumnHeader>Image</Table.ColumnHeader>

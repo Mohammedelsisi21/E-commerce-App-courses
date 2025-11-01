@@ -44,6 +44,12 @@ export interface ICategory {
     thumbnail: {id: number,url: string}[]
     products: IProduct[]
 }
+export interface IUser {
+    id: number
+    documentId: string
+    username: string
+    email: string
+}
 
 // ** function text limet
 export interface ITruncateText {

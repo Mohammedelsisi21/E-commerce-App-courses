@@ -19,12 +19,12 @@ const DashboardProduct = () => {
     const {isLoading, data} = useGetProductListQuery({page, pageSize})
     if(isLoading) return <TableSkeleton />
 return (
-    <Stack width={{base: "60%", md:"90%"}} gap="5" mr={{base: "10px", md: "auto"}} ml={{base: "0", md: "auto"}}>
+    <Stack shadow={"sm"} p={2} width={{base: "60%", md:"90%"}} gap="5" mr={{base: "10px", md: "auto"}} ml={{base: "0", md: "auto"}}>
         <Flex justifyContent={"space-between"}>
             <Heading size="xl">Products</Heading>
             <CreateProdcut />
         </Flex>
-            <Table.Root size="sm" variant="outline" striped>
+            <Table.Root size="sm" striped>
             <Table.Header>
             <Table.Row>
                 <Table.ColumnHeader>Image</Table.ColumnHeader>
