@@ -26,7 +26,7 @@ const tokenAdmin = CookiesServices.get("jwt_Admin")
 const router = createBrowserRouter(
     createRoutesFromElements(
         <>
-            <Route path="/E-commerce-App-courses/" element={<Layout />}>
+            <Route path="/" element={<Layout />}>
                 <Route index element={<HomePage />} errorElement={<ErrorHandler/>}/>
                 <Route path="/products" element={<ProductsPage />} errorElement={<ErrorHandler/>}/>
                 <Route path="/product/:documentId" element={<Product />} errorElement={<ErrorHandler/>}/>

@@ -44,7 +44,7 @@ const token = CookiesServices.get("jwt")
 
   const hendleLogout= () => {
     CookiesServices.remove("jwt", "/")
-    navigate("/E-commerce-App-courses/")
+    navigate("/")
   }
   
   return (
