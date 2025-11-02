@@ -9,10 +9,12 @@ import { userLoginAdmin } from "@/app/features/login/loginAdminSlice"
 import { useAppDispatch, useAppSelector } from "@/app/store"
 import { useEffect } from "react"
 import CircleUi from "@/components/myUi/CircleUi"
+import { useNavigate } from "react-router-dom"
 
 const LoginAdmin = () => {
     const { colorMode } = useColorMode()
     const isDark = colorMode === "dark"
+    const navigate = useNavigate()
     const {isLoading, error, data} = useAppSelector((store) =>store.loginAdmin )
     const dispatch = useAppDispatch()
     const { register, handleSubmit, formState: { errors }} = useForm<ILoginForm>(
@@ -23,7 +25,7 @@ const LoginAdmin = () => {
     useEffect(() => {
         if(data) {
             setTimeout(()=> {
-                location.replace("/dashboard")
+                navigate("/#/dashboard")
             },700)
         }
     })

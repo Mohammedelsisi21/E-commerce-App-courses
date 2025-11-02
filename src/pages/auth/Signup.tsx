@@ -2,7 +2,7 @@ import { useColorMode } from "@/components/ui/color-mode"
 import { PasswordInput } from "@/components/ui/password-input"
 import type { IRegisterForm } from "@/interfaces"
 import { Box, Button, Field, Fieldset, Flex, Input, Stack, Text,} from "@chakra-ui/react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { registerSchema } from "@/validation"
@@ -17,11 +17,12 @@ const Signup = () => {
     const {register, handleSubmit, formState: {errors}} = useForm<IRegisterForm>({
         resolver: yupResolver(registerSchema)
     })
-
+    const navigate = useNavigate()
+    
     const {userData ,error, isLoading}=useAppSelector((store) => store.register)
     useEffect(() => {
     if(userData) {
-        location.replace("/signin")
+        navigate("/signin")
     }
     },[userData])
 

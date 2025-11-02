@@ -2,7 +2,7 @@ import { useColorMode } from "@/components/ui/color-mode"
 import { PasswordInput } from "@/components/ui/password-input"
 import type { ILoginForm } from "@/interfaces"
 import { Box, Button, Field, Fieldset, Flex, Input, Stack, Text,} from "@chakra-ui/react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { loginSchema } from "@/validation"
@@ -14,6 +14,7 @@ import CircleUi from "@/components/myUi/CircleUi"
 const Signin = () => {
     const { colorMode } = useColorMode()
     const isDark = colorMode === "dark"
+    const navigate = useNavigate()
     const {isLoading, error, data} = useAppSelector((store) =>store.login )
     const dispatch = useAppDispatch()
     const { register, handleSubmit, formState: { errors }} = useForm<ILoginForm>(
@@ -24,7 +25,7 @@ const Signin = () => {
     useEffect(() => {
         if(data) {
             setTimeout(()=> {
-                location.replace("/")
+                navigate("/")
             },700)
         }
     })
