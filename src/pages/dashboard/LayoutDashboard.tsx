@@ -30,7 +30,7 @@ const SidebarItem = ({
 
 const token = CookiesServices.get("jwt_Admin")
 const onLogout = () => {
-  CookiesServices.remove("jwt_Admin",  '/dashboard' )
+  CookiesServices.remove("jwt_Admin",  '/' )
   location.replace("/dashboard/login")
 }
 
