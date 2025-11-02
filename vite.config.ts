@@ -7,5 +7,6 @@ export default defineConfig({
   plugins: [react(),
     tsconfigPaths(),
   ],
+  base: '/E-commerce-App-courses/'
 })
 
