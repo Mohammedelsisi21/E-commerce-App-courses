@@ -25,7 +25,7 @@ const LoginAdmin = () => {
     useEffect(() => {
         if(data) {
             setTimeout(()=> {
-                navigate("/#/dashboard")
+                navigate("/dashboard")
             },700)
         }
     })
