@@ -76,7 +76,7 @@ const loginAdminSlice = createSlice({
             })
             const date = new Date();
             date.setDate(date.getDate() + 3);
-            cookiesServices.set('jwt_Admin', action.payload.jwt, { path: '/dashboard', expires: date });
+            cookiesServices.set('jwt_Admin', action.payload.jwt, { path: '/', expires: date });
         })
         .addCase(userLoginAdmin.rejected, (state, action: PayloadAction<IErrorResponse | undefined>) => {
             state.isLoading = false;
