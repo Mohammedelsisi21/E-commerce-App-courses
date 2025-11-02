@@ -176,13 +176,7 @@ const Product = () => {
                             </Flex>
 
                             <Flex alignItems="center" gap={2}>
-                                <RatingGroup.Root
-                                    colorPalette="teal"
-                                    readOnly
-                                    count={5}
-                                    defaultValue={rating}
-                                    size="md"
-                                >
+                                <RatingGroup.Root colorPalette="yellow" readOnly count={5} defaultValue={rating} size="md">
                                     <RatingGroup.HiddenInput />
                                     <RatingGroup.Control />
                                 </RatingGroup.Root>

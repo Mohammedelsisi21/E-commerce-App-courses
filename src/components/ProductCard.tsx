@@ -26,7 +26,7 @@ const ProductCard = ({ ProductCard }: IProps) => {
     const addCart = () => {
       if(!token) {
         navigate("/signin");
-        return 
+        return
       }
         dispatch(addCartItmesAction(ProductCard))
     }
