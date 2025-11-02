@@ -5,8 +5,8 @@ const PageNotFound = () => {
   return (
     <Flex
       direction="column"
-      align="center"
-      justify="center"
+      alignContent="center"
+      justifyContent="center"
       minH="100vh"
       bg="gray.50"
       textAlign="center"
