@@ -1,4 +1,4 @@
-import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
+import { createHashRouter, createRoutesFromElements, Route } from "react-router-dom";
 import CookiesServices from "@/Services"
 import ProtectedRout from "@/auth/ProtectedRout";
 import { lazy } from "react";
@@ -23,7 +23,7 @@ const ErrorHandler = lazy(() => import("@/components/errors/ErrorHandler"));
 
 const token = CookiesServices.get("jwt")
 const tokenAdmin = CookiesServices.get("jwt_Admin")
-const router = createBrowserRouter(
+const router = createHashRouter(
     createRoutesFromElements(
         <>
             <Route path="/" element={<Layout />}>

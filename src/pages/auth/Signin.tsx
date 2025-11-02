@@ -24,7 +24,7 @@ const Signin = () => {
     useEffect(() => {
         if(data) {
             setTimeout(()=> {
-                location.replace("/")
+                location.replace("/E-commerce-App-courses/")
             },700)
         }
     })
