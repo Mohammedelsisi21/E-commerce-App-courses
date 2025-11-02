@@ -15,8 +15,9 @@ interface IProps {
   ProductCard: ICartItem
 }
 
-const token = CookiesServices.get("jwt")
 const ProductCard = ({ ProductCard }: IProps) => {
+  const token = CookiesServices.get("jwt")
+
   const {title ,description,price,thumbnail, documentId, discount, rating, stock}= ProductCard
   const navigate = useNavigate();
   const { url } = thumbnail
