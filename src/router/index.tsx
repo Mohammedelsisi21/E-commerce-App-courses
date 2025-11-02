@@ -1,21 +1,25 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
+import CookiesServices from "@/Services"
+import ProtectedRout from "@/auth/ProtectedRout";
+import { lazy } from "react";
 
 import Layout from "@/pages/Layout";
-import HomePage from "@/pages";
-import ProductsPage from "@/pages/Products";
-import Product from "@/pages/Product";
-import Signin from "@/pages/auth/Signin";
-import Signup from "@/pages/auth/Signup";
-import ProtectedRout from "@/auth/ProtectedRout";
-import CookiesServices from "@/Services"
-import LayoutDashboard from "../pages/dashboard/LayoutDashboard";
-import AdminDashboard from "@/pages/dashboard";
-import ProductDashboard from "@/pages/dashboard/ProductDashboard";
-import CategoryDashboard from "@/pages/dashboard/CategoryDashboard";
-import Category from "@/pages/Category";
-import LoginAdmin from "@/pages/dashboard/auth/Signin";
-import PageNotFound from "@/pages/PageNotFound";
-import ErrorHandler from "@/components/errors/ErrorHandler";
+
+const HomePage = lazy(() => import("@/pages"));
+const ProductsPage = lazy(() => import("@/pages/Products"));
+const Product = lazy(() => import("@/pages/Product"));
+const Signin = lazy(() => import("@/pages/auth/Signin"));
+const Signup = lazy(() => import("@/pages/auth/Signup"));
+const Category = lazy(() => import("@/pages/Category"));
+
+const LayoutDashboard = lazy(() => import("@/pages/dashboard/LayoutDashboard"));
+const AdminDashboard = lazy(() => import("@/pages/dashboard"));
+const ProductDashboard = lazy(() => import("@/pages/dashboard/ProductDashboard"));
+const CategoryDashboard = lazy(() => import("@/pages/dashboard/CategoryDashboard"));
+const LoginAdmin = lazy(() => import("@/pages/dashboard/auth/Signin"));
+const PageNotFound = lazy(() => import("@/pages/PageNotFound"));
+const ErrorHandler = lazy(() => import("@/components/errors/ErrorHandler"));
+
 
 const token = CookiesServices.get("jwt")
 const tokenAdmin = CookiesServices.get("jwt_Admin")

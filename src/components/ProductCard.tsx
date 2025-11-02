@@ -1,5 +1,5 @@
 import { Box, Image, Heading, Text, Button, VStack, Flex, RatingGroup } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useColorMode } from "./ui/color-mode";
 import type { ICartItem } from "../interfaces";
 import { truncateText, truncateTitle } from "@/utils";
@@ -18,13 +18,15 @@ interface IProps {
 const token = CookiesServices.get("jwt")
 const ProductCard = ({ ProductCard }: IProps) => {
   const {title ,description,price,thumbnail, documentId, discount, rating, stock}= ProductCard
+  const navigate = useNavigate();
   const { url } = thumbnail
   const [liked, setLiked] = useState(false);
   const { colorMode } = useColorMode();
       const dispatch = useAppDispatch()
     const addCart = () => {
       if(!token) {
-        return location.replace("/signin")
+        navigate("/signin");
+        return 
       }
         dispatch(addCartItmesAction(ProductCard))
     }
@@ -92,6 +94,7 @@ const ProductCard = ({ ProductCard }: IProps) => {
         borderRadius="md"
         border={".5px solid #cccccc4c"}
         shadow={"md"}
+        loading="lazy"
       />
       <VStack align="start" mt={6} p={3}>
         <Heading

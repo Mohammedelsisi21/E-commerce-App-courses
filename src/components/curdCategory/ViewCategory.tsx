@@ -25,7 +25,7 @@ const ViewCategory = ({ category }: IProps) => {
         title="Product Details">
             <VStack align="stretch" p={4} divideColor={isDark ? "gray.700" : "gray.200"}>
                 <Flex alignItems={"center"}>
-                    <Image src={`${thumbnail[0].url}`} alt={title} boxSize="200px" objectFit="cover" borderRadius="xl" shadow="xl" transition="all 0.3s ease" _hover={{ transform: "scale(1.05)" }}/>
+                    <Image src={`${thumbnail[0].url}`} alt={title} boxSize="200px" loading="lazy" objectFit="cover" borderRadius="xl" shadow="xl" transition="all 0.3s ease" _hover={{ transform: "scale(1.05)" }}/>
                   <Box ml={"30px"}>
                     <Heading size="lg" mb={1} color={isDark ? "teal.200" : "teal.700"} textAlign="center">
                         {title}

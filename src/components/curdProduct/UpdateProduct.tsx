@@ -178,7 +178,7 @@ const UpdateProduct = ({ product } : IProps) => {
             <Field.Root>
               <Flex>
                 <Field.Label mr={"5px"} color={isDark ? "teal.200" : "teal.700"}>Thumbnail</Field.Label>
-                <Image src={`${product.thumbnail?.url}`} alt={product.title} w={"50px"} h={"50px"} borderRadius={"sm"}></Image>
+                <Image src={`${product.thumbnail?.url}`} loading="lazy" alt={product.title} w={"50px"} h={"50px"} borderRadius={"sm"}></Image>
               </Flex>
               <FileUpload.Root>
                 <FileUpload.HiddenInput onChange={handlerImage}/>
