@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {Box,Flex,HStack,Button,IconButton,Spacer,Container,useDisclosure,VStack, Text, Icon,} from "@chakra-ui/react";
 import { FiSun, FiMoon, FiMenu, FiX, FiUserPlus } from "react-icons/fi";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useColorMode, useColorModeValue } from "@/components/ui/color-mode";
 import { navLinks } from "../constant";
 import Logo from "../components/myUi/Logo";
@@ -16,6 +16,7 @@ const token = CookiesServices.get("jwt")
   const { colorMode, toggleColorMode } = useColorMode();
   const [isScrolled, setIsScrolled] = useState(false);
   const { open :isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
     const onChangeCart = () => {
@@ -43,14 +44,14 @@ const token = CookiesServices.get("jwt")
 
   const hendleLogout= () => {
     CookiesServices.remove("jwt", "/")
-    location.replace("/")
+    navigate("/E-commerce-App-courses/")
   }
   
   return (
     <Box bg={bgColor} position="fixed" top="0" left="0" right="0" zIndex="999" boxShadow="md" px={{ base: 4, md: 10 }} py={3} transition="all 0.3s ease">
       <Container>
         <Flex align="center" justifyContent={"space-between"} alignItems={"center"}>
-          <Link to={"/"}>
+          <Link to={"/E-commerce-App-courses"}>
             <Logo />
           </Link>
 
